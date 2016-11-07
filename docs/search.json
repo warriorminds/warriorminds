@@ -2,9 +2,9 @@
 
   
     {
-      "title"			: "Hello World",
-      "link"			: "https://warriorminds.github.io/warriorminds/blog/hello-world/",
-      "excerpt"		: "You’ll find this post in your _posts directory - edit this post and re-build (or run with the -w switch) to see your changes!To add new posts, simply add a file in the _posts directory that follows the convention: YYYY-MM-DD-name-of-post.ext."
+      "title"			: "Programación Orientada a Objetos: Clases y Objetos",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/",
+      "excerpt"		: "Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:"
     }
   
 
