@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://warriorminds.github.io/warriorminds/blog/hello-world/</loc>
+<lastmod>2014-08-08T14:39:55-05:00</lastmod>
+</url>
+<url>
 <loc>https://warriorminds.github.io/warriorminds/</loc>
+</url>
+<url>
+<loc>https://warriorminds.github.io/warriorminds/blog/</loc>
+</url>
+<url>
+<loc>https://warriorminds.github.io/warriorminds/blog/es/</loc>
 </url>
 <url>
 <loc>https://warriorminds.github.io/warriorminds/about/</loc>
 </url>
 <url>
 <loc>https://warriorminds.github.io/warriorminds/categories/</loc>
-</url>
-<url>
-<loc>https://warriorminds.github.io/warriorminds/blog/es/</loc>
-</url>
-<url>
-<loc>https://warriorminds.github.io/warriorminds/blog/</loc>
 </url>
 </urlset>
