@@ -1,0 +1,639 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Programación Orientada a Objetos: Abstracción &#8211; Warrior Minds</title>
+<meta name="description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+<meta name="keywords" content="oop, programación orientada a objetos, herencia, java">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Programación Orientada a Objetos: Abstracción">
+<meta name="twitter:description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+<meta name="twitter:site" content="@warrior_minds">
+<meta name="twitter:creator" content="@warrior_minds">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://warriorminds.github.io/warriorminds/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Programación Orientada a Objetos: Abstracción">
+<meta property="og:description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+<meta property="og:url" content="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">
+<meta property="og:site_name" content="Warrior Minds">
+
+<!-- Webmaster Tools verfication -->
+<meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8">
+<meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+<link rel="canonical" href="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">
+<link href="https://warriorminds.github.io/warriorminds/feed.xml" type="application/atom+xml" rel="alternate" title="Warrior Minds Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://warriorminds.github.io/warriorminds/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/" >Home</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/blog/es/" >Blog en Español</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/categories/" >Categories</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/search/" >Search</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/about/" >About</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="https://warriorminds.github.io/warriorminds/" class="site-logo" rel="home" title="Warrior Minds"><img src="https://warriorminds.github.io/warriorminds/images/site-logo.png" width="200" height="200" alt="Warrior Minds logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="https://warriorminds.github.io/warriorminds/">Warrior Minds</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">A place to train your mind in the Software Arts.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://warriorminds.github.io/warriorminds/tags/#oop" title="Pages tagged oop">oop</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#programación orientada a objetos" title="Pages tagged programación orientada a objetos">programación orientada a objetos</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#herencia" title="Pages tagged herencia">herencia</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#java" title="Pages tagged java">java</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Programación Orientada a Objetos: Abstracción</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://warriorminds.github.io/warriorminds/images/bio-photo.png" class="bio-photo" alt="Warrior Minds bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Warrior Minds</span></span>
+        
+        <span class="entry-date date published"><time datetime="2016-11-14T10:30:55-06:00"><i class="fa fa-calendar-o"></i> November 14, 2016</time></span>
+        
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=oop,programaciónorientadaaobjetos,herencia,java&amp;text=Programación%20Orientada%20a%20Objetos:%20Abstracción&amp;url=https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&amp;via=warrior_minds" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        <div class="google-ads" style="margin-top:40px; text-align:center;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 160x600 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="4963587312"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads --><!-- /.google-ads -->
+      </footer>
+      <div class="entry-content">
+        <p>Este Post es la tercera parte de la serie <em>“Programación Orientada a Objetos”</em>. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</p>
+
+<ol>
+  <li><a href="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/">Definición de POO</a></li>
+  <li><a href="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/">Clases y Objetos</a></li>
+  <li><a href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia">Herencia</a></li>
+  <li>Abstracción</li>
+  <li>Encapsulamiento</li>
+  <li>Polimorfismo</li>
+  <li>Composición</li>
+  <li>Principios utilizados en la POO</li>
+</ol>
+
+<p>Todo el código de la serie está disponible en <a href="https://github.com/warriorminds/prog-orientada-objetos" target="_blank">GitHub</a>.</p>
+
+<p>El código correspondiente a esta tercera parte lo pueden encontrar <a href="https://github.com/warriorminds/prog-orientada-objetos/tree/master/Abstraccion" target="_blank">aquí</a>.</p>
+
+<p>Todos los ejemplos están hechos en <a href="https://netbeans.org" target="_blank">Netbeans</a>.</p>
+
+<h2 id="introduccin">Introducción</h2>
+
+<p>Cuando hacemos un programa traducimos los requerimientos o ideas en código. Usando la POO traducimos o modelamos estas ideas en objetos. Para hacer esto, necesitamos identificar las características de los objetos y sus comportamientos que queremos programar y que serían importantes en la ejecución de nuestro programa. El proceso mediante el cual se identifican los componentes necesarios para tus objetos, y los que no son necesarios, se conoce como <em>abstracción</em>.</p>
+
+<p>La abstracción es un proceso de suma importancia en el diseño de nuestros sistemas ya que debemos de identificar adecuadamente las características del objeto que necesitamos implementar. La selección de estas características depende del <em>contexto</em> en el cual se utilizará tu objeto.</p>
+
+<p>Como ejemplo, vamos a diseñar un pequeño sistema para llevar registro de alumnos que entran en una escuela y una manera de calcular su calificación. Podemos modelar un alumno en una clase Alumno. De igual manera, nuestros objetos Alumno tendrán algunas de las siguientes características:</p>
+
+<ul>
+  <li>Nombre</li>
+  <li>Grado escolar</li>
+  <li>Lista de materias cursadas</li>
+  <li>Promedio</li>
+</ul>
+
+<p>De igual manera, en este contexto, no nos interesan algunas características que podrían tener los alumnos, como lo son estatura, color de ojos, peso, etc.</p>
+
+<p>Si bien en la sección de <a href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia">Herencia</a> realizamos este proceso de abstracción, Java y la POO nos ofrecen otras herramientas para realizar este proceso y hacer nuestro diseño de software de una manera más adecuada.</p>
+
+<p>Nuestro ejemplo contará con dos tipos de alumnos, alumnos de primaria y alumnos de universidad. Ambos tipos de alumnos contarán con una lista de materias, su nombre, el grado escolar que cursan y el promedio que obtuvieron.</p>
+
+<p>La diferencia va a ser que el promedio se calculará de una manera diferente para los dos: el promedio del alumno de primaria será de esta manera</p>
+
+<ul>
+  <li>Promedio de las materias - 80%</li>
+  <li>Conducta - 10%</li>
+  <li>Esfuerzo - 10%</li>
+</ul>
+
+<p>Mientras que el promedio del alumno de universidad será solamente el promedio de las materias.</p>
+
+<p>También contará con una clase Materia, que tendrá solamente el nombre y el promedio del alumno.</p>
+
+<p>Para esto utilizaremos <em>Clases y Métodos abstractos</em>.</p>
+
+<h2 id="clases-y-mtodos-abstractos">Clases y Métodos Abstractos</h2>
+
+<p>En nuestro ejemplo que realizaremos, vemos que existen dos tipos de alumnos. Por lo cual, podemos crear dos objetos diferentes de tipo AlumnoPrimaria y AlumnoUniversidad. Pero también podemos ver que nuestro proceso de abstracción nos llevó a observar que prácticamente todas las características de ambos objetos son iguales y que también tienen las mismas operaciones. Lo único que cambia entre ambos es la manera de realizar la operación de calcular el promedio.</p>
+
+<p>Java nos da la opción de crear <em>clases y métodos abstractos</em>. Una clase abstracta se define de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Alumno</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Una clase abstracta deberá ser extendida por otra clase no abstracta. Si se trata de crear un objeto con la clase abstracta, marcará error ya que no es posible hacer esto debido a la falta de implementación de los métodos abstractos. Nuestra clase abstracta Alumno contendrá todas las propiedades de nuestro alumno y sus métodos para acceder a ellas, así como un constructor que nos permita crear a nuestro alumno:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Alumno</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Materia</span><span class="o">&gt;</span> <span class="n">materias</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="kt">double</span> <span class="n">promedio</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">grado</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Alumno</span><span class="o">(</span><span class="n">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="n">String</span> <span class="n">grado</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">grado</span> <span class="o">=</span> <span class="n">grado</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">materias</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getNombre</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Materia</span><span class="o">&gt;</span> <span class="nf">getMaterias</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">materias</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">agregarMateria</span><span class="o">(</span><span class="n">Materia</span> <span class="n">materia</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">materias</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">materia</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getGrado</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">grado</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getPromedio</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">promedio</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Con esto, podemos crear otras dos clases específicas, que heredarán de nuestra clase abstracta:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlumnoPrimaria</span> <span class="kd">extends</span> <span class="n">Alumno</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">AlumnoPrimaria</span><span class="o">(</span><span class="n">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="n">String</span> <span class="n">grado</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">nombre</span><span class="o">,</span> <span class="n">grado</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Al heredar de una clase abstracta, Java nos pide que creemos un constructor que mande llamar al constructor de la clase padre. Así mismo, si intentamos crear un objeto directamente con la clase Alumno, nos mandará un error:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Alumno</span> <span class="n">alumno</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Alumno</span><span class="o">(...);</span>  <span class="o">---&gt;</span> <span class="n">No</span> <span class="n">est</span><span class="err">á</span> <span class="n">permitido</span><span class="o">.</span>
+</code></pre>
+</div>
+
+<p>De igual manera podemos crear nuestra clase AlumnoUniversidad:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlumnoUniversidad</span> <span class="kd">extends</span> <span class="n">Alumno</span> <span class="o">{</span>
+
+     <span class="kd">public</span> <span class="nf">AlumnoUniversidad</span><span class="o">(</span><span class="n">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="n">String</span> <span class="n">grado</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kd">super</span><span class="o">(</span><span class="n">nombre</span><span class="o">,</span> <span class="n">grado</span><span class="o">);</span>
+     <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Con esto, podemos agregar materias a cada objeto que creemos de las dos clases, así como obtener su nombre y el grado en el que está (todo este código está implementado en la clase abstracta Alumno).</p>
+
+<p>Ahora necesitamos implementar nuestro método para calcular el promedio de cada alumno. Para esto, crearemos en nuestra clase Alumno un método abstracto:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">calcularCalificacionDelGrado</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>Un <em>método abstracto</em> solamente es la definición del método sin implementación. Cuando se agrega un método abstracto a nuestra clase, la clase forzosamente debe de ser una clase abstracta.</p>
+
+<p>Al agregar este método en nuestra clase Alumno, podemos ver que nuestras clases específicas AlumnoPrimaria y AlumnoUniversidad, nos piden implementar nuestro nuevo método.</p>
+
+<p>Implementemos este método para la clase AlumnoPrimaria:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">calcularCalificacionDelGrado</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">conducta</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">esfuerzo</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">materiasAcademicas</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">materias</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Materia</span> <span class="n">materia</span> <span class="o">=</span> <span class="n">materias</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">materia</span><span class="o">.</span><span class="na">getNombre</span><span class="o">().</span><span class="na">toLowerCase</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"conducta"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">conducta</span> <span class="o">+=</span> <span class="n">materia</span><span class="o">.</span><span class="na">getCalificacion</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">materia</span><span class="o">.</span><span class="na">getNombre</span><span class="o">().</span><span class="na">toLowerCase</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"esfuerzo"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">esfuerzo</span> <span class="o">+=</span> <span class="n">materia</span><span class="o">.</span><span class="na">getCalificacion</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">materia</span><span class="o">.</span><span class="na">getCalificacion</span><span class="o">();</span>
+            <span class="n">materiasAcademicas</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">promedio</span> <span class="o">=</span> <span class="o">((</span><span class="n">total</span> <span class="o">/</span> <span class="n">materiasAcademicas</span><span class="o">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">conducta</span> <span class="o">*</span> <span class="mf">0.1</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">esfuerzo</span> <span class="o">*</span> <span class="mf">0.1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Podemos ver que es necesario agregar la anotación <em>@Override</em> a nuestro método y que puede tener una implementación propia para cada clase.</p>
+
+<p>Ahora implementemos este método para nuestra clase AlumnoUniversidad</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">calcularCalificacionDelGrado</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">materias</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Materia</span> <span class="n">materia</span> <span class="o">=</span> <span class="n">materias</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">materia</span><span class="o">.</span><span class="na">getCalificacion</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="n">promedio</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="n">materias</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Para hacer uso de nuestras clases, crearemos un alumno de cada tipo y le agregaremos sus materias con su calificación correspondiente:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Alumno</span> <span class="n">alumnoPrimaria</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AlumnoPrimaria</span><span class="o">(</span><span class="s">"Juan"</span><span class="o">,</span> <span class="s">"Primero"</span><span class="o">);</span>
+<span class="n">alumnoPrimaria</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Matemáticas"</span><span class="o">,</span> <span class="mi">10</span><span class="o">));</span>
+<span class="n">alumnoPrimaria</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Español"</span><span class="o">,</span> <span class="mi">8</span><span class="o">));</span>
+<span class="n">alumnoPrimaria</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Conducta"</span><span class="o">,</span> <span class="mi">9</span><span class="o">));</span>
+<span class="n">alumnoPrimaria</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Esfuerzo"</span><span class="o">,</span> <span class="mi">10</span><span class="o">));</span>
+
+<span class="n">Alumno</span> <span class="n">alumnoUniversidad</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AlumnoUniversidad</span><span class="o">(</span><span class="s">"Pablo"</span><span class="o">,</span> <span class="s">"Sexto Semestre"</span><span class="o">);</span>
+<span class="n">alumnoUniversidad</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Matemáticas Aplicadas"</span><span class="o">,</span> <span class="mi">7</span><span class="o">));</span>
+<span class="n">alumnoUniversidad</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Diseño de Software"</span><span class="o">,</span> <span class="mi">8</span><span class="o">));</span>
+<span class="n">alumnoUniversidad</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Sistemas Operativos"</span><span class="o">,</span> <span class="mi">8</span><span class="o">));</span>
+<span class="n">alumnoUniversidad</span><span class="o">.</span><span class="na">agregarMateria</span><span class="o">(</span><span class="k">new</span> <span class="n">Materia</span><span class="o">(</span><span class="s">"Física Avanzada"</span><span class="o">,</span> <span class="mi">9</span><span class="o">));</span>
+</code></pre>
+</div>
+
+<p>Podemos hacer uso ahora del método calcularCalificacionDelGrado() de cada objeto:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">alumnoPrimaria</span><span class="o">.</span> <span class="nf">calcularCalificacionDelGrado</span><span class="o">();</span>
+<span class="n">alumnoUniversidad</span><span class="o">.</span> <span class="nf">calcularCalificacionDelGrado</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>Pero para ver el alcance y el uso de nuestras clases abstractas, crearemos una lista de Alumno y agregaremos nuestros dos alumnos a la lista:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Alumno</span><span class="o">&gt;</span> <span class="n">alumnos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">alumnos</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">alumnoPrimaria</span><span class="o">);</span>
+<span class="n">alumnos</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">alumnoUniversidad</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>Si bien tenemos nuestras clases AlumnoPrimaria y AlumnoSecundaria, ambas clases también son de la clase Alumno, por eso podemos realizar esto.</p>
+
+<p>Y por último, calcularemos el promedio para cada alumno y lo imprimiremos en la pantalla:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">alumnos</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">Alumno</span> <span class="n">alumno</span> <span class="o">=</span> <span class="n">alumnos</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">alumno</span><span class="o">.</span><span class="na">calcularCalificacionDelGrado</span><span class="o">();</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">alumno</span><span class="o">.</span><span class="na">getNombre</span><span class="o">()</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">alumno</span><span class="o">.</span><span class="na">getPromedio</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Cada alumno sabe de qué tipo específico de alumno se trata, por eso cuando se ejecuta la línea de código</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">alumno</span><span class="o">.</span><span class="na">calcularCalificacionDelGrado</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>dependiendo del tipo de alumno que se trate, se ejecuta su método específico.</p>
+
+<p>Para Juan, el alumno de primaria esperaríamos esta calificación:</p>
+
+<ul>
+  <li>Materias académicas: 9 * 0.8 = 7.2</li>
+  <li>Esfuerzo: 10 * 0.1 = 1.0</li>
+  <li>Conducta: 9 * 0.1 = 0.9</li>
+  <li>Total = 9.1</li>
+</ul>
+
+<p>Para Pablo, el alumno de universidad:</p>
+
+<ul>
+  <li>Materias: (7 + 8 + 8 + 9) / 4 = 8.0</li>
+</ul>
+
+<p>Podemos ver en la consola el siguiente resultado:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nl">Juan:</span> <span class="mf">9.1</span>
+<span class="nl">Pablo:</span> <span class="mf">8.0</span>
+</code></pre>
+</div>
+
+<p>Las ventajas de utilizar clases abstractas es que podemos tener implementación dentro de la clase abstracta, en nuestro caso los métodos para obtener y modificar las variables del objeto. También podemos utilizar las clases abstractas cuando tenemos varias clases que comparten cierta información y que difieren solamente en la implementación de algún método o comportamiento.</p>
+
+<h2 id="interfaces">Interfaces</h2>
+
+<p>Las clases abstractas son muy útiles, como ya lo vimos, pero tienen una limitación: en Java solamente se permite <em>herencia simple</em> - heredar de una sola clase. Al heredar de la clase abstracta, ocupamos este único lugar que tenemos disponible. Si en cambio queremos que cualquier clase, aún cuando no estén relacionadas, pueda implementar algunos métodos, especificar el comportamiento de una clase y además permitir que se hereden de varios tipos, se puede utilizar una <em>interfaz</em>.</p>
+
+<p>Una <em>interfaz</em> se puede ver como un contrato que debe de cumplir la clase. Todas las clases que implementen una interfaz tendrán disponibles los métodos que se declaran en la interfaz.</p>
+
+<p>Para definir una interfaz se utiliza la palabra <em>interface</em> y el nombre de la interfaz. Dentro de ella, se declaran los métodos, sin implementación, que deberán implementar las clases que implementen la interfaz.</p>
+
+<p>A nuestro ejemplo de Alumnos y Materias, agregaremos una interfaz, IAlumno, la cual tendrá dos métodos: obtenerInformacion(); e imprimirMaterias();</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IAlumno</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="nf">obtenerInformacion</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">imprimirMaterias</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Ahora haremos que ambos objetos AlumnoPrimaria y AlumnoUniversidad implementen esta interfaz:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlumnoPrimaria</span> <span class="kd">extends</span> <span class="n">Alumno</span> <span class="kd">implements</span> <span class="n">IAlumno</span> <span class="o">{</span>
+    <span class="o">......</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">obtenerInformacion</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">....</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">imprimirMaterias</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">....</span>
+    <span class="o">}</span>
+
+    <span class="o">....</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlumnoUniversidad</span> <span class="kd">extends</span> <span class="n">Alumno</span> <span class="kd">implements</span> <span class="n">IAlumno</span> <span class="o">{</span>
+    <span class="o">......</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">obtenerInformacion</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">....</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">imprimirMaterias</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">....</span>
+    <span class="o">}</span>
+
+    <span class="o">....</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>En ambas clases debemos de implementar los métodos de la interfaz IAlumno. Para este ejemplo, ambas implementaciones harán lo mismo.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">obtenerInformacion</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Nombre: "</span> <span class="o">+</span> <span class="n">nombre</span> <span class="o">+</span> <span class="s">", Grado: "</span> <span class="o">+</span> <span class="n">grado</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">imprimirMaterias</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">materias</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Materia</span> <span class="n">materia</span> <span class="o">=</span> <span class="n">materias</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nombre: "</span> <span class="o">+</span> <span class="n">materia</span><span class="o">.</span><span class="na">getNombre</span><span class="o">()</span> <span class="o">+</span> <span class="s">" - "</span> <span class="o">+</span> <span class="n">materia</span><span class="o">.</span><span class="na">getCalificacion</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Para hacer uso de esta interfaz, haremos que nuestros objetos alumnos que están en la lista muestren la información y las materias.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">alumnos</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">IAlumno</span> <span class="n">alumno</span> <span class="o">=</span> <span class="o">(</span><span class="n">IAlumno</span><span class="o">)</span> <span class="n">alumnos</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">alumno</span><span class="o">.</span><span class="na">obtenerInformacion</span><span class="o">());</span>
+    <span class="n">alumno</span><span class="o">.</span><span class="na">imprimirMaterias</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Como podemos ver, la lista de alumnos es de tipo Alumno, pero sabemos que cada alumno también es de tipo IAlumno, por lo tanto el cast (IAlumno) se puede hacer. También podemos ver que el objeto IAlumno alumno, tendrá disponibles los métodos obtenerInformacion() e imprimirMaterias().</p>
+
+<p>El resultado que vemos en la consola es el siguiente:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="o">===============</span> <span class="n">RESULTADOS</span> <span class="n">DE</span> <span class="n">LA</span> <span class="n">INTERFAZ</span> <span class="n">IALUMNO</span> <span class="o">===============</span>
+<span class="nl">Nombre:</span> <span class="n">Juan</span><span class="o">,</span> <span class="nl">Grado:</span> <span class="n">Primero</span>
+<span class="n">Matem</span><span class="err">á</span><span class="n">ticas</span> <span class="o">-</span> <span class="mf">10.0</span>
+<span class="n">Espa</span><span class="err">ñ</span><span class="n">ol</span> <span class="o">-</span> <span class="mf">8.0</span>
+<span class="n">Conducta</span> <span class="o">-</span> <span class="mf">9.0</span>
+<span class="n">Esfuerzo</span> <span class="o">-</span> <span class="mf">10.0</span>
+
+<span class="nl">Nombre:</span> <span class="n">Pablo</span><span class="o">,</span> <span class="nl">Grado:</span> <span class="n">Sexto</span> <span class="n">Semestre</span>
+<span class="n">Matem</span><span class="err">á</span><span class="n">ticas</span> <span class="n">Aplicadas</span> <span class="o">-</span> <span class="mf">7.0</span>
+<span class="n">Dise</span><span class="err">ñ</span><span class="n">o</span> <span class="n">de</span> <span class="n">Software</span> <span class="o">-</span> <span class="mf">8.0</span>
+<span class="n">Sistemas</span> <span class="n">Operativos</span> <span class="o">-</span> <span class="mf">8.0</span>
+<span class="n">F</span><span class="err">í</span><span class="n">sica</span> <span class="n">Avanzada</span> <span class="o">-</span> <span class="mf">9.0</span>
+</code></pre>
+</div>
+
+<p>Una de las ventajas de las interfaces es que las clases pueden implementar el número que quieran de interfaces:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AlumnoUniversidad</span> <span class="kd">implements</span> <span class="n">interfaz1</span><span class="o">,</span> <span class="n">interfaz2</span><span class="o">,</span> <span class="n">interfaz3</span><span class="o">....</span>
+</code></pre>
+</div>
+
+<h2 id="conclusin">Conclusión</h2>
+
+<p>La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.</p>
+
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'warriormindswebsite'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/" class="btn" title="Programación Orientada a Objetos: Herencia">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    <div class="google-ads" style="margin:10px 0;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 320x50 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:320px;height:50px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="9595923317"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads -->
+
+<span>&copy; 2016 Warrior Minds. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="https://twitter.com/warrior_minds" title="Warrior Minds on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="https://facebook.com/warriorminds" title="Warrior Minds on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="https://plus.google.com/102230749926196780961" title="Warrior Minds on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/warriorminds" title="Warrior Minds on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://warriorminds.github.io/warriorminds/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://warriorminds.github.io/warriorminds';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://warriorminds.github.io/warriorminds/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-86871758-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>
