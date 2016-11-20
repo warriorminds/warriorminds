@@ -1,11 +1,257 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-11-20T08:23:04-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Abstracción</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Abstracción" /><published>2016-11-14T10:30:55-06:00</published><updated>2016-11-14T10:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">&lt;p&gt;Este Post es la tercera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-11-20T17:34:39-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Encapsulamiento</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Encapsulamiento" /><published>2016-11-20T16:30:55-06:00</published><updated>2016-11-20T16:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/">&lt;p&gt;Este Post es la cuarta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Encapsulamiento&lt;/li&gt;
+  &lt;li&gt;Polimorfismo&lt;/li&gt;
+  &lt;li&gt;Composición&lt;/li&gt;
+  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código correspondiente a esta cuarta parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Encapsulamiento&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Otro de los conceptos principales de la POO es el &lt;em&gt;encpsulamiento&lt;/em&gt;. Ya hemos venido aplicando el encapsulamiento desde que comenzamos a hablar acerca de los objetos. &lt;em&gt;Encapsular&lt;/em&gt; significa envolver todos los datos y comportamientos en un solo lugar. Esto es lo que buscamos al crear objetos: &lt;em&gt;tener los datos y comportamientos comunes en un solo objeto&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Así mismo, el encapsulamiento busca &lt;em&gt;limitar la interacción&lt;/em&gt; que puedan tener objetos externos sobre nuestro objeto, esto con el objetivo de que los datos de nuestro objeto se encuentren seguros y no puedan ser cambiados en cualquier momento y por cualquier otro objeto. Esto se logra escondiendo las variables y los métodos de nuestro objeto para limitar su interacción externa.&lt;/p&gt;
+
+&lt;p&gt;El encapsulamiento ya lo habíamos aplicado antes. Viendo nuestro ejemplo de Usuario (en el proyecto POO), vemos que declaramos nuestras variables privadas&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;y posteriormente creamos métodos públicos, llamados getters y setters, para poder modificar estas variables.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apellido&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Con esto logramos encapsular las variables de la clase Usuario y obligamos a otros objetos externos a utilizar los métodos para modificar los valores de las variables de Usuario.&lt;/p&gt;
+
+&lt;p&gt;Lo que se quiere lograr con el encapsulamiento, es hacer de cada objeto una &lt;em&gt;caja negra&lt;/em&gt;, que solamente puedan tener opción de ingresar valores para sus variables y obtener los resultados de vuelta. Así, aun cuando el objeto tenga más variables que solamente sean de uso interno, los objetos externos no tendrán conocimiento de su existencia y no las podrán modificar, asegurando el buen funcionamiento del comportamiento del objeto en cuestión.&lt;/p&gt;
+
+&lt;h2 id=&quot;niveles-de-acceso&quot;&gt;Niveles de Acceso&lt;/h2&gt;
+
+&lt;p&gt;Para poder implementar el encapsulamiento de una manera adecuada, Java nos provee varios niveles de acceso para nuestras variables y métodos. Dependiendo del nivel de acceso que tengan, estas variables y métodos podrán ser accesados y modificados por ciertos elementos.&lt;/p&gt;
+
+&lt;h3 id=&quot;private&quot;&gt;private&lt;/h3&gt;
+
+&lt;p&gt;Este es el nivel de acceso más limitado de todos. Las variables y métodos que sean declarados privados, solamente podrán ser accesados &lt;em&gt;dentro de la clase&lt;/em&gt;. Teniendo como ejemplo nuestra clase Usuario y nuestras siguientes variables&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Si creamos un objeto usuario e intentamos acceder a estas variables, obtendremos un error diciendo que nombre tiene acceso privado.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Warrior Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;De igual manera, un método privado solamente puede ser accesado dentro de la clase en la que está declarado.&lt;/p&gt;
+
+&lt;h3 id=&quot;public&quot;&gt;public&lt;/h3&gt;
+
+&lt;p&gt;El nivel de acceso public da acceso a todo mundo a la variable o al método. Cualquiera que cree un objeto, puede tener acceso a estos métodos y variables. Es por eso que a nuestros métodos getters y setters son públicos.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Desde cualquier lado, podemos mandarlos llamar:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Warrior Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;protected&quot;&gt;protected&lt;/h3&gt;
+
+&lt;p&gt;El nivel de acceso protected se puede ver como un punto intermedio entre público y privado. Las variables o métodos protected podrán ser accesados dentro de la clase, dentro del mismo paquete y en clases hijas (sin importar en el paquete que se encuentren).&lt;/p&gt;
+
+&lt;p&gt;Si declaramos una variable protected&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Y tratamos de usarla en nuestra clase Encapsulamiento, no la podemos utilizar.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Calle central&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Esto pasa porque la clase Encapsulamiento está en el paquete com.warriorminds, y la clase Usuario está en el paquete com.warriorminds.encapsulamiento.&lt;/p&gt;
+
+&lt;p&gt;En cambio, si creamos otra clase dentro del paquete com.warriorminds.encapsulamiento, ahí sí podemos tener acceso a esta variable, como por ejemplo en la clase Prueba.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Prueba&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Calle central 123&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Si creamos una clase en un paquete diferente y que herede de la clase Usuario, también podremos tener acceso a la variable dirección.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OtroHijoDeUsuario&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OtroHijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Mi nueva dirección&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;declarando-variables-y-mtodos-sin-modificador-de-acceso&quot;&gt;Declarando variables y métodos sin modificador de acceso&lt;/h2&gt;
+
+&lt;p&gt;Tenemos la opción de NO indicar el tipo de acceso a una variable o método. Al hacer esto, nuestras variables y métodos podrán ser accesados desde dentro de su clase, y dentro del mismo paquete, pero NO podrán ser accesadas en clases hijas (a menos que estén en el mismo paquete).&lt;/p&gt;
+
+&lt;p&gt;Al declarar esta variable apodos en nuestra clase Usuario (dentro del paquete com.warriorminds.encapsulamiento)&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apodos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;La clase Prueba puede tener acceso a ella ya que están en el mismo paquete:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;El Warrior&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Igualmente, la clase HijoDeUsuario puede tener acceso a ella, ya que están en el mismo paquete también:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;El Warrior&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Pero la clase Encapsulamiento NO puede tener acceso, porque están en diferente paquete.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Otro más&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;De igual manera, nuestra clase OtroHijoDeUsuario, que hereda de Usuario, pero está en otro paquete, tampoco tiene acceso:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OtroHijoDeUsuario&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OtroHijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//apodos.add(&quot;Esto no es posible!&quot;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Es importante declarar el nivel de acceso adecuado a nuestras variables y métodos, para tener un diseño correcto de nuestro programa. En la siguiente tabla podemos ver un resumen de los modificadores de acceso que existen en Java, los cuales ayudan a implementar el encapsulamiento.&lt;/p&gt;
+
+&lt;table class=&quot;table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Modificador&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Clase&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Paquete&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Clase Hija&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Mundo&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;public&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;protected&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;sin modificador&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;private&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Abstracción</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Abstracción" /><published>2016-11-14T10:30:55-06:00</published><updated>2016-11-14T10:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">&lt;p&gt;Este Post es la tercera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Abstracción&lt;/li&gt;
-  &lt;li&gt;Encapsulamiento&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Polimorfismo&lt;/li&gt;
   &lt;li&gt;Composición&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
@@ -367,14 +613,14 @@
 
 &lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
 
-&lt;p&gt;La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="abstraccion" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Herencia</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Herencia" /><published>2016-11-08T15:30:55-06:00</published><updated>2016-11-08T15:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-herencia</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/">&lt;p&gt;Este Post es la segunda parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+&lt;p&gt;La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="abstraccion" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Herencia</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Herencia" /><published>2016-11-08T15:30:55-06:00</published><updated>2016-11-08T15:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-herencia</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/">&lt;p&gt;Este Post es la segunda parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Herencia&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Encapsulamiento&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Polimorfismo&lt;/li&gt;
   &lt;li&gt;Composición&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
@@ -796,7 +1042,7 @@
   &lt;li&gt;Clases y Objetos&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Encapsulamiento&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Polimorfismo&lt;/li&gt;
   &lt;li&gt;Composición&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
