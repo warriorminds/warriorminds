@@ -3,7 +3,7 @@
   
     {
       "title"			: "Programación Orientada a Objetos: Encapsulamiento",
-      "link"			: "http://localhost:4000/blogesp/poo-encapsulamiento/",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento."
     }
   
@@ -11,7 +11,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Abstracción",
-      "link"			: "http://localhost:4000/blogesp/poo-abstraccion/",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción."
     }
   
@@ -19,7 +19,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Herencia",
-      "link"			: "http://localhost:4000/blogesp/poo-herencia/",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Herencia."
     }
   
@@ -27,7 +27,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Clases y Objetos",
-      "link"			: "http://localhost:4000/blogesp/poo-clases-objetos/",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/",
       "excerpt"		: "Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:"
     }
   
@@ -43,7 +43,7 @@
   
     ,{
       "title"			: "Acerca de Warrior Minds",
-      "link"			: "http://localhost:4000/about/",
+      "link"			: "https://warriorminds.github.io/warriorminds/about/",
       "excerpt"		: "Entrena tu mente en las artes del Software."
     }
   
