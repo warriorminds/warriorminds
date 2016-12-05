@@ -1,19 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-11-27T13:29:54-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Polimorfismo</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Polimorfismo" /><published>2016-11-27T13:25:55-06:00</published><updated>2016-11-27T13:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo/">&lt;p&gt;Este Post es la quinta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-05T15:17:17-06:00</updated><id>http://localhost:4000/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Composición</title><link href="http://localhost:4000/blogesp/poo-composicion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Composición" /><published>2016-12-05T12:25:55-06:00</published><updated>2016-12-05T12:25:55-06:00</updated><id>http://localhost:4000/blogesp/poo-composicion</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-composicion/">&lt;p&gt;Este Post es la sexta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Polimorfismo&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Composición&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;El código correspondiente a esta cuarta parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Polimorfismo&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;El código correspondiente a esta quinta parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Composicion&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;La &lt;em&gt;composición&lt;/em&gt; es una técnica de programación que se utiliza para implementar objetos que contengan variables de instancia que hagan referencia a otros objetos. Se implementa una relación de un objeto con otras clases. Esta técnica se utiliza, al igual que la herencia, para reutilizar código, con la diferencia de que aquí también se centraliza código común en un objeto particular.&lt;/p&gt;
+
+&lt;p&gt;En Java y en POO, se prefiere implementar &lt;em&gt;composición en lugar de herencia&lt;/em&gt;. Esto es debido a que la herencia hace que nuestro objeto dependa estrechamente de la implementación de la clase padre, y, si ésta llega a cambiar, nuestro objeto podría tener comportamiento erróneo y tendría que ser modificado también.&lt;/p&gt;
+
+&lt;p&gt;En cambio con la composición, nuestro objeto cuenta con variables de instancia de otros objetos por lo que la implementación de los demás objetos podría cambiar y nuestro código no tendría que ser modificado, mientras la interfaz que se utiliza no sea modificada.&lt;/p&gt;
+
+&lt;p&gt;Otra ventanja, es que al utilizar herencia, nuestra clase hija obtiene todas las implementaciones públicas que tenga la clase padre. En cambio con la composición, nuestra clase tiene que mandar llamar de manera explícita los métodos del objeto en cuestión.&lt;/p&gt;
+
+&lt;p&gt;De igual manera, al utilizar la composición, los objetos que se tengan en la clase pueden ser creados hasta el momento de ser utilizados. Con la herencia, desde el inicio se tiene todo el código disponible de la clase padre.&lt;/p&gt;
+
+&lt;p&gt;Por último, se pueden tener diferentes objetos dentro de la clase, cada uno implementando una funcionalidad en específico. En cambio con la herencia, solamente se puede heredar de una sola clase.&lt;/p&gt;
+
+&lt;p&gt;Veamos un ejemplo. Tendremos una clasae Usuario, la cual tendrá un objeto Trabajo y un objeto Dirección. De igual manera la clase Trabajo tendrá un objeto Dirección.&lt;/p&gt;
+
+&lt;p&gt;Empezemos con la clase Direccion. Solamente tendrá variables de tipo String para guardar toda la información de una dirección:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;numero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;codigoPostal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; número &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, colonia: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, C.P. &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Crearemos ahora la clase Trabajo. La clase trabajo tendrá un objeto de tipo Dirección, con esto podrá hacer uso de los métodos de Dirección.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Trabajo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antiguedad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antiguedad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;puesto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antiguedad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antiguedad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPuesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAntiguedad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antiguedad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Vamos a crear un método en la clase Trabajo que haga uso del método imprimirDirección() de la clase Dirección. Este es un ejemplo del uso de la Composición.&lt;/p&gt;
+
+&lt;p&gt;public void imprimirDireccion() {
+  direccion.imprimirDireccion();
+}&lt;/p&gt;
+
+&lt;p&gt;Crearemos ahora la clase Usuario, que tendrá un objeto Trabajo y un objeto Dirección, además de las variables para la información básica de un usuario.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trabajo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setTrabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Trabajo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;trabajo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ahora haremos uso de la Composición, al utilizar los métodos de la clase Trabajo y de la clase Dirección:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;========= DIRECCION USUARIO ========&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;imprimirDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No hay dirección agregada.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirTrabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;========= TRABAJO USUARIO ========&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Trabajo: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPuesto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Direccion de trabajo: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;imprimirDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No tiene trabajo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Podemos ver cómo la clase Usuario utiliza el concepto de &lt;em&gt;delegación&lt;/em&gt; ya que delega a los objetos dirección y trabajo la responsabilidad de imprimir la dirección de cada uno. A su vez, el objeto Trabajo delega esta funcionalidad al objeto Dirección.&lt;/p&gt;
+
+&lt;p&gt;Ahora haremos uso del objeto Usuario en nuestro método main:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccionTrabajo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Calle trabajo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;32&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Colonia trabajo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;123456&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Trabajo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Software Developer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccionTrabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccionCasa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Calle casa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;18&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Colonia casa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;654321&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Warrior Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;email@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;direccionCasa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTrabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;imprimirDireccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;imprimirTrabajo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Podemos ver cómo es mejor tener varias variables con referencias a distintos objetos: se pueden agregar las que sean necesarias, algo que no se puede hacer con la herencia. De igual manera, si algo cambia en Dirección o Trabajo, solamente el objeto Usuario tendría que ser modificado y no nuestro “cliente” que en este caso es el método main, ya que para cualquiera que utilice la clase Usuario, solamente tendrá que mandar llamar los métodos imprimirDireccion() e imprimirTrabajo() y la clase Usuario será la encargada de mandar llamar los métodos necesarios de los objetos que la componen.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="composicion" /><category term="java" /><summary type="html">En este Post hablaremos acerca del principio de composición.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Polimorfismo</title><link href="http://localhost:4000/blogesp/poo-polimorfismo/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Polimorfismo" /><published>2016-11-27T13:25:55-06:00</published><updated>2016-11-27T13:25:55-06:00</updated><id>http://localhost:4000/blogesp/poo-polimorfismo</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-polimorfismo/">&lt;p&gt;Este Post es la quinta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Polimorfismo&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código correspondiente a esta quinta parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Polimorfismo&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
 
@@ -143,16 +311,16 @@
 
 &lt;p&gt;También podemos observar que todos los objetos creados en Java son del tipo Object, por default.&lt;/p&gt;
 
-&lt;p&gt;En nuestra sección de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;, pudimos ver el polimorfismo en acción y algunas de las ventajas que nos puede traer.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="polimorfismo" /><category term="java" /><summary type="html">En este Post hablaremos acerca del polimorfismo.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Encapsulamiento</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Encapsulamiento" /><published>2016-11-20T16:30:55-06:00</published><updated>2016-11-20T16:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/">&lt;p&gt;Este Post es la cuarta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+&lt;p&gt;En nuestra sección de &lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;, pudimos ver el polimorfismo en acción y algunas de las ventajas que nos puede traer.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="polimorfismo" /><category term="java" /><summary type="html">En este Post hablaremos acerca del polimorfismo.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Encapsulamiento</title><link href="http://localhost:4000/blogesp/poo-encapsulamiento/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Encapsulamiento" /><published>2016-11-20T16:30:55-06:00</published><updated>2016-11-20T16:30:55-06:00</updated><id>http://localhost:4000/blogesp/poo-encapsulamiento</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-encapsulamiento/">&lt;p&gt;Este Post es la cuarta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Encapsulamiento&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Composición&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -389,16 +557,16 @@
       &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Abstracción</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Abstracción" /><published>2016-11-14T10:30:55-06:00</published><updated>2016-11-14T10:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">&lt;p&gt;Este Post es la tercera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Abstracción</title><link href="http://localhost:4000/blogesp/poo-abstraccion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Abstracción" /><published>2016-11-14T10:30:55-06:00</published><updated>2016-11-14T10:30:55-06:00</updated><id>http://localhost:4000/blogesp/poo-abstraccion</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-abstraccion/">&lt;p&gt;Este Post es la tercera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Abstracción&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Composición&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -425,7 +593,7 @@
 
 &lt;p&gt;De igual manera, en este contexto, no nos interesan algunas características que podrían tener los alumnos, como lo son estatura, color de ojos, peso, etc.&lt;/p&gt;
 
-&lt;p&gt;Si bien en la sección de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt; realizamos este proceso de abstracción, Java y la POO nos ofrecen otras herramientas para realizar este proceso y hacer nuestro diseño de software de una manera más adecuada.&lt;/p&gt;
+&lt;p&gt;Si bien en la sección de &lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt; realizamos este proceso de abstracción, Java y la POO nos ofrecen otras herramientas para realizar este proceso y hacer nuestro diseño de software de una manera más adecuada.&lt;/p&gt;
 
 &lt;p&gt;Nuestro ejemplo contará con dos tipos de alumnos, alumnos de primaria y alumnos de universidad. Ambos tipos de alumnos contarán con una lista de materias, su nombre, el grado escolar que cursan y el promedio que obtuvieron.&lt;/p&gt;
 
@@ -758,16 +926,16 @@
 
 &lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
 
-&lt;p&gt;La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="abstraccion" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Herencia</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Herencia" /><published>2016-11-08T15:30:55-06:00</published><updated>2016-11-08T15:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-herencia</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/">&lt;p&gt;Este Post es la segunda parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+&lt;p&gt;La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="abstraccion" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Herencia</title><link href="http://localhost:4000/blogesp/poo-herencia/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Herencia" /><published>2016-11-08T15:30:55-06:00</published><updated>2016-11-08T15:30:55-06:00</updated><id>http://localhost:4000/blogesp/poo-herencia</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-herencia/">&lt;p&gt;Este Post es la segunda parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Herencia&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Composición&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1180,16 +1348,16 @@
 
 &lt;p&gt;Como hemos visto, la herencia nos permite reutilizar y centralizar código, haciendo nuestro código más reusable y limpio. Pero trae también algunos problemas.&lt;/p&gt;
 
-&lt;p&gt;En Java, solamente se permite la &lt;em&gt;herencia simple&lt;/em&gt; - heredar de una sola clase. En sistemas más grandes esto representa un problema. De igual manera, la clase hija depende estrechamente de la implementación que tenga la clase padre y si en algún momento esta implementación llega a cambiar, la clase hija podría tener un comportamiento distinto al deseado. Hay maneras de evitar estos problemas, y lo veremos en los siguientes módulos.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="herencia" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Clases y Objetos</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Clases y Objetos" /><published>2016-11-07T15:39:55-06:00</published><updated>2016-11-07T15:39:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/">&lt;p&gt;Este Post es la primera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+&lt;p&gt;En Java, solamente se permite la &lt;em&gt;herencia simple&lt;/em&gt; - heredar de una sola clase. En sistemas más grandes esto representa un problema. De igual manera, la clase hija depende estrechamente de la implementación que tenga la clase padre y si en algún momento esta implementación llega a cambiar, la clase hija podría tener un comportamiento distinto al deseado. Hay maneras de evitar estos problemas, y lo veremos en los siguientes módulos.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="herencia" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Clases y Objetos</title><link href="http://localhost:4000/blogesp/poo-clases-objetos/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Clases y Objetos" /><published>2016-11-07T15:39:55-06:00</published><updated>2016-11-07T15:39:55-06:00</updated><id>http://localhost:4000/blogesp/poo-clases-objetos</id><content type="html" xml:base="http://localhost:4000/blogesp/poo-clases-objetos/">&lt;p&gt;Este Post es la primera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Definición de POO&lt;/li&gt;
   &lt;li&gt;Clases y Objetos&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Composición&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-herencia/&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://localhost:4000/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1677,4 +1845,4 @@
 
 &lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
 
-&lt;p&gt;Las clases y los objetos son la base de la Programación Orientada a Objetos. Una vez conociendo cómo crear clases y objetos, tipos de variables, como utilizar los métodos y sus parámetros, el concepto de clases/variables estáticas, clases internas y de cuándo utilizar “this”, podemos pasar a conceptos, e ideas que se utilizan en la POO.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="clases" /><category term="objetos" /><category term="java" /><summary type="html">Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
+&lt;p&gt;Las clases y los objetos son la base de la Programación Orientada a Objetos. Una vez conociendo cómo crear clases y objetos, tipos de variables, como utilizar los métodos y sus parámetros, el concepto de clases/variables estáticas, clases internas y de cuándo utilizar “this”, podemos pasar a conceptos, e ideas que se utilizan en la POO.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="clases" /><category term="objetos" /><category term="java" /><summary type="html">Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000{&quot;feature&quot;=&gt;nil}" /></entry></feed>
