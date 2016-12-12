@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Programación Orientada a Objetos: Principios",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-principios/",
+      "excerpt"		: "En este Post hablaremos acerca de algunos principios utilizados en la POO."
+    }
+  
+
+  
+    ,{
       "title"			: "Programación Orientada a Objetos: Composición",
       "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/",
       "excerpt"		: "En este Post hablaremos acerca del principio de composición."
@@ -57,15 +65,15 @@
   
 
   
+
+  
+
+  
     ,{
       "title"			: "Acerca de Warrior Minds",
       "link"			: "https://warriorminds.github.io/warriorminds/about/",
       "excerpt"		: "Entrena tu mente en las artes del Software."
     }
-  
-
-  
-
   
 
   

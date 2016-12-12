@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-05T15:23:17-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Composición</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Composición" /><published>2016-12-05T12:25:55-06:00</published><updated>2016-12-05T12:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-composicion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/">&lt;p&gt;Este Post es la sexta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-12T11:32:07-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Principios</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Principios" /><published>2016-12-12T10:25:55-06:00</published><updated>2016-12-12T10:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-principios</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/">&lt;p&gt;Este Post es la última parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Vamos a presentar varios principios que se deben de cumplir al momento de diseñar programas orientados a objetos. Definiciones son sacadas de Wikipedia.&lt;/p&gt;
+
+&lt;h2 id=&quot;principio-de-responsabilidad-nica&quot;&gt;Principio de responsabilidad única&lt;/h2&gt;
+
+&lt;p&gt;El &lt;em&gt;principio de responsabilidad única&lt;/em&gt; establece que cada clase debe tener responsabilidad sobre una única parte de la funcionalidad el programa completo. Esta única responsabilidad debe de estar encapsulada dentro de una misma clase.&lt;/p&gt;
+
+&lt;p&gt;Al llevar a cabo este principio, cualquier cambio en una parte específica del programa, solamente tendría que afectar a esa parte del programa, en otras palabras a una sola clase. Si no se separan las responsabilidades de una manera adecuada, la mantenibilidad y extensión del programa podrían hacerse mucho más complicadas.&lt;/p&gt;
+
+&lt;h2 id=&quot;principio-abierto-cerrado&quot;&gt;Principio abierto-cerrado&lt;/h2&gt;
+
+&lt;p&gt;El &lt;em&gt;principio de abierto/cerrado&lt;/em&gt; establece que “una entidad de software (clase, módulo, función, etc.) debe quedarse abierta para su extensión, pero cerrada para su modificación”. En otras palabras, se puede agregar funcionalidad nueva, pero no se debería de modificar lo que ya está hecho para no tener que cambiar los objetos que usen la clase modificada.&lt;/p&gt;
+
+&lt;p&gt;Este principio se puede cumplir utilizando interfaces, ya que se pueden tener diferentes implementaciones de las mismas interfaces, y se pueden sustituir unas por otras, pero los métodos que implementan las interfaces siempre permanecerían iguales. Se puede cambiar completamente la implementación de cierta parte del programa, pero los objetos que usan esas clases modificadas no se darían cuenta, ya que la interfaz seguiría siendo la misma.&lt;/p&gt;
+
+&lt;h2 id=&quot;composicin-sobre-herencia&quot;&gt;Composición sobre herencia&lt;/h2&gt;
+
+&lt;p&gt;Como vimos, es preferible implementar composición que implementar herencia. Se pueden agregar los objetos que sean necesarios a nuestras clases, creando varias relaciones del tipo “tiene un objeto del tipo X”. También se puede utilizar la delegación para pasar la responsabilidad de ejecutar ciertas cosas a otros objetos.&lt;/p&gt;
+
+&lt;h2 id=&quot;dry---no-te-repitas&quot;&gt;DRY - No te repitas&lt;/h2&gt;
+
+&lt;p&gt;Don’t Repeat Yourself. Cada pieza de conocimiento debe tener una única representación en el sistema. Con esto podemos evitar que nuestro programa tenga el mismo código repetido en varios lugares. Esto lleva a tener un código más limpio, más ordenado, de más fácil mantenibilidad y además es más sencillo de encontrar problemas y arreglarlos.&lt;/p&gt;
+
+&lt;h2 id=&quot;separacin-de-intereses&quot;&gt;Separación de intereses&lt;/h2&gt;
+
+&lt;p&gt;Este principio de diseño establece que un sistema debe de separarse en secciones, cada sección debe de enfocarse en un interés específico. Un interés es un conjunto de información que afecta el código de tu programa. Se utiliza el encapsulamiento y las interfaces para lograr esto.&lt;/p&gt;
+
+&lt;p&gt;Debe de existir un buen diseño en el programa con separación de intereses. Al enfocar cada sección en un interés en particular, sabemos dónde encontrar el código que necesitamos, además de que secciones individuales se pueden reutilizar en otras partes del código. De igual manera, si se actualiza una sección, las secciones que la utilicen no deberían de verse afectadas por los cambios realizados.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="java" /><summary type="html">En este Post hablaremos acerca de algunos principios utilizados en la POO.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Composición</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Composición" /><published>2016-12-05T12:25:55-06:00</published><updated>2016-12-05T12:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-composicion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/">&lt;p&gt;Este Post es la sexta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
@@ -8,7 +53,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Composición&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
@@ -176,7 +221,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Polimorfismo&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
@@ -321,7 +366,7 @@
   &lt;li&gt;Encapsulamiento&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
@@ -567,7 +612,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
@@ -936,7 +981,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
@@ -1358,7 +1403,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Principios utilizados en la POO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
