@@ -1,4 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-12T11:32:07-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Programación Orientada a Objetos: Principios</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Principios" /><published>2016-12-12T10:25:55-06:00</published><updated>2016-12-12T10:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-principios</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/">&lt;p&gt;Este Post es la última parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-19T17:08:28-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Introducción a Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/" rel="alternate" type="text/html" title="Introducción a Firebase" /><published>2016-12-12T14:25:55-06:00</published><updated>2016-12-12T14:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-intro</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/">&lt;p&gt;Al crear aplicaciones móviles, casi el 100% de las veces necesitamos un &lt;em&gt;servidor “back-end”&lt;/em&gt; el cual proporciona los datos necesarios a la app y de igual manera permite almacenar algunos datos generados por nuestros usuarios. También muchas veces necesitamos &lt;em&gt;identificar&lt;/em&gt; al usuario, ya sea por medio de su email, cuenta de Facebook, Twitter o alguna otra. Una funcionalidad cada vez más común en las aplicaciones son las &lt;em&gt;notificaciones&lt;/em&gt;, que también tendríamos que desarrollar en nuestro servidor para que funcionen. Para saber cómo utilizan tus usuarios tu aplicación necesitas información conocida como &lt;em&gt;Analytics&lt;/em&gt; (estadísticas). Y también a veces necesitas cambiar la &lt;em&gt;configuración&lt;/em&gt; de tu app sin sacar una nueva versión. Todas estas características, entre otras, son las que ofrece Firebase, de Google.&lt;/p&gt;
+
+&lt;p&gt;Firebase pretende facilitar el desarrollo de aplicaciones móviles y web al proporcionar estas herramientas. Es una solución muy completa que nos puede evitar tener que desarrollar un servicio web completo. Nos puede ayudar a tener un alcance más grande de usuarios. Además, tiene dos grandes ventajas: para comenzar, Firebase es gratis y además se puede ir contratando un plan que cumpla con las necesidades, conforme tu app vaya creciendo.&lt;/p&gt;
+
+&lt;p&gt;En esta serie de Posts explicaremos qué es Firebase y cómo implementar algunas de sus funcionalidades en aplicaciones Android.&lt;/p&gt;
+
+&lt;p&gt;Los temas de Firebase que se verán serán:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Añadiendo Firebase a tu app Android&lt;/li&gt;
+  &lt;li&gt;Autenticación
+    &lt;ol&gt;
+      &lt;li&gt;Correo electrónico y contraseña&lt;/li&gt;
+      &lt;li&gt;Google&lt;/li&gt;
+      &lt;li&gt;Facebook&lt;/li&gt;
+      &lt;li&gt;Twitter&lt;/li&gt;
+      &lt;li&gt;Usuarios anónimos&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Analytics&lt;/li&gt;
+  &lt;li&gt;Notificaciones&lt;/li&gt;
+  &lt;li&gt;Configuración Remota&lt;/li&gt;
+  &lt;li&gt;Base de datos&lt;/li&gt;
+  &lt;li&gt;Almacentamiento&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-app.git&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;. Esta aplicación no tiene funcionalidad alguna, solamente se muestra cómo agregar Firebase. Este código será la base para los siguientes Posts.&lt;/p&gt;
+
+&lt;h2 id=&quot;instalando-firebase&quot;&gt;Instalando Firebase&lt;/h2&gt;
+
+&lt;p&gt;Para comenzar a utilizar Firebase necesitamos crear un proyecto en su &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;consola&lt;/a&gt;. Al entrar por primera vez, podrán visualizar una pantalla similar a la siguiente:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/1.intro-consola.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/1.intro-consola.png&quot; alt=&quot;Consola de Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Para crear un nuevo proyecto solamente hay que hacer clic en el botón “Crear Nuevo Proyecto”. Aparecerá un diálogo para introducir el nombre de tu aplicación y para seleccionar tu país o región. Nombraremos nuestro proyecto Firebase. Al ingresar el nombre del proyecto y seleccionar el país o región, hay que dar clic en el botón para crear tu proyecto.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/2.crear-proyecto.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/2.crear-proyecto.png&quot; alt=&quot;Crear proyecto en Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez creado el nuevo proyecto se abre la página principal de la consola.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/3.consola-principal.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/3.consola-principal.png&quot; alt=&quot;Consola principal de Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Como vamos a crear una aplicación para Android, presionaremos el botón “Añade Firebase a tu aplicación de Android” que se encuentra en el centro de la pantalla. Como podemos ver, también se puede agregar Firebase a una aplicación de iOS y a una aplicación web.&lt;/p&gt;
+
+&lt;p&gt;Se nos presenta la siguiente pantalla para poder agregar Firebase a nuestra app Android.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/4.agregar-android.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/4.agregar-android.png&quot; alt=&quot;Agregar una aplicacion Android&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Antes de poder añadir Firebase a nuestra app, necesitamos tener creado nuestro proyecto en Android Studio, ya que como vimos en la imagen, Firebase nos pide el paquete de nuestra aplicación. En nuestro caso, creé la aplicación con el paquete com.warriorminds.firebase. De igual manera, podemos agregar un apodo a nuestra app si así lo deseamos.&lt;/p&gt;
+
+&lt;p&gt;Por último, necesitamos proporcionar nuestro &lt;em&gt;certificado SHA-1&lt;/em&gt;. Este certificado se debe de obtener tanto para la firma de debug como para la firma de producción de nuestra app.&lt;/p&gt;
+
+&lt;h2 id=&quot;obtener-el-certificado-sha-1-en-windows&quot;&gt;Obtener el certificado SHA-1 en Windows&lt;/h2&gt;
+
+&lt;p&gt;Para obtener el certificado SHA-1 en &lt;em&gt;Windows&lt;/em&gt;, debemos de abrir la consola e ir al directorio donde tenemos instalado el JDK de Java. En mi caso es en &lt;em&gt;c:/Program Files/Java/jdk1.8.0_92/bin&lt;/em&gt;. Una vez ahí, ejecutaremos el siguiente comando:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;keytool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exportcert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;androiddebugkey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keystore&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;USERPROFILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keystore&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al ejecutar el comando se nos solicitará una contraseña. La contraseña por defecto para la firma de debug de Android es &lt;em&gt;android&lt;/em&gt;. Una vez que ingresamos la contraseña obtenemos tres valores: MD5, SHA1 y SHA256.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/5.keytool.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/5.keytool.png&quot; alt=&quot;Keytool&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Debemos de copiar el valor de SHA1 a nuestra consola de Firebase. Cuando hayamos terminado de copiar el valor, podremos añaidr nuestra aplicación a Firebase.&lt;/p&gt;
+
+&lt;h2 id=&quot;continuando-con-la-instalacin-de-firebase&quot;&gt;Continuando con la instalación de Firebase&lt;/h2&gt;
+
+&lt;p&gt;Al añadir nuestra aplicación, necesitaremos descargar un archivo llamado &lt;em&gt;google-services.json&lt;/em&gt;. Este archivo contiene la configuración de nuestra app en Firebase. Debemos de guardarlo en el directorio &lt;em&gt;app&lt;/em&gt; de nuestra aplicación. Recuerden que deben descargar su propio archivo google-services.json y colocarlo en la carpeta app. Este archivo no está en el repositorio de Github y si no lo agregan, no funcionará su aplicación.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/6.google-services-json.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/6.google-services-json.png&quot; alt=&quot;Google Services JSON&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez descargado el archivo google-services.json, hemos terminado de añadir nuestra aplicación a Firebase. Nuestra app nos aparecerá en la consola principal.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/7.app-creada.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/init/7.app-creada.png&quot; alt=&quot;Aplicación creada en Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;dependencias&quot;&gt;Dependencias&lt;/h2&gt;
+
+&lt;p&gt;Firebase nos proporciona dependencias separadas para cada uno de sus módulos. Cuenta con una dependencia principal o core que debemos de añadir siempre. También necesitamos agregar &lt;em&gt;Google Play Services&lt;/em&gt; a nuestra aplicación. Si por alguna razón al agregar estas dependencias gradle no las encuentra, necesitan actualizar su SDK de Android a la última versión.&lt;/p&gt;
+
+&lt;p&gt;En el archivo de proyecto &lt;a href=&quot;https://github.com/warriorminds/firebase-app/blob/master/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt; debemos de agregar el siguiente classpath&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;services:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Por último, en el archivo &lt;a href=&quot;https://github.com/warriorminds/firebase-app/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt; de la aplicación debemos agregar las dependencias que utilizaremos de Firebase. Para comenzar y como base, necesitamos agregar &lt;em&gt;firebase-core&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;core:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;9.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al final del mismo archivo necesitamos agregar la siguiente línea para aplicar el plugin de google-services&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;plugin:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Hemos terminado de configurar y agregar nuestra app a Firebase. Los pasos que seguimos fueron:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Crear nuestro proyecto en la consola&lt;/li&gt;
+  &lt;li&gt;Agregar nuestra aplicación Android, obteniendo el certificado SHA1 con keytool.&lt;/li&gt;
+  &lt;li&gt;Descargar el archivo google-services.json y agregarlo a la carpeta app de nuestro proyecto.&lt;/li&gt;
+  &lt;li&gt;Agregar la dependencia de google-services en build.gradle del proyecto.&lt;/li&gt;
+  &lt;li&gt;Agregar la dependencia de firebase-core en build.gradle de la app.&lt;/li&gt;
+  &lt;li&gt;Aplicar el plugin de google-services en el archivo build.gradle de la app.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;En el siguiente Post, aprenderemos a autenticar usuarios mediante correo electrónico, Google, Facebook, Twitter y autenticar usuarios anónimos, todo esto utilizando Firebase.&lt;/p&gt;</content><category term="firebase" /><category term="android" /><summary type="html">Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Principios</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Principios" /><published>2016-12-12T10:25:55-06:00</published><updated>2016-12-12T10:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-principios</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/">&lt;p&gt;Este Post es la última parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;

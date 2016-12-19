@@ -1,0 +1,415 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Introducción a Firebase &#8211; Warrior Minds</title>
+<meta name="description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+<meta name="keywords" content="firebase, android">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Introducción a Firebase">
+<meta name="twitter:description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+<meta name="twitter:site" content="@warrior_minds">
+<meta name="twitter:creator" content="@warrior_minds">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://warriorminds.github.io/warriorminds/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="es_MX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introducción a Firebase">
+<meta property="og:description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+<meta property="og:url" content="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/">
+<meta property="og:site_name" content="Warrior Minds">
+
+<!-- Webmaster Tools verfication -->
+<meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8">
+<meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+<link rel="canonical" href="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/">
+<link href="https://warriorminds.github.io/warriorminds/feed.xml" type="application/atom+xml" rel="alternate" title="Warrior Minds Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://warriorminds.github.io/warriorminds/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/" >Inicio</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/blog/es/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/categories/" >Categorias</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/search/" >Buscar</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/about/" >Acerca de</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="https://warriorminds.github.io/warriorminds/" class="site-logo" rel="home" title="Warrior Minds"><img src="https://warriorminds.github.io/warriorminds/images/site-logo.png" width="200" height="200" alt="Warrior Minds logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="https://warriorminds.github.io/warriorminds/">Warrior Minds</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Entrena tu mente en las artes del Software.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="//github.us14.list-manage.com/subscribe/post?u=b7c3d4083b8b3456c5927056f&amp;id=b18df401fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Suscríbete a Warrior Minds</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="correo electrónico" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b7c3d4083b8b3456c5927056f_b18df401fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Suscríbete" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://warriorminds.github.io/warriorminds/tags/#firebase" title="Pages tagged firebase">firebase</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#android" title="Pages tagged android">android</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Introducción a Firebase</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://warriorminds.github.io/warriorminds/images/bio-photo.png" class="bio-photo" alt="Warrior Minds bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Warrior Minds</span></span>
+        
+        <span class="entry-date date published"><time datetime="2016-12-12T14:25:55-06:00"><i class="fa fa-calendar-o"></i> December 12, 2016</time></span>
+        
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=firebase,android&amp;text=Introducción%20a%20Firebase&amp;url=https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/&amp;via=warrior_minds" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        <div class="google-ads" style="margin-top:40px; text-align:center;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 160x600 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="4963587312"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads --><!-- /.google-ads -->
+      </footer>
+      <div class="entry-content">
+        <p>Al crear aplicaciones móviles, casi el 100% de las veces necesitamos un <em>servidor “back-end”</em> el cual proporciona los datos necesarios a la app y de igual manera permite almacenar algunos datos generados por nuestros usuarios. También muchas veces necesitamos <em>identificar</em> al usuario, ya sea por medio de su email, cuenta de Facebook, Twitter o alguna otra. Una funcionalidad cada vez más común en las aplicaciones son las <em>notificaciones</em>, que también tendríamos que desarrollar en nuestro servidor para que funcionen. Para saber cómo utilizan tus usuarios tu aplicación necesitas información conocida como <em>Analytics</em> (estadísticas). Y también a veces necesitas cambiar la <em>configuración</em> de tu app sin sacar una nueva versión. Todas estas características, entre otras, son las que ofrece Firebase, de Google.</p>
+
+<p>Firebase pretende facilitar el desarrollo de aplicaciones móviles y web al proporcionar estas herramientas. Es una solución muy completa que nos puede evitar tener que desarrollar un servicio web completo. Nos puede ayudar a tener un alcance más grande de usuarios. Además, tiene dos grandes ventajas: para comenzar, Firebase es gratis y además se puede ir contratando un plan que cumpla con las necesidades, conforme tu app vaya creciendo.</p>
+
+<p>En esta serie de Posts explicaremos qué es Firebase y cómo implementar algunas de sus funcionalidades en aplicaciones Android.</p>
+
+<p>Los temas de Firebase que se verán serán:</p>
+
+<ol>
+  <li>Añadiendo Firebase a tu app Android</li>
+  <li>Autenticación
+    <ol>
+      <li>Correo electrónico y contraseña</li>
+      <li>Google</li>
+      <li>Facebook</li>
+      <li>Twitter</li>
+      <li>Usuarios anónimos</li>
+    </ol>
+  </li>
+  <li>Analytics</li>
+  <li>Notificaciones</li>
+  <li>Configuración Remota</li>
+  <li>Base de datos</li>
+  <li>Almacentamiento</li>
+</ol>
+
+<p>Toda la información oficial de Firebase la pueden encontrar <a href="https://firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-app.git" target="_blank">Github</a>. Esta aplicación no tiene funcionalidad alguna, solamente se muestra cómo agregar Firebase. Este código será la base para los siguientes Posts.</p>
+
+<h2 id="instalando-firebase">Instalando Firebase</h2>
+
+<p>Para comenzar a utilizar Firebase necesitamos crear un proyecto en su <a href="https://console.firebase.google.com/" target="_blank">consola</a>. Al entrar por primera vez, podrán visualizar una pantalla similar a la siguiente:</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/1.intro-consola.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/1.intro-consola.png" alt="Consola de Firebase" /></a>
+</figure>
+
+<p>Para crear un nuevo proyecto solamente hay que hacer clic en el botón “Crear Nuevo Proyecto”. Aparecerá un diálogo para introducir el nombre de tu aplicación y para seleccionar tu país o región. Nombraremos nuestro proyecto Firebase. Al ingresar el nombre del proyecto y seleccionar el país o región, hay que dar clic en el botón para crear tu proyecto.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/2.crear-proyecto.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/2.crear-proyecto.png" alt="Crear proyecto en Firebase" /></a>
+</figure>
+
+<p>Una vez creado el nuevo proyecto se abre la página principal de la consola.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/3.consola-principal.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/3.consola-principal.png" alt="Consola principal de Firebase" /></a>
+</figure>
+
+<p>Como vamos a crear una aplicación para Android, presionaremos el botón “Añade Firebase a tu aplicación de Android” que se encuentra en el centro de la pantalla. Como podemos ver, también se puede agregar Firebase a una aplicación de iOS y a una aplicación web.</p>
+
+<p>Se nos presenta la siguiente pantalla para poder agregar Firebase a nuestra app Android.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/4.agregar-android.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/4.agregar-android.png" alt="Agregar una aplicacion Android" /></a>
+</figure>
+
+<p>Antes de poder añadir Firebase a nuestra app, necesitamos tener creado nuestro proyecto en Android Studio, ya que como vimos en la imagen, Firebase nos pide el paquete de nuestra aplicación. En nuestro caso, creé la aplicación con el paquete com.warriorminds.firebase. De igual manera, podemos agregar un apodo a nuestra app si así lo deseamos.</p>
+
+<p>Por último, necesitamos proporcionar nuestro <em>certificado SHA-1</em>. Este certificado se debe de obtener tanto para la firma de debug como para la firma de producción de nuestra app.</p>
+
+<h2 id="obtener-el-certificado-sha-1-en-windows">Obtener el certificado SHA-1 en Windows</h2>
+
+<p>Para obtener el certificado SHA-1 en <em>Windows</em>, debemos de abrir la consola e ir al directorio donde tenemos instalado el JDK de Java. En mi caso es en <em>c:/Program Files/Java/jdk1.8.0_92/bin</em>. Una vez ahí, ejecutaremos el siguiente comando:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">keytool</span> <span class="o">-</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">list</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">alias</span> <span class="n">androiddebugkey</span> <span class="o">-</span><span class="n">keystore</span> <span class="o">%</span><span class="n">USERPROFILE</span><span class="o">%</span><span class="err">\</span><span class="o">.</span><span class="na">android</span><span class="err">\</span><span class="n">debug</span><span class="o">.</span><span class="na">keystore</span>
+</code></pre>
+</div>
+
+<p>Al ejecutar el comando se nos solicitará una contraseña. La contraseña por defecto para la firma de debug de Android es <em>android</em>. Una vez que ingresamos la contraseña obtenemos tres valores: MD5, SHA1 y SHA256.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/5.keytool.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/5.keytool.png" alt="Keytool" /></a>
+</figure>
+
+<p>Debemos de copiar el valor de SHA1 a nuestra consola de Firebase. Cuando hayamos terminado de copiar el valor, podremos añaidr nuestra aplicación a Firebase.</p>
+
+<h2 id="continuando-con-la-instalacin-de-firebase">Continuando con la instalación de Firebase</h2>
+
+<p>Al añadir nuestra aplicación, necesitaremos descargar un archivo llamado <em>google-services.json</em>. Este archivo contiene la configuración de nuestra app en Firebase. Debemos de guardarlo en el directorio <em>app</em> de nuestra aplicación. Recuerden que deben descargar su propio archivo google-services.json y colocarlo en la carpeta app. Este archivo no está en el repositorio de Github y si no lo agregan, no funcionará su aplicación.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/6.google-services-json.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/6.google-services-json.png" alt="Google Services JSON" /></a>
+</figure>
+
+<p>Una vez descargado el archivo google-services.json, hemos terminado de añadir nuestra aplicación a Firebase. Nuestra app nos aparecerá en la consola principal.</p>
+
+<figure>
+	<a href="https://warriorminds.github.io/warriorminds/images/fb/init/7.app-creada.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/init/7.app-creada.png" alt="Aplicación creada en Firebase" /></a>
+</figure>
+
+<h2 id="dependencias">Dependencias</h2>
+
+<p>Firebase nos proporciona dependencias separadas para cada uno de sus módulos. Cuenta con una dependencia principal o core que debemos de añadir siempre. También necesitamos agregar <em>Google Play Services</em> a nuestra aplicación. Si por alguna razón al agregar estas dependencias gradle no las encuentra, necesitan actualizar su SDK de Android a la última versión.</p>
+
+<p>En el archivo de proyecto <a href="https://github.com/warriorminds/firebase-app/blob/master/build.gradle" target="_blank">build.gradle</a> debemos de agregar el siguiente classpath</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gms</span><span class="o">:</span><span class="n">google</span><span class="o">-</span><span class="nl">services:</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre>
+</div>
+
+<p>Por último, en el archivo <a href="https://github.com/warriorminds/firebase-app/blob/master/app/build.gradle" target="_blank">build.gradle</a> de la aplicación debemos agregar las dependencias que utilizaremos de Firebase. Para comenzar y como base, necesitamos agregar <em>firebase-core</em>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">firebase</span><span class="o">:</span><span class="n">firebase</span><span class="o">-</span><span class="nl">core:</span><span class="mf">9.8</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre>
+</div>
+
+<p>Al final del mismo archivo necesitamos agregar la siguiente línea para aplicar el plugin de google-services</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">apply</span> <span class="nl">plugin:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gms</span><span class="o">.</span><span class="na">google</span><span class="o">-</span><span class="n">services</span><span class="err">'</span>
+</code></pre>
+</div>
+
+<h2 id="conclusin">Conclusión</h2>
+
+<p>Hemos terminado de configurar y agregar nuestra app a Firebase. Los pasos que seguimos fueron:</p>
+
+<ol>
+  <li>Crear nuestro proyecto en la consola</li>
+  <li>Agregar nuestra aplicación Android, obteniendo el certificado SHA1 con keytool.</li>
+  <li>Descargar el archivo google-services.json y agregarlo a la carpeta app de nuestro proyecto.</li>
+  <li>Agregar la dependencia de google-services en build.gradle del proyecto.</li>
+  <li>Agregar la dependencia de firebase-core en build.gradle de la app.</li>
+  <li>Aplicar el plugin de google-services en el archivo build.gradle de la app.</li>
+</ol>
+
+<p>En el siguiente Post, aprenderemos a autenticar usuarios mediante correo electrónico, Google, Facebook, Twitter y autenticar usuarios anónimos, todo esto utilizando Firebase.</p>
+
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'warriormindswebsite'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://warriorminds.github.io/warriorminds/blogesp/poo-principios/" class="btn" title="Programación Orientada a Objetos: Principios">Anterior</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    <div class="google-ads" style="margin:10px 0;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 320x50 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:320px;height:50px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="9595923317"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads -->
+
+<span>&copy; 2016 Warrior Minds. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="https://twitter.com/warrior_minds" title="Warrior Minds on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="https://facebook.com/warriorminds" title="Warrior Minds on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="https://plus.google.com/102230749926196780961" title="Warrior Minds on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/warriorminds" title="Warrior Minds on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://warriorminds.github.io/warriorminds/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://warriorminds.github.io/warriorminds';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://warriorminds.github.io/warriorminds/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-86871758-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>
