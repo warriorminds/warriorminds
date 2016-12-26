@@ -1,4 +1,681 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-19T17:08:28-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Introducción a Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/" rel="alternate" type="text/html" title="Introducción a Firebase" /><published>2016-12-12T14:25:55-06:00</published><updated>2016-12-12T14:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-intro</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/">&lt;p&gt;Al crear aplicaciones móviles, casi el 100% de las veces necesitamos un &lt;em&gt;servidor “back-end”&lt;/em&gt; el cual proporciona los datos necesarios a la app y de igual manera permite almacenar algunos datos generados por nuestros usuarios. También muchas veces necesitamos &lt;em&gt;identificar&lt;/em&gt; al usuario, ya sea por medio de su email, cuenta de Facebook, Twitter o alguna otra. Una funcionalidad cada vez más común en las aplicaciones son las &lt;em&gt;notificaciones&lt;/em&gt;, que también tendríamos que desarrollar en nuestro servidor para que funcionen. Para saber cómo utilizan tus usuarios tu aplicación necesitas información conocida como &lt;em&gt;Analytics&lt;/em&gt; (estadísticas). Y también a veces necesitas cambiar la &lt;em&gt;configuración&lt;/em&gt; de tu app sin sacar una nueva versión. Todas estas características, entre otras, son las que ofrece Firebase, de Google.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2016-12-26T15:49:42-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Autenticación con Firebase - Primera Parte: correo, Google y Facebook</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1/" rel="alternate" type="text/html" title="Autenticación con Firebase - Primera Parte: correo, Google y Facebook" /><published>2016-12-26T14:25:55-06:00</published><updated>2016-12-26T14:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Este Post crea una actividad independiente para cada tipo de autenticación. El código de esa aplicación lo pueden encontrar en la rama master del repositorio en Github.&lt;/p&gt;
+
+&lt;p&gt;También podrán encontrar una app que utiliza todos los tipos de autenticación en una misma actividad. Este código lo pueden encontrar en la rama &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/tree/app_completa&quot; target=&quot;_blank&quot;&gt;app_completa&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Firebase nos proporciona las herramientas necesarias para &lt;em&gt;autenticar&lt;/em&gt; a nuestros usuarios. Ofrece soluciones para autenticar utilizando correo electrónico y contraseña, Google, Facebook, Twitter, Github, tu sistema personalizado de autenticación y además permite autenticar usuarios de manera anónima.&lt;/p&gt;
+
+&lt;p&gt;En este Post, el cual será la primera parte para utilizar autenticación con Firebase, veremos cómo implementar la creación de cuentas con correo y contraseña, iniciar sesión con correo y contraseña, con cuentas de Google y de Facebook.&lt;/p&gt;
+
+&lt;p&gt;Vamos a tomar el código como lo dejamos en el &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-intro&quot; target=&quot;_blank&quot;&gt;post anterior&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para agregar autenticación a tu app, debemos de agregar esta dependencia al archivo &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;auth:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;9.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;crear-cuenta-con-correo-electrnico-y-contrasea&quot;&gt;Crear cuenta con correo electrónico y contraseña&lt;/h2&gt;
+
+&lt;p&gt;Todo el código para crear una cuenta con correo y contraseña lo pueden encontrar en la clase &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/CrearCuentaActivity.java&quot; target=&quot;_blank&quot;&gt;CrearCuentaActivity.java&lt;/a&gt;. Recuerden que necesitan agregar su archivo de &lt;em&gt;google-services.json&lt;/em&gt; al proyecto, en la carpeta app, para que funcione la aplicación.&lt;/p&gt;
+
+&lt;p&gt;Firebase nos proporciona dos objetos que son los que nos permiten crear cuentas e iniciar sesión. Si bien iniciar sesión con cada proveedor (Google, Facebook) tiene sus detalles, en general estos dos objetos son los que necesitamos utilizar.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;FirebaseAuth&lt;/li&gt;
+  &lt;li&gt;FirebaseAuth.AuthStateListener&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Necesitamos obtener la instancia de FirebaseAuth y crear el listener que escuchará los cambios de estado en la cuenta.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicializarAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAuthStateChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;FirebaseUser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// El usuario ha iniciado sesión&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// El usuario no ha iniciado sesion aun&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;El método de &lt;em&gt;onAuthStateChanged()&lt;/em&gt; se manda llamar cuando hay un cambio en el estado de la sesión; por ejemplo cuando el usuario inició o cerró sesión. También cuando se termina de inicializar Firebase, por lo que al entrar a la actividad se ejecutará este método también.  En este método podemos utilizar el objeto FirebaseAuth para obtener el FirebaseUser. Si obtenemos un valor de usuario, significa que ha iniciado sesión. Esta inicialización se debe de realizar en el onCreate().&lt;/p&gt;
+
+&lt;p&gt;Una vez creado el listener, necesitamos agregarlo a nuestro objeto FirebaseAuth. Esto se lleva a cabo en el onStart() de nuestra actividad. Así mismo, se debe de quitar el listener del objeto FirebaseAuth en el onStop().&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Por último, vamos a añadir las instrucciones para crear la cuenta. En nuestro proyecto hay un botón al cual se le asigna un onClickListener() que manda llamar el método crearCuenta(String email, String password). En este método, lo que tenemos que hacer es llamar el método &lt;em&gt;createUserWithEmailAndPassword()&lt;/em&gt; del objeto autenticaciónFirebase. De igual manera se le agrega un listener, &lt;em&gt;addOnCompleteListener()&lt;/em&gt; el cual se llamará cuando se termine de crear el usuario y nos indicará si hubo algún error o si la operación fue exitosa.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;crearCuenta&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createUserWithEmailAndPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addOnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccessful&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Hubo algún error.&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// La operación de creación de cuenta fue exitosa.&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;El código de ejemplo también les proporciona el layout con los campos de texto para correo y contraseña, un círculo para mostrar el progreso mientras se hace la creación de cuenta, así como una validación simple del correo y la contraseña. De igual manera, hay código para mostrar correos electrónicos que se encuentren asociados al teléfono. Cabe destacar que Firebase permite contraseñas de al menos &lt;em&gt;seis caracteres&lt;/em&gt;, si no, regresa un error.&lt;/p&gt;
+
+&lt;h3 id=&quot;activacin-en-la-consola&quot;&gt;Activación en la Consola&lt;/h3&gt;
+
+&lt;p&gt;Para que nuestro código funcione, necesitamos ir a la &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;consola de Firebase&lt;/a&gt;. Una vez ahí, en el menú del lado izquierdo hay que seleccionar la opción de Autenticación. Esta pantalla nos presenta tres pestañas. Necesitamos abrir la pestaña &lt;em&gt;Método de Inicio de Sesión&lt;/em&gt;, que se muestra en la siguiente imagen.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/8.consola-metodo-inicio-sesion.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/8.consola-metodo-inicio-sesion.png&quot; alt=&quot;Método de Inicio de Sesión&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez en esta pantalla, daremos clic en la opción de &lt;em&gt;Correo electrónico/contraseña&lt;/em&gt;. Se abrirá un diálogo donde podemos activar esta opción y guardar los cambios.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/9.habilitar-email-pwd.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/9.habilitar-email-pwd.png&quot; alt=&quot;Activar correo electrónico y contraseña&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Ahora podemos iniciar nuestra app y crear una cuenta con correo electrónico y contraseña.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/10.app-crear-cuenta-mail.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/10.app-crear-cuenta-mail.png&quot; alt=&quot;Actividad para crear cuenta con correo y contraseña.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Podemos ver que creamos la cuenta y además iniciamos sesión. Ahora tenemos acceso al objeto &lt;em&gt;FirebaseUser&lt;/em&gt;. Pueden revisar el método asignarUsuario(FirebaseUser usuarioFirebase).&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/11.cuenta-creada-email.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/11.cuenta-creada-email.png&quot; alt=&quot;Al crear cuenta se inicia sesión.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;inicio-de-sesin-con-correo-electrnico-y-contrasea&quot;&gt;Inicio de Sesión con Correo Electrónico y Contraseña&lt;/h2&gt;
+
+&lt;p&gt;El código para iniciar sesión con correo electrónico y contraseña lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/IniciarSesionCorreoContrasenaActivity.java&quot; target=&quot;_blank&quot;&gt;IniciarSesionCorreoContraseñaActivity.java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para iniciar sesión, se deben de seguir pasos muy similares al punto anterior, cuando creamos la cuenta. Primero se debe de inicializar el listener FirebaseAuth.AuthStateListener y posteriormente se debe de agregar el listener al objeto FirebaseAuth en el onStart() y quitarlo en el onStop().&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicializarAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAuthStateChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FirebaseUser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// El usuario ya inició sesión.&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// El usuario no ha iniciado sesión aún.&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Por último se debe de llamar el método &lt;em&gt;signInWithEmailAndPassword()&lt;/em&gt; del objeto FirebaseAuth para inciar sesión. Se le agrega un listener con &lt;em&gt;addOnCompleteListener()&lt;/em&gt; para escuchar los cambios y ver si se pudo iniciar sesión o no. De igual manera, al terminar la operación de iniciar sesión, se ejecutará el método &lt;em&gt;onAuthStateChanged()&lt;/em&gt; del listener FirebaseAuth.AuthStateListener en donde podremos obtener el usuario.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;iniciarSesion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signInWithEmailAndPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addOnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;mostrarProgreso&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccessful&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Hubo algún error&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Se inició sesión. Se llamará el listener.&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Se incluye además de esto, el mismo código que en la clase &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/CrearCuentaActivity.java&quot; target=&quot;_blank&quot;&gt;CrearCuentaActivity.java&lt;/a&gt;., para validar los datos, mostrar el círculo de progreso, mostrar las cuentas asociadas al teléfono.&lt;/p&gt;
+
+&lt;p&gt;Podemos iniciar sesión con la cuenta de correo que utilizamos anteriormente.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/13.login-email.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/13.login-email.png&quot; alt=&quot;Iniciar sesión con correo y contraseña.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez iniciada la sesión podemos tener acceso al FirebaseUser. Pueden ver como en el método &lt;em&gt;asignarUsuario(FirebaseUser usuarioFirebase)&lt;/em&gt; obtenemos el correo del usuario utilizado para iniciar sesión.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/12.login-complete.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/12.login-complete.png&quot; alt=&quot;Iniciar sesión con correo y contraseña.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;cerrar-sesin&quot;&gt;Cerrar Sesión&lt;/h3&gt;
+
+&lt;p&gt;Para cerrar sesión, se tiene que llamar el método &lt;em&gt;signOut()&lt;/em&gt; del objeto FirebaseAuth. Pueden revisar el método &lt;em&gt;cerrarSesion()&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signOut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;inicio-de-sesin-con-google&quot;&gt;Inicio de sesión con Google&lt;/h2&gt;
+
+&lt;p&gt;Utilizar Google Sign-in para iniciar sesión involucra algunos pasos más. Para empezar, hay que activar el inicio de sesión con Google en la consola de Firebase.&lt;/p&gt;
+
+&lt;h3 id=&quot;activar-inicio-de-sesin-con-google-en-la-consola&quot;&gt;Activar Inicio de Sesión con Google en la Consola&lt;/h3&gt;
+
+&lt;p&gt;En el menú de la izquierda hay que ir a Autenticación y seleccionar la pestaña de Métodos de Inicio de Sesión. Una vez ahí, seleccionamos la opción de Google para habilitarla. Se muestra una advertencia de necesitar la huella digital SHA1 para poder hacer esto. Esto lo hicimos en el post anterior por lo que no debe de haber problema.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/14.activar-login-google.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/14.activar-login-google.png&quot; alt=&quot;Activar inicio de sesión con cuenta de Google.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Antes de guardar los cambios, necesitamos obtener un valor &lt;em&gt;ID de cliente web&lt;/em&gt; que se encuentra en esta pantalla. Debemos expandir la opción de &lt;em&gt;Configuración del SDK web (opcional)&lt;/em&gt;. Ahí encontraremos el &lt;em&gt;ID de cliente web&lt;/em&gt;. Copien y guarden este valor que lo necesitaremos más adelante. Después de guardar este valor podemos guardar los cambios.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/15.token-id-google.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/15.token-id-google.png&quot; alt=&quot;ID de cliente web.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;dependencias&quot;&gt;Dependencias&lt;/h3&gt;
+
+&lt;p&gt;Hay que agregar la dependencia de &lt;em&gt;google-play-services-auth&lt;/em&gt; en nuestro archivo &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;auth:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;9.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;En esta dependencia viven los objetos de &lt;em&gt;Google Sign In&lt;/em&gt; que utilizaremos más adelante.&lt;/p&gt;
+
+&lt;h3 id=&quot;layout&quot;&gt;Layout&lt;/h3&gt;
+
+&lt;p&gt;Lo primero que necesitamos hacer, es crear nuestro layout. En él, vamos a agregar un botón &lt;em&gt;SignInButton&lt;/em&gt;. En nuestro ejemplo, el layout que utilizamos es &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/res/layout/activity_iniciar_sesion_google.xml&quot; target=&quot;_blank&quot;&gt;activity_iniciar_sesion_google.xml&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SignInButton&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@+id/boton_sesion_google&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;match_parent&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;inicializar-firebase&quot;&gt;Inicializar Firebase&lt;/h3&gt;
+
+&lt;p&gt;El código para iniciar sesión con Google lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/IniciarSesionGoogleActivity.java&quot; target=&quot;_blank&quot;&gt;IniciarSesionGoogleActivity.java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Al igual que en las secciones anteriores, debemos inicializar el objeto FirebaseAuth y el FirebaseAuth.AuthStateListener. También hay que agregar el listener al objeto FirebaseAuth en el onStart() y quitarlo en el onStop().&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicializarAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAuthStateChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FirebaseUser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// Usuario ha iniciado sesión.&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// Usuario no ha iniciado sesión aún.&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;inicializar-google-sign-in&quot;&gt;Inicializar Google Sign-in&lt;/h3&gt;
+
+&lt;p&gt;Debemos de inicializar también los objetos de Google que utilizaremos. Necesitamos dos objetos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GoogleSignInOptions&lt;/li&gt;
+  &lt;li&gt;GoogleApiClient&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;GoogleSignInOptions&lt;/em&gt; nos permite configurar la manera con que iniciaremos sesión. Por ahora utilizaremos las opciones por default de inicio de sesión &lt;em&gt;(DEFAULT_SIGN_IN)&lt;/em&gt;. También nos permite agregar opciones que pediremos al usuario, en este caso pediremos acceso a su cuenta de correo electrónico. De igual manera, el &lt;em&gt;ID de cliente web&lt;/em&gt; que guardamos al inicio de esta sección, lo debemos proporcionar. Reemplazen este código &lt;em&gt;getString(R.string.default_web_client_id)&lt;/em&gt; con el valor del &lt;em&gt;ID de cliente web&lt;/em&gt; suyo.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;GoogleSignInOptions&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcionesInicioSesionGoogle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleSignInOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GoogleSignInOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEFAULT_SIGN_IN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestIdToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;default_web_client_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;GoogleApiClient&lt;/em&gt; nos permite iniciar la actividad para iniciar sesión con Google. A este objeto le indicamos que utilizaremos la API de Google Sign In, además de agregarle los listeners necesarios y el objeto &lt;em&gt;GoogleSignInOptions&lt;/em&gt; configurado previamente.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;clienteApiGoogle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleApiClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enableAutoManage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* FragmentActivity */&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* OnConnectionFailedListener */&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addApi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GOOGLE_SIGN_IN_API&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcionesInicioSesionGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;iniciar-flujo-de-inicio-de-sesin-con-google&quot;&gt;Iniciar Flujo de Inicio de Sesión con Google&lt;/h3&gt;
+
+&lt;p&gt;Para iniciar el flujo de inicio de sesión con Google, necesitamos agregarle un onClickListener a nuestro botón SignInButton.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;botonIniciarSesion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SignInButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boton_sesion_google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;botonIniciarSesion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;iniciarSesionConGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al hacer clic en el botón, necesitamos lanzar un Intent el cual se crea utilizando el objeto &lt;em&gt;GoogleApiClient&lt;/em&gt; que acabamos de configurar.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GoogleSignInApi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSignInIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clienteApiGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Iniciaremos una actividad por resultado, pasando el intent y un código de solicitud (en nuestro caso es CS_INICIAR_SESION = 9001).&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;startActivityForResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CS_INICIAR_SESION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Lo que hace el &lt;em&gt;startActivityForResult()&lt;/em&gt; es iniciar la actividad de inicio de sesión de Google y regresar un resultado a nuestra actividad. Este resultado lo tenemos que obtener en el método &lt;em&gt;onActivityResult()&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Primero debemos de comprobar que el codigo de solicitud recibido sea el mismo que el que enviamos. Posteriormente, en el Intent datos que recibimos viene la información de la cuenta seleccionada del usuario. Debemos de obtener un &lt;em&gt;GoogleSignInResult&lt;/em&gt; utilizando este Intent. Podemos utilizarlo también para ver si el inicio de sesión fue exitoso. Si fue exitoso, de este objeto podemos obtener la cuenta del usuario, con el objeto &lt;em&gt;GoogleSignInAccount&lt;/em&gt;. Por último, utilizando este objeto, debemos de iniciar sesión en Firebase.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onActivityResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoSolicitud&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoResultado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onActivityResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;codigoSolicitud&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoResultado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;codigoSolicitud&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CS_INICIAR_SESION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;GoogleSignInResult&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultado&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GoogleSignInApi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSignInResultFromIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resultado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;GoogleSignInAccount&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cuenta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSignInAccount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;inicioSesionFirebaseConCuentaGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cuenta&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Hubo un error&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;iniciando-sesin-en-firebase-con-una-cuenta-google&quot;&gt;Iniciando sesión en Firebase con una cuenta Google&lt;/h3&gt;
+
+&lt;p&gt;Utilizando un &lt;em&gt;Id Token&lt;/em&gt; que tiene nuestro objeto &lt;em&gt;GoogleSignInAccount&lt;/em&gt; obtenido previamente, necesitamos obtener una credencial de tipo &lt;em&gt;AuthCredential&lt;/em&gt;. Esta credencial se obtiene utilizando el objeto de Firebase &lt;em&gt;GoogleAuthProvider&lt;/em&gt;. Esta credencial se utilizará para iniciar sesión.&lt;/p&gt;
+
+&lt;p&gt;Por último, llamareoms el método &lt;em&gt;signInWithCredential()&lt;/em&gt; de nuestro objeto FirebaseAuth, pasándole la credencial obtenida. De igual manera se le agrega un &lt;em&gt;OnCompleteListener&lt;/em&gt;, con el cual podemos ver si hubo un error al iniciar sesión con Firebase. Cuando se termine de ejecutar este método, se manda llamar el método &lt;em&gt;onAuthStateChanged()&lt;/em&gt; de nuestro  FirebaseAuth.AuthStateListener, con el cual podemos obtener la información del usuario.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicioSesionFirebaseConCuentaGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GoogleSignInAccount&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cuentaGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;AuthCredential&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;credencial&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GoogleAuthProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cuentaGoogle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getIdToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signInWithCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credencial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addOnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccessful&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Hubo un error&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al terminar de agregar este código, podremos ser capaces de iniciar sesión con Google Sign-In. &lt;strong&gt;IMPORTANTE: recuerden agregar su ID al objeto GoogleSignInOptions y de activar la opción de iniciar sesión con Google Sign-In en la consola.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/16.google-signin-button.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/16.google-signin-button.png&quot; alt=&quot;Actividad para iniciar sesión con cuenta de Google&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al iniciar el flujo de inicio de sesión, se nos presenta un diálogo para elegir una cuenta:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/17.choose-google-account.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/17.choose-google-account.png&quot; alt=&quot;Elegir una cuenta Google para iniciar sesión.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;La primera vez que inicies sesión con Google, tendrás que dar permiso a la app para utilizar tu información.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/18.google-sigin-permissions.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/18.google-sigin-permissions.png&quot; alt=&quot;Permisos para iniciar sesión.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al concluir este proceso, hemos iniciado sesión con Google.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/19.google-signin-completed.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/19.google-signin-completed.png&quot; alt=&quot;Inicio de sesión con Google completado.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;inicio-de-sesin-con-facebook&quot;&gt;Inicio de Sesión con Facebook&lt;/h2&gt;
+
+&lt;p&gt;Ahora aprenderemos como utilizar Facebook para iniciar sesión con Firebase.&lt;/p&gt;
+
+&lt;h3 id=&quot;creando-tu-app-en-facebook&quot;&gt;Creando tu App en Facebook&lt;/h3&gt;
+
+&lt;p&gt;Lo primero que tenemos que hacer es crear nuestra aplicación en Facebook. Hay que entrar a la página de &lt;a href=&quot;https://developers.facebook.com/apps/&quot; target=&quot;_blank&quot;&gt;Facebook Developers&lt;/a&gt;. En esta página podrán ver todas las aplicaciones que tengan actualmente así como agregar nuevas apps.&lt;/p&gt;
+
+&lt;p&gt;Para agregar una nueva aplicación, hay que dar clic en el botón &lt;em&gt;Agregar una nueva app&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/20.fb-dev-console.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/20.fb-dev-console.png&quot; alt=&quot;Facebook developers.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Nos pedirán algunos datos de nuestra aplicación: nombre de la app y algún correo electrónico para contacto, así como la categoría a la que pertenece nuestra app. Al llenar estos campos, dar clic en el botón para crear el ID de tu app.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/21.fb-create-app.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/21.fb-create-app.png&quot; alt=&quot;Crear app en Facebook.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez creada nuestra app, entramos a la consola donde la podemos administrar. Necesitamos obtener un par de valores de nuestra app de Facebook. Para esto, hay que ir a &lt;em&gt;Configuración -&amp;gt; Básica&lt;/em&gt;. Ahí podemos ver el &lt;em&gt;Identificador de la aplicación&lt;/em&gt; y podemos mostrar la &lt;em&gt;Clave secreta de la aplicación&lt;/em&gt;. Necesitamos guardar estos dos valores para utilizarlos en Firebase posteriormente.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/22.fb-secret-id.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/22.fb-secret-id.png&quot; alt=&quot;Valores de Id de la aplicación y clave secreta de la aplicación.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Ahora debemos agregar una plataforma, que en nuestro caso será Android. Esto lo pueden hacer en la parte inferior de la misma pantalla, en &lt;em&gt;Configuración -&amp;gt; Básica&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/25.fb-add-androidapp.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/25.fb-add-androidapp.png&quot; alt=&quot;Agregar la plataforma Android.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Una vez agregada la plataforma Android, nos piden algunos datos. Debemos agregar el paquete de nuestra app y el nombre de la clase que hará el inicio de sesión con Facebook.&lt;/p&gt;
+
+&lt;p&gt;De igual manera nos piden los hashes de clave de nuestra app.&lt;/p&gt;
+
+&lt;h4 id=&quot;obteniendo-los-hashes-de-clave&quot;&gt;Obteniendo los Hashes de clave&lt;/h4&gt;
+
+&lt;p&gt;Para obtener los Hashes de clave de nuestra app necesitamos utilizar &lt;em&gt;OpenSSL&lt;/em&gt;. En Windows pueden descargar OpenSSL &lt;a href=&quot;https://code.google.com/archive/p/openssl-for-windows/downloads&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;. Hay que extraer su contenido y después debemos de crear una carpeta en &lt;em&gt;C:/&lt;/em&gt;, en mi caso cree una carpeta llamada c:/openssl, en donde debemos de pegar todo el contenido del archivo que extrajimos previamente.&lt;/p&gt;
+
+&lt;p&gt;Necesitamos saber la ubicación de nuestro archivo keystore (esto aplica tanto para su keystore de desarrollo como para el de producción, en caso de que lo tengan.). La ubicación para el keystore de desarrollo en Windows es &lt;em&gt;%USERPROFILE%.android\debug.keystore&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Debemos ir a la ubicación del programa &lt;em&gt;keytool.exe&lt;/em&gt; la cual es &lt;em&gt;c:/Program Files/Java/jdk1.8.0_92/bin&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Una vez ahí, ejecutaremos la siguiente instrucción&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;keytool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exportcert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;androiddebugkey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keystore&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;USERPROFILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keystore&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C:\openssl\bin\openssl&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sha1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;C:\openssl\bin\openssl&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Les pedirá el password de su keystore el cual es “android” si utilizan el de desarrollo. Con esto obtendrán el hash y lo deberán de ingresar en la consola de Facebook.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/26.android-app-fb.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/26.android-app-fb.png&quot; alt=&quot;Agregar hashes de clave.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;habilitar-inicio-de-sesin-con-facebook-en-firebase&quot;&gt;Habilitar Inicio de Sesión con Facebook en Firebase&lt;/h3&gt;
+
+&lt;p&gt;Es momento de regresar a la &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;consola de Firebase&lt;/a&gt;. En el menú de la izquierda hay que ir a Autenticación, y seleccionar la pestaña de &lt;em&gt;Método de Inicio de Sesión&lt;/em&gt;. Hay que habilitar la opción de Facebook. Esto nos abrirá un diálogo en donde tenemos que ingresar nuestra &lt;em&gt;ID de aplicación&lt;/em&gt; y la &lt;em&gt;Clave secreta&lt;/em&gt; que obtuvimos en la consola de Facebook.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/23.fb-enable-firebase.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/23.fb-enable-firebase.png&quot; alt=&quot;Agregar ID de aplicación y clave secreta.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;En la parte inferior de este diálogo hay una URL de la forma &lt;em&gt;my-app-12345.firebaseapp.com/__/auth/handler&lt;/em&gt;. Esta URL hay que copiarla y agregarla en la consola de Facebook.&lt;/p&gt;
+
+&lt;p&gt;Una vez en la consola de Facebook hay que ir en el menú de la izquierda a &lt;em&gt;Inicio de Sesión con Facebook&lt;/em&gt;. Hay un campo llamado &lt;em&gt;URI de redireccionamiento de OAuth válidos&lt;/em&gt;. En este campo hay que pegar la URL que obtuvimos en Firebase.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/24.fb-oaut-redirect-url.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/24.fb-oaut-redirect-url.png&quot; alt=&quot;URL de redireccionamiento de OAuth.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;agregar-el-sdk-de-facebook&quot;&gt;Agregar el SDK de Facebook&lt;/h3&gt;
+
+&lt;p&gt;Después de terminar con la configuración de nuestra app en Facebook y en Firebase, llegó el momento de agregar el SDK de Facebook a nuestra app. Para empezar, en el &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt; del proyecto, agregar en repositories &lt;em&gt;mavenCentral()&lt;/em&gt;. Esto nos permitirá descargar la dependencia de Facebook.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;jcenter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mavenCentral&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ahora debemos de agregar la dependencia en el &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;build.gradle&lt;/a&gt; de la app:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;sdk:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.17&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Facebook necesita saber el &lt;em&gt;ID de nuestra aplicación&lt;/em&gt; que obtuvimos previamente en la consola de Facebook. Debemos agregar un atributo metadata en el manifest de nuestra app. Debe tener como nombre &lt;em&gt;com.facebook.sdk.ApplicationId y como valor un string con el *ID de nuestra aplicación&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;meta&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.facebook.sdk.ApplicationId&quot;&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/facebook_app_id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Con esto, estamos listos para agregar el código para iniciar sesión. Necesitamos agregar el botón de inicio de sesión de Facebook. En nuestro layout, &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/res/layout/activity_iniciar_sesion_facebook.xml&quot; target=&quot;_blank&quot;&gt;activity_iniciar_sesion_facebook.xml&lt;/a&gt;, vamos a agregar este botón.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LoginButton&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@+id/login_button&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_gravity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;center_horizontal&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_marginTop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;30dp&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_marginBottom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;30dp&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;El código para iniciar sesión con Facebook lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/IniciarSesionFacebookActivity.java&quot; target=&quot;_blank&quot;&gt;IniciarSesionFacebookActivity.java&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;En la actividad debemos de inicializar el SDK de Facebook &lt;strong&gt;ANTES&lt;/strong&gt; de llamar el &lt;em&gt;setContentView()&lt;/em&gt; con nuestro layout.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FacebookSdk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sdkInitialize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;También debemos de crear un &lt;em&gt;CallbackManager&lt;/em&gt; que es el objeto de Facebook que maneja las llamadas desde la actividad o fragment.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;manejadorDeLlamadas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CallbackManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Facebook requiere que le agreguemos al &lt;em&gt;LoginButton&lt;/em&gt; los permisos que necesitamos pedirle al usuario. Firebase nos pide que al menos pidamos los permisos de &lt;em&gt;email&lt;/em&gt; y &lt;em&gt;public_profile&lt;/em&gt;. Igualmente se deben de registrar una llamada de regreso (callback) para manejar los cambios de sesión de Facebook. Este callback nos permitirá manejar los casos en que el inicio de sesión sea exitoso, cuando el usuario cancele el inicio de sesión o cuando se presente algún error al iniciar sesión. Cuando iniciemos con éxito la sesión con Facebook, debemos iniciar sesión con Firebase, utilizando el &lt;em&gt;accessToken&lt;/em&gt; que nos provee Facebook mediante el &lt;em&gt;LoginResult&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FacebookSdk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sdkInitialize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;setContentView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;activity_iniciar_sesion_facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;manejadorDeLlamadas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CallbackManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Factory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;LoginButton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;botonLogin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LoginButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boton_login_facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;botonLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setReadPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;public_profile&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;botonLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;manejadorDeLlamadas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FacebookCallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LoginResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onSuccess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LoginResult&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loginResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;iniciarSesionFirebaseConFacebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loginResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAccessToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onCancel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Toast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;makeText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IniciarSesionFacebookActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Usuario canceló inicio de sesión con Facebook.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Toast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FacebookException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Toast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;makeText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IniciarSesionFacebookActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hubo un error al iniciar sesión con Facebook.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Toast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LENGTH_SHORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para terminar con el código de Facebook para iniciar sesión, se debe de agregar el método &lt;em&gt;onActivityResult()&lt;/em&gt; donde se llame al método &lt;em&gt;onActivityResult()&lt;/em&gt; del manejador de llamadas de Facebook:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onActivityResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onActivityResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;manejadorDeLlamadas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onActivityResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resultCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;inicializando-firebase&quot;&gt;Inicializando Firebase&lt;/h3&gt;
+
+&lt;p&gt;Este paso es idéntico a lo realizado previamente para iniciar sesión con Google y con correo electrónico. Hay que obtener la instancia de FirebaseAuth, crear el listener y agregar y quitar el listener en el onStart() y en el onStop(). Recuerden que el método &lt;em&gt;onAuthStateChanged()&lt;/em&gt; del FirebaseAuth.AuthStateListener es el que se manda llamar cuando se detecta algún cambio de sesión con Firebase:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicializarAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAuthStateChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAuth&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;FirebaseUser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firebaseAuth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAuthStateListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listenerAutenticacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Por último, necesitamos iniciar sesión con Firebase utilizando el &lt;em&gt;AccessToken&lt;/em&gt; que obtuvimos de Facebook. Se crea una credencial con el token de acceso y se manda llamar el método &lt;em&gt;signInWithCredential()&lt;/em&gt; del objeto FirebaseAuth utilizando la credencial creada.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;iniciarSesionFirebaseConFacebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AccessToken&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokenDeAcceso&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AuthCredential&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;credencial&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FacebookAuthProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenDeAcceso&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;autenticacionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signInWithCredential&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credencial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addOnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccessful&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Hubo un error al iniciar sesión con Firebase&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Después de este paso, podemos hacer login con nuestra cuenta de Facebook.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/27.fb-login.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/27.fb-login.png&quot; alt=&quot;Iniciar sesión con Facebook.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;La primera vez, nos indicará los permisos que va a utilizar la app.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/28.fb-permissions.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/28.fb-permissions.png&quot; alt=&quot;Permisos para iniciar sesión con Facebook.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al aceptar los permisos y continuar, logramos iniciar sesión.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/29.fb-firebase-login.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/auth/29.fb-firebase-login.png&quot; alt=&quot;Inicio de sesión con Facebook.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;cerrar-sesin-con-facebook-y-firebase&quot;&gt;Cerrar sesión con Facebook y Firebase&lt;/h3&gt;
+
+&lt;p&gt;Facebook nos proporciona el botón de Logout o Cerrar Sesión. También nos proporciona un objeto &lt;em&gt;AccessTokenTracker&lt;/em&gt; el cual tiene un listener con el método &lt;em&gt;onCurrentAccessTokenChanged()&lt;/em&gt; el cual se manda llamar cada vez que el token de Facebook cambia, lo cual ocurre al iniciar o cerrar sesión. Cuando se cierra sesión en Facebook, este valor viene nulo y podemos cerrar sesión también con Firebase.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;AccessTokenTracker&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessTokenTracker&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccessTokenTracker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onCurrentAccessTokenChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;AccessToken&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldAccessToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;AccessToken&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentAccessToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentAccessToken&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;cerrarSesionFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;En esta primera parte, aprendimos cómo utilizar Firebase para iniciar sesión utilizando correo y contraseña, una cuenta de Google y una cuenta de Facebook. Como pudimos ver, el código de Firebase para los tres escenarios es prácticamente el mismo: obtener la instancia de FirebaseAuth, crear un listener de tipo FirebaseAuth.AuthStateListener, agregar y quitar el listener en el onStart() y onStop().&lt;/p&gt;
+
+&lt;p&gt;Para iniciar sesión con cualquiera de los tres proveedores, el objeto FirebaseAuth nos proporcina los métodos necesarios.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;createUserWithEmailAndPassword(): para crear una cuenta con correo y contraseña.&lt;/li&gt;
+  &lt;li&gt;signInWithEmailAndPassword(): para iniciar sesión con correo y contraseña.&lt;/li&gt;
+  &lt;li&gt;signInWithCredential(): para iniciar sesión con Google o Facebook.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;También Firebase nos provee dos Providers, para crear una credencial y poder iniciar sesión:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GoogleAuthProvider.getCredential(): para crear la credencial utilizando el TokenId obtenido de iniciar sesión con Google.&lt;/li&gt;
+  &lt;li&gt;FacebookAuthProvider.getCredential(): para crear la credencial utilizando el AccessToken obtenido al iniciar sesión con Facebook.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Antes de poder iniciar sesión con Firebase, es necesario configurar los objetos de Google, al utilizar Google para iniciar sesión, así como crear y configurar tu app en Facebook y configurar el SDK en tu código, al utilizar Facebook para iniciar sesión, como se mostró en este post.&lt;/p&gt;
+
+&lt;p&gt;En la segunda parte de autenticación con Firebase, aprenderemos a iniciar sesión con Twitter y Github, así como tener usuarios anónimos y la manera en que podemos combinar varios proveedores para iniciar sesión con una misma cuenta.&lt;/p&gt;</content><category term="firebase" /><category term="android" /><category term="autenticación" /><summary type="html">Autenticación con Firebase utilizando correo electrónico, cuenta de Google y cuenta de Facebook.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Introducción a Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/" rel="alternate" type="text/html" title="Introducción a Firebase" /><published>2016-12-19T14:25:55-06:00</published><updated>2016-12-19T14:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-intro</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/">&lt;p&gt;Al crear aplicaciones móviles, casi el 100% de las veces necesitamos un &lt;em&gt;servidor “back-end”&lt;/em&gt; el cual proporciona los datos necesarios a la app y de igual manera permite almacenar algunos datos generados por nuestros usuarios. También muchas veces necesitamos &lt;em&gt;identificar&lt;/em&gt; al usuario, ya sea por medio de su email, cuenta de Facebook, Twitter o alguna otra. Una funcionalidad cada vez más común en las aplicaciones son las &lt;em&gt;notificaciones&lt;/em&gt;, que también tendríamos que desarrollar en nuestro servidor para que funcionen. Para saber cómo utilizan tus usuarios tu aplicación necesitas información conocida como &lt;em&gt;Analytics&lt;/em&gt; (estadísticas). Y también a veces necesitas cambiar la &lt;em&gt;configuración&lt;/em&gt; de tu app sin sacar una nueva versión. Todas estas características, entre otras, son las que ofrece Firebase, de Google.&lt;/p&gt;
 
 &lt;p&gt;Firebase pretende facilitar el desarrollo de aplicaciones móviles y web al proporcionar estas herramientas. Es una solución muy completa que nos puede evitar tener que desarrollar un servicio web completo. Nos puede ayudar a tener un alcance más grande de usuarios. Además, tiene dos grandes ventajas: para comenzar, Firebase es gratis y además se puede ir contratando un plan que cumpla con las necesidades, conforme tu app vaya creciendo.&lt;/p&gt;
 
@@ -10,9 +687,9 @@
   &lt;li&gt;Añadiendo Firebase a tu app Android&lt;/li&gt;
   &lt;li&gt;Autenticación
     &lt;ol&gt;
-      &lt;li&gt;Correo electrónico y contraseña&lt;/li&gt;
-      &lt;li&gt;Google&lt;/li&gt;
-      &lt;li&gt;Facebook&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1&quot;&gt;Correo electrónico y contraseña&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1&quot;&gt;Google&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1&quot;&gt;Facebook&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;Twitter&lt;/li&gt;
       &lt;li&gt;Usuarios anónimos&lt;/li&gt;
     &lt;/ol&gt;
@@ -21,7 +698,7 @@
   &lt;li&gt;Notificaciones&lt;/li&gt;
   &lt;li&gt;Configuración Remota&lt;/li&gt;
   &lt;li&gt;Base de datos&lt;/li&gt;
-  &lt;li&gt;Almacentamiento&lt;/li&gt;
+  &lt;li&gt;Almacenamiento&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;

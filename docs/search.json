@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Autenticación con Firebase - Primera Parte: correo, Google y Facebook",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1/",
+      "excerpt"		: "Autenticación con Firebase utilizando correo electrónico, cuenta de Google y cuenta de Facebook."
+    }
+  
+
+  
+    ,{
       "title"			: "Introducción a Firebase",
       "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/",
       "excerpt"		: "Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps."
@@ -73,15 +81,15 @@
   
 
   
-
-  
-
-  
     ,{
       "title"			: "Acerca de Warrior Minds",
       "link"			: "https://warriorminds.github.io/warriorminds/about/",
       "excerpt"		: "Entrena tu mente en las artes del Software."
     }
+  
+
+  
+
   
 
   
