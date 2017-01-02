@@ -1,0 +1,676 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta &#8211; Warrior Minds</title>
+<meta name="description" content="Autenticación con Firebase utilizando cuenta de Twitter, autenticación anónima y varios proveedores.">
+<meta name="keywords" content="firebase, android, autenticación">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta">
+<meta name="twitter:description" content="Autenticación con Firebase utilizando cuenta de Twitter, autenticación anónima y varios proveedores.">
+<meta name="twitter:site" content="@warrior_minds">
+<meta name="twitter:creator" content="@warrior_minds">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://warriorminds.github.io/warriorminds/images/site-logo.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="es_MX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta">
+<meta property="og:description" content="Autenticación con Firebase utilizando cuenta de Twitter, autenticación anónima y varios proveedores.">
+<meta property="og:url" content="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/">
+<meta property="og:site_name" content="Warrior Minds">
+
+<!-- Webmaster Tools verfication -->
+<meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8">
+<meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+<link rel="canonical" href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/">
+<link href="https://warriorminds.github.io/warriorminds/feed.xml" type="application/atom+xml" rel="alternate" title="Warrior Minds Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://warriorminds.github.io/warriorminds/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://warriorminds.github.io/warriorminds/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://warriorminds.github.io/warriorminds/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/" >Inicio</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/blog/es/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/categories/" >Categorias</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/search/" >Buscar</a></li>
+		  
+		    
+		    <li><a href="https://warriorminds.github.io/warriorminds/about/" >Acerca de</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="https://warriorminds.github.io/warriorminds/" class="site-logo" rel="home" title="Warrior Minds"><img src="https://warriorminds.github.io/warriorminds/images/site-logo.png" width="200" height="200" alt="Warrior Minds logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="https://warriorminds.github.io/warriorminds/">Warrior Minds</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Entrena tu mente en las artes del Software.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="//github.us14.list-manage.com/subscribe/post?u=b7c3d4083b8b3456c5927056f&amp;id=b18df401fa" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Suscríbete a Warrior Minds</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="correo electrónico" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b7c3d4083b8b3456c5927056f_b18df401fa" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Suscríbete" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="https://warriorminds.github.io/warriorminds/tags/#firebase" title="Pages tagged firebase">firebase</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#android" title="Pages tagged android">android</a></li><li><a href="https://warriorminds.github.io/warriorminds/tags/#autenticación" title="Pages tagged autenticación">autenticación</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://warriorminds.github.io/warriorminds/images/bio-photo.png" class="bio-photo" alt="Warrior Minds bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Warrior Minds</span></span>
+        
+        <span class="entry-date date published"><time datetime="2017-01-02T12:25:55-06:00"><i class="fa fa-calendar-o"></i> January 02, 2017</time></span>
+        
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=firebase,android,autenticación&amp;text=Autenticación%20con%20Firebase%20-%20Segunda%20Parte:%20Twitter,%20Usuarios%20Anónimos%20y%20Diferentes%20Proveedores%20en%20una%20misma%20Cuenta&amp;url=https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/&amp;via=warrior_minds" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        <div class="google-ads" style="margin-top:40px; text-align:center;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 160x600 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="4963587312"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads --><!-- /.google-ads -->
+      </footer>
+      <div class="entry-content">
+        <p>Toda la información oficial de Firebase la pueden encontrar <a href="https://console.firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-autenticacion" target="_blank">Github</a></p>
+
+<p>Este Post crea una actividad independiente para cada tipo de autenticación. El código de esa aplicación lo pueden encontrar en la rama master del repositorio en Github.</p>
+
+<p>También podrán encontrar una app que utiliza todos los tipos de autenticación en una misma actividad. Este código lo pueden encontrar en la rama <a href="https://github.com/warriorminds/firebase-autenticacion/tree/app_completa" target="_blank">app_completa</a>.</p>
+
+<p>En la <a href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1" target="_blank">primera parte de esta serie</a> encontrarán cómo iniciar sesión con correo electrónico, Facebook y Google.</p>
+
+<h2 id="introduccin">Introducción</h2>
+
+<p>En este Post, que es la segunda parte para utilizar autenticación con Firebase, veremos cómo iniciar sesión con Twitter, cómo tener usuarios anónimos y cómo poder utilizar varios proveedores para iniciar sesión con el mismo usuario.</p>
+
+<h2 id="twitter">Twitter</h2>
+
+<p>Para comenzar con la autenticación utilizando una cuenta de Twitter, necesitamos ingresar al sitio de Apps de Twitter y crear una nueva aplicación. Entrar a <a href="https://apps.twitter.com/" target="_blank">Apps Twitter</a> y crear nueva app.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/30.twitter-dash.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/30.twitter-dash.png" alt="Twitter Apps" /></a>
+</figure>
+
+<p>Nos pide llenar algunos datos. Agregamos un nombre para nuestra app, una descripción y un sitio web.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/31.tw-create-app.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/31.tw-create-app.png" alt="Crear una app en Twitter" /></a>
+</figure>
+
+<p>Una vez creada la app en Twitter, necesitamos obtener la API secret y la API key. Para esto, hay que ir a la pestaña <em>Key and Access Tokens</em> y obtener los valores. Hay que guardarlos para utilizarlos posteriormente.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/32.tw-keys.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/32.tw-keys.png" alt="API key y API secret" /></a>
+</figure>
+
+<h3 id="activar-en-la-consola-de-firebase">Activar en la consola de Firebase</h3>
+
+<p>Una vez creada nuestra app en Twitter, podemos ir a la <a href="https://console.firebase.google.com/" target="_blank">consola de Firebase</a> y activar Twitter como opción para iniciar sesión. En la consola hay que ir a Autenticación, en el menú de la izquierda, y seleccionar la pestaña Método de Inicio de Sesión. Necesitamos habilitar Twitter y poner el API secret y API key obtenidos previamente.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/33.tw-fb-activation.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/33.tw-fb-activation.png" alt="Habilitar Twitter en la consola y agregar el API key y API secret" /></a>
+</figure>
+
+<p>En la parte de abajo del diálogo hay una URL de devolución de la llamada, parecida a my-app-12345.firebaseapp.com/__/auth/handler. Hay que copiarla e ir nuevamente al sitio de <a href="https://apps.twitter.com/" target="_blank">Apps de Twitter</a>. Seleccionamos la pestaña de <em>Settings</em> y una vez ahí, hay que pegar este valor de URL en el campo <em>Callback URL</em>.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/34.tw-callback-url.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/34.tw-callback-url.png" alt="URL de devolución de llamada." /></a>
+</figure>
+
+<h3 id="agregar-twitter-a-la-app-en-android">Agregar Twitter a la app en Android</h3>
+
+<p>Para agregar Twitter a nuestra app podemos utilizar <a href="https://fabric.io/sign_up" target="_blank">Fabric</a>. Fabric tiene varios productos para mejorar y ayudar en el desarrollo de apps. Una de estos productos es para agregar Twitter. Necesitamos crear una cuenta en Fabric, iniciar sesión y confirmar su correo electrónico.</p>
+
+<p>Una vez creada y confirmada la cuenta hay que ir al sitio de <a href="https://www.fabric.io/downloads/android" target="_blank">Fabric para Android</a> y seguir las siguientes instrucciones, que también pueden encontrar en el sitio.</p>
+
+<p>Primero necesitamos agregar el plugin de Fabric a Android Studio. Este plugin nos ayudará ya que podemos tener acceso dentro de Android Studio, al código necesario para agregar Twitter. Podemos agregar plugins en Android Studio en File -&gt; Settings.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/35.as-plugins.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/35.as-plugins.png" alt="Plugins en Android Studio." /></a>
+</figure>
+
+<p>Buscamos el plugin de <em>Fabric for Android Studio</em> en Browse Repositories y presionamos el botón de Install. Una vez terminada la instalación hay que reiniciar Android Studio.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/36.as-plugins-fabric.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/36.as-plugins-fabric.png" alt="Plugin de Fabric para Android Studio" /></a>
+</figure>
+
+<p>Después de reiniciar Android Studio tenemos un ícono en la barra de herramientas para entrar a Fabric. Ahí podemos iniciar sesión con nuestra cuenta y podemos tener acceso al código e instrucciones para iniciar sesión con Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/37.fabric-icon.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/37.fabric-icon.png" alt="Icono de Fabric en Android Studio" /></a>
+</figure>
+
+<p>Una vez iniciada sesión en Fabric hay que crear una nueva app:</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/38.fabric-new-app.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/38.fabric-new-app.png" alt="Crear app en Fabric" /></a>
+</figure>
+
+<p>Seleccionamos nuestra organización, la cual configuramos al crear la cuenta en el sitio web, y le damos siguiente. Ahí nos aparecerán varias opciones, y seleccionaremos Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/39.fabric-twitter.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/39.fabric-twitter.png" alt="Twitter con Fabric" /></a>
+</figure>
+
+<p>Damos clic en el botón de Install en la primera opción para instalar Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/40.fabric-twitter-install.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/40.fabric-twitter-install.png" alt="Instalar Twitter con Fabric" /></a>
+</figure>
+
+<p>Nos va a pedir nuestra API secret y nuestra API key, si seleccionan la opción de que ya tienen una cuenta de Twitter. Al hacer esto nos aparecerán en esa ventana los cambios que tenemos que hacer a nuestro código.</p>
+
+<h3 id="agregar-sdk-de-twitter">Agregar SDK de Twitter</h3>
+
+<p>Para empezar, necesitamos agregar el repositorio https://maven.fabric.io/public en el archivo <a href="https://github.com/warriorminds/firebase-autenticacion/blob/master/build.gradle" target="_blank">build.gradle</a> del proyecto en la sección de <em>buildscript</em>:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">jcenter</span><span class="o">()</span>
+    <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//maven.fabric.io/public' }</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>En las dependencias del buildscript necesitamos agregar el siguiente classpath:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">classpath</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">fabric</span><span class="o">.</span><span class="na">tools</span><span class="o">:</span><span class="nl">gradle:</span><span class="mi">1</span><span class="o">.+</span><span class="err">'</span>
+</code></pre>
+</div>
+
+<p>También tenemos que agregar el repositorio en la sección de repositories:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="err">'</span><span class="nl">https:</span><span class="c1">//maven.fabric.io/public' } // Para Twitter</span>
+    <span class="n">jcenter</span><span class="o">()</span> <span class="c1">// Para Facebook</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Ahora en el <a href="https://github.com/warriorminds/firebase-autenticacion/blob/master/app/build.gradle" target="_blank">build.gradle</a> de la app hay que aplicar el plugin después del plugin de com.android.application:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">apply</span> <span class="nl">plugin:</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">fabric</span><span class="err">'</span>
+</code></pre>
+</div>
+
+<p>Por último, hay que agregar la dependencia con el SDK de Twitter:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span><span class="o">(</span><span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">twitter</span><span class="o">.</span><span class="na">sdk</span><span class="o">.</span><span class="na">android</span><span class="o">:</span><span class="nl">twitter:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">0</span><span class="nd">@aar</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">transitive</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Necesitamos agregar un atributo meta-data a nuestro manifest. Este valor lo podemos obtener en la pantalla del plugin en la sección AndroidManifest.xml. Es importante que pongan directamente el valor de su Fabric API Key en el meta-data, sin utilizar un recurso String, ya que si utilizan un String, <strong>NO</strong> funcionará.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/41.fabric-twitter-meta-data.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/41.fabric-twitter-meta-data.png" alt="Metadata con la Fabric API Key" /></a>
+</figure>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">meta</span><span class="o">-</span><span class="n">data</span>
+    <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"io.fabric.ApiKey"</span>
+    <span class="nl">android:</span><span class="n">value</span><span class="o">=</span><span class="s">"fabric_api_key"</span> <span class="o">/&gt;</span>
+</code></pre>
+</div>
+
+<p>Por último, en nuestra actividad <a href="https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/java/com/warriorminds/firebase/IniciarSesionTwitterActivity.java" target="_blank">IniciarSesionTwitterActivity.java</a>, vamos a inicializar Fabric <strong>ANTES</strong> del setContentView(). Necesitamos proporcionarle una configuración con nuestra API Key y API Secret de Twitter.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+    <span class="n">TwitterAuthConfig</span> <span class="n">authConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TwitterAuthConfig</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">twitter_api_key</span><span class="o">),</span> <span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">twitter_api_secret</span><span class="o">));</span>
+    <span class="n">Fabric</span><span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="k">new</span> <span class="n">Twitter</span><span class="o">(</span><span class="n">authConfig</span><span class="o">));</span>
+    <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_iniciar_sesion_twitter</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>En nuestro layout <a href="https://github.com/warriorminds/firebase-autenticacion/blob/master/app/src/main/res/layout/activity_iniciar_sesion_twitter.xml" target="_blank">activity_iniciar_sesion_twitter.xml</a>, necesitamos agregar el botón para iniciar sesión de Twitter:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">com</span><span class="o">.</span><span class="na">twitter</span><span class="o">.</span><span class="na">sdk</span><span class="o">.</span><span class="na">android</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">identity</span><span class="o">.</span><span class="na">TwitterLoginButton</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/twitter_login_button"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_centerInParent</span><span class="o">=</span><span class="s">"true"</span><span class="o">/&gt;</span>
+</code></pre>
+</div>
+
+<h3 id="iniciando-sesin-con-twitter">Iniciando Sesión con Twitter</h3>
+
+<p>Una vez que configuramos Fabric estamos listos para iniciar sesión con Twitter. Las instrucciones las pueden encontrar en el plugin de Fabric en la opción de Login con Twitter.</p>
+
+<p>Necesitamos agregar un botón de Twitter</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">TwitterLoginButton</span> <span class="n">botonInicioSesionTwitter</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>Necesitamos obtener el botón de nuestro layout y agregar un <em>Callback</em> con el cual obtendremos la sesión de Twitter si el inicio de sesión fue exitoso, u obtendremos una <em>TwitterException</em> si hubo algún error. Si el inicio de sesión fue exitoso, procederemos a iniciar sesión con Firebase.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializarTwitter</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">botonInicioSesionTwitter</span> <span class="o">=</span> <span class="o">(</span><span class="n">TwitterLoginButton</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">twitter_login_button</span><span class="o">);</span>
+    <span class="n">botonInicioSesionTwitter</span><span class="o">.</span><span class="na">setCallback</span><span class="o">(</span><span class="k">new</span> <span class="n">Callback</span><span class="o">&lt;</span><span class="n">TwitterSession</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">success</span><span class="o">(</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">TwitterSession</span><span class="o">&gt;</span> <span class="n">resultado</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">iniciarSesionConFirebase</span><span class="o">(</span><span class="n">resultado</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">failure</span><span class="o">(</span><span class="n">TwitterException</span> <span class="n">exception</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>También necesitamos el método onActivityResult() para que el botón pueda escuchar el resultado de cualquier actividad que él lanzó.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onActivityResult</span><span class="o">(</span><span class="kt">int</span> <span class="n">requestCode</span><span class="o">,</span> <span class="kt">int</span> <span class="n">resultCode</span><span class="o">,</span> <span class="n">Intent</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onActivityResult</span><span class="o">(</span><span class="n">requestCode</span><span class="o">,</span> <span class="n">resultCode</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+    <span class="n">botonInicioSesionTwitter</span><span class="o">.</span><span class="na">onActivityResult</span><span class="o">(</span><span class="n">requestCode</span><span class="o">,</span> <span class="n">resultCode</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="iniciando-sesin-con-firebase">Iniciando Sesión con Firebase</h3>
+
+<p>El inicio de sesión con Firebase es similar a los casos anteriores. Necesitamos nuestro FirebaseAuth y el FirebaseAuth.AuthStateListener, inicializarlos, agregar el listener y quitarlo en el onStart() y onStop().</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializarAutenticacion</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">autenticacionFirebase</span> <span class="o">=</span> <span class="n">FirebaseAuth</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+    <span class="n">listenerAutenticacion</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirebaseAuth</span><span class="o">.</span><span class="na">AuthStateListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAuthStateChanged</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">FirebaseAuth</span> <span class="n">firebaseAuth</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">FirebaseUser</span> <span class="n">usuario</span> <span class="o">=</span> <span class="n">firebaseAuth</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">usuario</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// El usuario inició sesión</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="c1">// El usuario no ha iniciado sesión.</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">addAuthStateListener</span><span class="o">(</span><span class="n">listenerAutenticacion</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStop</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">listenerAutenticacion</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">removeAuthStateListener</span><span class="o">(</span><span class="n">listenerAutenticacion</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Por último, necesitamos crear una credencial utilizando el <em>TwitterProvider</em> y el token y el secret que obtenemos de la <em>TwitterSession</em>. Con esta credencial llamamos al método signInWithCredential() del objeto FirebaseAuth.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">iniciarSesionConFirebase</span><span class="o">(</span><span class="n">TwitterSession</span> <span class="n">sesionTwitter</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">AuthCredential</span> <span class="n">credential</span> <span class="o">=</span> <span class="n">TwitterAuthProvider</span><span class="o">.</span><span class="na">getCredential</span><span class="o">(</span><span class="n">sesionTwitter</span><span class="o">.</span><span class="na">getAuthToken</span><span class="o">().</span><span class="na">token</span><span class="o">,</span> <span class="n">sesionTwitter</span><span class="o">.</span><span class="na">getAuthToken</span><span class="o">().</span><span class="na">secret</span><span class="o">);</span>
+
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">signInWithCredential</span><span class="o">(</span><span class="n">credential</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">addOnCompleteListener</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="k">new</span> <span class="n">OnCompleteListener</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Task</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;</span> <span class="n">task</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isSuccessful</span><span class="o">())</span> <span class="o">{</span>
+                       <span class="c1">// Hubo algún error</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Ahora ya podemos iniciar sesión con Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/42.twitter_login.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/42.twitter_login.png" alt="Iniciar sesión con Twitter" /></a>
+</figure>
+
+<p>Al iniciar sesión nos pide autorizar nuestra app para utilizar nuestra cuenta de Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/43.twitter-authorize.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/43.twitter-authorize.png" alt="Autorizar nuestra app para iniciar sesión con nuestro Twitter" /></a>
+</figure>
+
+<p>Una vez autorizada nuestra app, podemos iniciar sesión y podemos obtener los datos del usuario de Twitter.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/44.twitter-loggedin.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/44.twitter-loggedin.png" alt="Sesión iniciada con Twitter" /></a>
+</figure>
+
+<h3 id="cerrar-sesin">Cerrar Sesión</h3>
+
+<p>Para cerrar sesión, necesitamos mandar llamar el método Twitter.logOut() además del ya conocido método autenticaciónFirebase.signOut().</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">cerrarSesion</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">signOut</span><span class="o">();</span>
+    <span class="n">Twitter</span><span class="o">.</span><span class="na">logOut</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h2 id="usuarios-annimos">Usuarios anónimos</h2>
+
+<p>Firebase también provee la opción de crear usuarios anónimos, los cuales posteriormente pueden ser enlazados con alguna cuenta de algún proveedor.</p>
+
+<h3 id="configuracin-en-consola">Configuración en consola</h3>
+
+<p>Necesitamos entrar a la consola de Firebase [https://console.firebase.google.com] y entrar al proyecto adecuado. Una vez ahí, hay que ir a la sección de Autenticación y seleccionar la pestaña Método de Inicio de Sesión. Ahí podemos encontrar la opción de “Anónimo”, la cual necesitamos habilitar.</p>
+
+<figure>
+    <a href="https://warriorminds.github.io/warriorminds/images/fb/auth2/45.anonymous.png"><img src="https://warriorminds.github.io/warriorminds/images/fb/auth2/45.anonymous.png" alt="Habilitar inicio de sesión anónimo." /></a>
+</figure>
+
+<h3 id="inicializar-firebase">Inicializar Firebase</h3>
+
+<p>Al igual que los demás métodos para iniciar sesión, debemos obtener la instancia de FirebaseAuth y debemos de inicializar el listener de Firebase. Después, debemos de agregar el listener en onStart() y quitarlo en onStop().</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializarAutenticacion</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="n">autenticacionFirebase</span> <span class="o">=</span> <span class="n">FirebaseAuth</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+    <span class="n">listenerAutenticacion</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirebaseAuth</span><span class="o">.</span><span class="na">AuthStateListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAuthStateChanged</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">FirebaseAuth</span> <span class="n">firebaseAuth</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="n">FirebaseUser</span> <span class="n">usuario</span> <span class="o">=</span> <span class="n">firebaseAuth</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">usuario</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">UsuariosAnonimosActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"Usuario: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">usuario</span><span class="o">.</span><span class="na">isAnonymous</span><span class="o">()</span> <span class="o">?</span> <span class="s">"Usuario anónimo"</span> <span class="o">:</span> <span class="n">usuario</span><span class="o">.</span><span class="na">getEmail</span><span class="o">()),</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">UsuariosAnonimosActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"Usuario sin sesión"</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">addAuthStateListener</span><span class="o">(</span><span class="n">listenerAutenticacion</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onStop</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">listenerAutenticacion</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">removeAuthStateListener</span><span class="o">(</span><span class="n">listenerAutenticacion</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>En el momento en el que queramos autenticar anónimamente al usuario debemos de llamar el método de FirebaseAuth.signInAnonymously() y agregarle un listener que nos notifique cuando termina la autenticación y si ésta fue exitosa o no.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">autenticarAnonimamente</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">signInAnonymously</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">addOnCompleteListener</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="k">new</span> <span class="n">OnCompleteListener</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Task</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;</span> <span class="n">task</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isSuccessful</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">UsuariosAnonimosActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"Hubo un error."</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Posteriormente, se llamará el método onAuthStateChanged() del listener y tendremos un usuario anónimo.</p>
+
+<h3 id="enlazar-un-usuario-annimo-con-una-cuenta">Enlazar un usuario anónimo con una cuenta</h3>
+
+<p>Firebase nos da la oportunidad de enlazar una cuenta de usuario anónimo con su cuenta de Google, Facebook, Twitter y correo electrónico.</p>
+
+<p>Una vez que el usuario inicia sesión, debemos utilizar un objeto AuthCredential para enlazar la cuenta. Para crear la credencial debemos utilizar alguno de los AuthProviders que tenemos disponibles, dependiendo del proveedor con el que se inició sesión:</p>
+
+<ul>
+  <li>FacebookAuthProvider</li>
+  <li>GoogleAuthProvider</li>
+  <li>EmailAuthProvider</li>
+  <li>TwitterAuthProvider</li>
+</ul>
+
+<p>En este ejemplo, utilizamos una cuenta de Facebook, por lo que usaremos el FacebookAuthProvider. Necesitamos el token de acceso que nos da Facebook al iniciar sesión, y con este token podemos obtener la credencial.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">enlazarCuentas</span><span class="o">(</span><span class="n">AccessToken</span> <span class="n">tokenDeAcceso</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">AuthCredential</span> <span class="n">credencial</span> <span class="o">=</span> <span class="n">FacebookAuthProvider</span><span class="o">.</span><span class="na">getCredential</span><span class="o">(</span><span class="n">tokenDeAcceso</span><span class="o">.</span><span class="na">getToken</span><span class="o">());</span>
+
+    <span class="n">autenticacionFirebase</span><span class="o">.</span><span class="na">getCurrentUser</span><span class="o">().</span><span class="na">linkWithCredential</span><span class="o">(</span><span class="n">credencial</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">addOnCompleteListener</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="k">new</span> <span class="n">OnCompleteListener</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Task</span><span class="o">&lt;</span><span class="n">AuthResult</span><span class="o">&gt;</span> <span class="n">task</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(!</span><span class="n">task</span><span class="o">.</span><span class="na">isSuccessful</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">UsuariosAnonimosActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"Hubo un error."</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Es importante mencionar que si quiere enlazar su usuario anónimo con una cuenta que ya esté en Firebase, recibirán un error.</p>
+
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'warriormindswebsite'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1/" class="btn" title="Autenticación con Firebase - Primera Parte: correo, Google y Facebook">Anterior</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    <div class="google-ads" style="margin:10px 0;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 320x50 ad -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:320px;height:50px"
+       data-ad-client="ca-pub-8872211495609343"
+       data-ad-slot="9595923317"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div><!-- /.google-ads -->
+
+<span>&copy; 2017 Warrior Minds. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="https://twitter.com/warrior_minds" title="Warrior Minds on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="https://facebook.com/warriorminds" title="Warrior Minds on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="https://plus.google.com/102230749926196780961" title="Warrior Minds on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	
+	
+	<a href="https://github.com/warriorminds" title="Warrior Minds on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="https://warriorminds.github.io/warriorminds/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'https://warriorminds.github.io/warriorminds';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://warriorminds.github.io/warriorminds/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://warriorminds.github.io/warriorminds/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-86871758-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>
