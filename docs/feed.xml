@@ -1,4 +1,548 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-02T15:19:51-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/" rel="alternate" type="text/html" title="Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta" /><published>2017-01-02T12:25:55-06:00</published><updated>2017-01-02T12:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-10T14:27:36-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Analytics con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics/" rel="alternate" type="text/html" title="Analytics con Firebase" /><published>2017-01-10T12:25:55-06:00</published><updated>2017-01-10T12:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-analytics&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Necesitan seguir los pasos en el Post de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-intro&quot; target=&quot;_blank&quot;&gt;Introducción a Firebase&lt;/a&gt; para poder comenzar a utilizar Analytics.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Analytics nos permite conocer cómo nuestros usuarios interactúan con la app. También nos permite tener reportes de fallas y excepciones así cómo nos provee de filtros para poder visualizar la información generada por nuestros usuarios de diferentes maneras. En este Post aprenderemos cómo utilizar Firebase para agregar Analytics a nuestra aplicación.&lt;/p&gt;
+
+&lt;h2 id=&quot;agregando-analytics&quot;&gt;Agregando Analytics&lt;/h2&gt;
+
+&lt;p&gt;Después de seguir los pasos en el Post de  &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-intro&quot; target=&quot;_blank&quot;&gt;Introducción a Firebase&lt;/a&gt;, ya tenemos lo necesario para utilizar Analytics, ya que Analytics viene incluido en la dependencia principal de Firebase, la cual pueden encontrar en el archivo &lt;a href=&quot;https://github.com/warriorminds/firebase-analytics/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;gradle de la app&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;core:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;9.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para que Analytics funcione, necesitamos agregar los siguientes permisos en el Manifest:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permission&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.permission.ACCESS_NETWORK_STATE&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permission&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.permission.INTERNET&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permission&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.permission.WAKE_LOCK&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Firebase nos permite tener registro de dos tipos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Eventos&lt;/li&gt;
+  &lt;li&gt;Propiedades de usuario&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;eventos&quot;&gt;Eventos&lt;/h2&gt;
+
+&lt;p&gt;Un &lt;em&gt;evento&lt;/em&gt; es alguna acción de importancia que ocurre dentro de nuestra aplicación, la cual quisiéramos medir y analizar. Por ejemplo, quisiéramos saber cuando un usuario compra algún objeto desde nuestra app, cuando inicia sesión, cuando instala o desinstala la app, o alguna opción que seleccionó.&lt;/p&gt;
+
+&lt;p&gt;Firebase nos permite enviar hasta &lt;em&gt;500 eventos&lt;/em&gt; diferentes desde nuestra aplicación. También nos provee algunos eventos predefinidos que podemos utilizar, aunque también podemos enviar nuestros propios eventos. A cada evento se le pueden agregar hasta &lt;em&gt;25 parámetros&lt;/em&gt; por evento.&lt;/p&gt;
+
+&lt;h3 id=&quot;eventos-enviados-por-defecto&quot;&gt;Eventos enviados por defecto&lt;/h3&gt;
+
+&lt;p&gt;Al agregar Firebase se tiene el registro de algunos eventos sin necesidad de agregar ningún código.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;first_open&lt;/strong&gt;: este evento nos indica la primera vez que un usuario abre nuestra app después de instalarla o reinstalarla.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;in_app_purchase&lt;/strong&gt;: este evento nos indica cuando un usuario termina una compra dentro de la aplicación utilizando Google Play Store. Se envían los siguientes parámetros: ID del producto, nombre del producto, la moneda de la compra y la cantidad de productos comprados.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;user_engagement&lt;/strong&gt;: este evento nos indica cuando el usuario tiene la app abierta y está interactuando con ella.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;session_start&lt;/strong&gt;: se envía cuando un usuario usa la app por más de un tiempo mínimo (que se puede asignar en la app, y que por default es 10 segundos) después de un tiempo de inactividad (que es 30 minutos por defecto y también se puede asignar).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;app_update&lt;/strong&gt;: se envía cuando la app es actualizada. Se envía el ID de la versión anterior de la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;app_remove&lt;/strong&gt;: se envía cuando se ha desinstalado la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;os_update&lt;/strong&gt;: se envía cuando se ha actualizado el sistema operativo. Se envía el ID de la versión anterior del S.O.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;app_clear_data&lt;/strong&gt;: nos indica cuando el usuario borra toda la información de la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;app_exception&lt;/strong&gt;: nos indica cuando ha habido alguna excepción en nuestra app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;notification_foreground&lt;/strong&gt;: se envía cuando se recibe una notificación por medio de Firebase y la app está siendo utilizada.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;notification_receive&lt;/strong&gt;: nos indica cuando se recibe una notificación por medio de FIrebase y la app está en background.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;notification_open&lt;/strong&gt;: nos indica cuando el usuario abre una notificación enviada por medio de Firebase.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;notification_dismiss&lt;/strong&gt;: nos indica cuando el usuario quita la notificación enviada por Firebase.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;dynamic_link_first_open&lt;/strong&gt;: nos indica cuando un usuario abre la app por primera vez utilizando un link dinámico.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;dynamic_link_app_open&lt;/strong&gt;: se envía cuando el usuario abre la app con un link dinámico.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;dynamic_link_app_update&lt;/strong&gt;: nos indica cuando el usuario actualiza la app utilizando un link dinámico.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;enviar-eventos&quot;&gt;Enviar Eventos&lt;/h3&gt;
+
+&lt;p&gt;Firebase nos proporciona algunas constantes de eventos comunes para la mayoría de las apps, para apps de ventas y comercio, para apps de viaje y para juegos. También nos proporciona algunas constantes para pasar como parámetros de eventos. Pueden ver la lista de eventos y parámetros que nos proporciona Firebase al final del post. De igual manera, podemos crear nuestros propios eventos con nuestros propios parámetros.&lt;/p&gt;
+
+&lt;p&gt;En este post agregaremos dos botones y pondremos un evento a cada uno.&lt;/p&gt;
+
+&lt;p&gt;En nuestro layout agregamos dos botones:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@+id/boton_compra&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/evento_compra&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@+id/boton_personalizado&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/analytics_personalizado&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Con el primer botón utilizaremos las constantes que nos proporciona Firebase. Con el segundo botón utilizaremos nuestros propios valores para el evento y sus parámetros.&lt;/p&gt;
+
+&lt;p&gt;Para enviar &lt;em&gt;nuestros propios eventos&lt;/em&gt;, necesitamos una instancia de FirebaseAnalytics. Agregamos este código en nuestra actividad:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;analyticsFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;analyticsFirebase&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Inicializamos las vistas y agregamos un OnClickListener() a cada botón.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;inicializarVistas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;botonCompra&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boton_compra&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;botonCompra&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;analyticsCompra&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;botonPersonalizado&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boton_personalizado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;botonPersonalizado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;analyticsPersonalizado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Los parámetros de nuestro evento se agregan en un &lt;em&gt;Bundle&lt;/em&gt; y utilizamos el método de &lt;em&gt;analyticsFirebase.logEvent(evento, parámetros)&lt;/em&gt; para enviarlo.&lt;/p&gt;
+
+&lt;p&gt;El método analyticsCompra() que utiliza las constantes de Firebase quedaría de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;analyticsCompra&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CURRENCY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;MXN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putDouble&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;50.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TRANSACTION_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;compra2x1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;analyticsFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ECOMMERCE_PURCHASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;El método analyticsPersonalizado() que utiliza nuestros propios eventos y parámetros, quedaría de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;analyticsPersonalizado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putDouble&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;putString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FirebaseAnalytics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ITEM_CATEGORY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;prueba&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;analyticsFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;analytics_prueba&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Al ejecutar nuestra app y presionar los botones, se generan los eventos. Estos eventos los podemos ver en la &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;consola de Firebase&lt;/a&gt; en nuestra aplicación. En el menú principal seleccionamos Analytics y entramos a la pestaña de Eventos. Los eventos pueden tardar un tiempo en aparecer en la consola.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/01.console-events.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/01.console-events.png&quot; alt=&quot;Eventos en la consola de Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;En esta imagen también podemos observar los eventos que Firebase registra automáticamente, como lo son app_remove, first_open y session_start.&lt;/p&gt;
+
+&lt;h2 id=&quot;propiedades-de-usuario&quot;&gt;Propiedades de usuario&lt;/h2&gt;
+
+&lt;p&gt;Las propiedades de usuario son atributos que nos permiten filtar la información para identificar los segmentos de personas que utilizan nuestra app.&lt;/p&gt;
+
+&lt;p&gt;Al igual que con los Eventos, Firebase registra automáticamente algunas propiedades de usuario. Es importante mencionar que Firebase obtiene algunas de estas propiedades automáticas del ID de publicidad de Android, por lo que si no se ha configurado este ID, no se tendrán algunas de las propiedades.&lt;/p&gt;
+
+&lt;p&gt;Estas son las propiedades que se registran automáticamente:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Age&lt;/strong&gt;: identifica a los usuarios en 6 grupos: 18-24, 25-34, 35-44, 45-54, 55-64 y 65+.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;App Store&lt;/strong&gt;: es la tienda de la cual se bajó la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;App Version&lt;/strong&gt;: identifica el versionName de la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Country&lt;/strong&gt;: el país donde se encuentra el usuario.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Brand&lt;/strong&gt;: la marca del teléfono en donde se instaló la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Category&lt;/strong&gt;: la categoría del dispositivo móvil (tablet, celular).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Model&lt;/strong&gt;: el nombre del modelo del dispositivo.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;First Open Time&lt;/strong&gt;: la hora en microsegundos a la cual se abrió la app por primera vez.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Gender&lt;/strong&gt;: género del usuario de la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interests&lt;/strong&gt;: intereses del usuario de la app.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Language&lt;/strong&gt;: el idioma en el que está el dispositivo.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New/Established&lt;/strong&gt;: tipo de usuario; new: abrió la app hace menos de 7 días; established: abrió la app por primera vez hace más de 7 días.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OS Version&lt;/strong&gt;: la versión del sistema operativo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Podemos observar algunas de estas propiedades en el Panel de Control de Analytics en la consola de Firebase.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/02.console-user-prop-main.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/02.console-user-prop-main.png&quot; alt=&quot;Propiedades de Usuario en la consola de Firebase&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;También podemos crear nuestras propias propiedades de usuario. En el Panel de Control de Analytics seleccionamos la pestaña de Propiedades de Usuario, después presionamos el botón Nueva Propiedad de Usuario.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/03.nueva_user_property.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/03.nueva_user_property.png&quot; alt=&quot;Creación de propiedades de usuario.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Necesitamos nombrar nuestra propiedad de usuario y ponerle una breve descripción.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/04.creando_user_prop.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/04.creando_user_prop.png&quot; alt=&quot;Creación de propiedades de usuario.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;De regreso en nuestro código, vamos a agregar un nuevo botón para reportar el grupo favorito del usuario, utilizando esta nueva propiedad.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@+id/boton_propiedad_usuario&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout_height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;android:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/grupo_fav&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Inicializamos nuestro botón y le agregamos su OnClickListener().&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;botonPropiedadUsuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boton_propiedad_usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;botonPropiedadUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;propiedadUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para enviar una propiedad de usuario, utilizamos el método &lt;em&gt;analyticsFirebase.setUserProperty(propiedad, valor)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Vamos a tener un arreglo con tres grupos musicales y mandar uno de manera aleatoria al presionar el botón.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grupos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;The Beatles&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Pink Floyd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Led Zeppelin&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;El método propiedadUsuario() quedaría de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;propiedadUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grupoFavorito&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grupos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;analyticsFirebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setUserProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;grupo_favorito&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grupoFavorito&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Después de algunas horas, esta propiedad de usuario se puede utilizar en la consola para filtar la información:&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/05.usando_user_prop.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/analytics/05.usando_user_prop.png&quot; alt=&quot;Utilizando propiedades de usuario.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;constantes-de-eventos-y-parmetros-proporcionados-por-firebase&quot;&gt;Constantes de Eventos y Parámetros Proporcionados por Firebase&lt;/h2&gt;
+
+&lt;p&gt;Esta es la lista de las constantes de Eventys y Parámetros que Firebase nos proporciona.&lt;/p&gt;
+
+&lt;h3 id=&quot;addpaymentinfo&quot;&gt;ADD_PAYMENT_INFO&lt;/h3&gt;
+
+&lt;p&gt;Este evento nos indica que el usuario agregó información de pago a la app. No tiene parámetros.&lt;/p&gt;
+
+&lt;h3 id=&quot;addtocart&quot;&gt;ADD_TO_CART&lt;/h3&gt;
+
+&lt;p&gt;Este evento nos indica que se agregó un elemento al carrito de compras. Le pueden agregar los siguientes parámetros:&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_ID (String): identificador del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_NAME (String): nombre del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_CATEGORY (String): categoría del producto.&lt;/li&gt;
+  &lt;li&gt;QUANTITY (long): cantidad de elementos.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;parmetros-opcionales&quot;&gt;Parámetros opcionales:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;PRICE (double): precio del elemento.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor del elemento.&lt;/li&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): procedencia del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.&lt;/li&gt;
+  &lt;li&gt;DESTINATION (String): Destino del producto.&lt;/li&gt;
+  &lt;li&gt;START_DATE (String): fecha de inicio del producto (puede ser de alguna oferta, o desde cuando está a la venta) en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;END_DATE (String): fecha de fin del producto (cuando termina la oferta, cuando se dejará de vender el producto) en formato YYYY-MM-DD.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;addtowishlist&quot;&gt;ADD_TO_WISHLIST&lt;/h3&gt;
+
+&lt;p&gt;Evento que se genera cuando se agregar un producto a una lista de deseos.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_ID (String): identificador del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_NAME (String): nombre del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_CATEGORY (String): categoría del producto.&lt;/li&gt;
+  &lt;li&gt;QUANTITY (long): cantidad de elementos.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PRICE (double): precio del elemento.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor del elemento.&lt;/li&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio.&lt;/li&gt;
+  &lt;li&gt;ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;appopen&quot;&gt;APP_OPEN&lt;/h3&gt;
+
+&lt;p&gt;Evento que se genera al abrir la app.&lt;/p&gt;
+
+&lt;h3 id=&quot;begincheckout&quot;&gt;BEGIN_CHECKOUT&lt;/h3&gt;
+
+&lt;p&gt;Evento al comenzar con el checkout para realizar una compra.&lt;/p&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;VALUE (double): valor del elemento (precio).&lt;/li&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio.&lt;/li&gt;
+  &lt;li&gt;TRANSACTION_ID (String): ID de la transacción a generar.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): origen del viaje o del producto.&lt;/li&gt;
+  &lt;li&gt;DESTINATION (String): destino del viaje o del producto.&lt;/li&gt;
+  &lt;li&gt;START_DATE (String): fecha de inicio para el viaje, en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;END_DATE (String): fecha de fin del viaje, en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;earnvirtualcurrency&quot;&gt;EARN_VIRTUAL_CURRENCY&lt;/h3&gt;
+
+&lt;p&gt;Evento cuando el usuario obtiene moneda virtual. (como en juegos o promociones en compras).&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;VIRTUAL_CURRENCY_NAME (String): nombre de la moneda virtual en tu app.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): cantidad de moneda virtual obtenida.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ecommercepurchase&quot;&gt;ECOMMERCE_PURCHASE&lt;/h3&gt;
+
+&lt;p&gt;Evento cuando un usuario ha hecho una compra desde tu app.&lt;/p&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que se realizó la compra.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor de la compra.&lt;/li&gt;
+  &lt;li&gt;TRANSACTION_ID (String): ID de la transacción realizada.&lt;/li&gt;
+  &lt;li&gt;TAX (double): impuesto del total de la compra.&lt;/li&gt;
+  &lt;li&gt;SHIPPING (double): costo del envío.&lt;/li&gt;
+  &lt;li&gt;COUPON (String): código de un cupón de oferta utilizado en la compra.&lt;/li&gt;
+  &lt;li&gt;LOCATION (String): ID de Google Place, o tu propio ID del lugar de la compra.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_NIGHTS (long): número de noches reservadas.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_ROOMS (long): número de cuartos reservados.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_PASSENGERS (long): número de pasajeros en el viaje.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): origen del viaje comprado.&lt;/li&gt;
+  &lt;li&gt;DESTINATION (String): destino del viaje comprado.&lt;/li&gt;
+  &lt;li&gt;START_DATE (String): fecha del viaje.&lt;/li&gt;
+  &lt;li&gt;END_DATE (String); fecha del viaje de regreso.&lt;/li&gt;
+  &lt;li&gt;TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;joingroup&quot;&gt;JOIN_GROUP&lt;/h3&gt;
+
+&lt;p&gt;Evento cuando el usuario se une a un grupo.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;GROUP_ID (String): ID del grupo al que se unió el usuario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;levelup&quot;&gt;LEVEL_UP&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario subió de nivel.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;LEVEL (long): nivel al que subió el usuario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CHARACTER (String): personaje del usuario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;login&quot;&gt;LOGIN&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario inició sesión.&lt;/p&gt;
+
+&lt;h3 id=&quot;postscore&quot;&gt;POST_SCORE&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica cuando el usuario obtuvo un puntaje.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SCORE (long): puntaje obtenido.&lt;/li&gt;
+  &lt;li&gt;LEVEL (long): nivel en el que se obtuvo el puntaje.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CHARACTER (String): personaje del usuario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;presentoffer&quot;&gt;PRESENT_OFFER&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que se le presentó una oferta al usuario.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_ID (String): identificador de la oferta.&lt;/li&gt;
+  &lt;li&gt;ITEM_NAME (String): nombre de la oferta.&lt;/li&gt;
+  &lt;li&gt;ITEM_CATEGORY (String): categoría de la oferta.&lt;/li&gt;
+  &lt;li&gt;QUANTITY (long): cantidad de elementos en la oferta.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PRICE (double): precio del elemento.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor del elemento.&lt;/li&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): procedencia del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;purchaserefund&quot;&gt;PURCHASE_REFUND&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que se hizo la devolución de un producto.&lt;/p&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor del elemento.&lt;/li&gt;
+  &lt;li&gt;TRANSACTION_ID (String): ID de la transacción a generar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;search&quot;&gt;SEARCH&lt;/h3&gt;
+
+&lt;p&gt;Indica que se realizó una búsqueda, así como algunos parámetros de la misma.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SEARCH_TERM (String): término de búsqueda.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): origen del viaje o del producto.&lt;/li&gt;
+  &lt;li&gt;DESTINATION (String): destino del viaje o del producto.&lt;/li&gt;
+  &lt;li&gt;START_DATE (String): fecha de inicio para el viaje, en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;END_DATE (String): fecha de fin del viaje, en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;selectcontent&quot;&gt;SELECT_CONTENT&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario ha seleccionado algún elemento en tu app. Puede ser cualquier objeto de tu app.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CONTENT_TYPE (String): Tipo de elemento seleccionado.&lt;/li&gt;
+  &lt;li&gt;ITEM_ID (String): identificador del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;share&quot;&gt;SHARE&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica cuando un usuario comparte algo.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CONTENT_TYPE (String): Tipo de elemento seleccionado.&lt;/li&gt;
+  &lt;li&gt;ITEM_ID (String): identificador del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;signup&quot;&gt;SIGN_UP&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica cuando el usuario se registra en tu app.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SIGN_UP_METHOD (String): método que utilizó el usuario para iniciar sesión.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;spendvirtualcurrency&quot;&gt;SPEND_VIRTUAL_CURRENCY&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que se gastó moneda virtual en la app.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_NAME (String): nombre del producto.&lt;/li&gt;
+  &lt;li&gt;VIRTUAL_CURRENCY_NAME (String): nombre de la moneda virtual en tu app.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): cantidad de moneda virtual gastada.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tutorialbegin&quot;&gt;TUTORIAL_BEGIN&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que ha iniciado el tutorial en tu app.&lt;/p&gt;
+
+&lt;h3 id=&quot;tutorialcomplete&quot;&gt;TUTORIAL_COMPLETE&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario terminó el tutorial.&lt;/p&gt;
+
+&lt;h3 id=&quot;unlockachievement&quot;&gt;UNLOCK_ACHIEVEMENT&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario ha desbloqueado un logro en el juego.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ACHIEVEMENT_ID (String): ID del logro desbloquado.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;viewitem&quot;&gt;VIEW_ITEM&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que se ha mostrado algún elemento al usuario.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_ID (String): identificador del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_NAME (String): nombre del producto.&lt;/li&gt;
+  &lt;li&gt;ITEM_CATEGORY (String): categoría del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Parámetros opcionales:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_LOCATION_ID (String): ID de Google Place del origen del producto mostrado.&lt;/li&gt;
+  &lt;li&gt;PRICE (double): precio del elemento mostrado.&lt;/li&gt;
+  &lt;li&gt;QUANTITY (long): cantidad de elementos mostrados.&lt;/li&gt;
+  &lt;li&gt;CURRENCY (String): moneda en la que está el precio mostrado.&lt;/li&gt;
+  &lt;li&gt;VALUE (double): valor del elemento mostrado.&lt;/li&gt;
+  &lt;li&gt;FLIGHT_NUMBER (String): número de vuelo mostrado.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.&lt;/li&gt;
+  &lt;li&gt;NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.&lt;/li&gt;
+  &lt;li&gt;ORIGIN (String): procedencia del producto mostrado.&lt;/li&gt;
+  &lt;li&gt;DESTINATION (String): Destino del producto mostrado.&lt;/li&gt;
+  &lt;li&gt;START_DATE (String): fecha de inicio del producto mostrado en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;END_DATE (String): fecha de fin del producto mostrado en formato YYYY-MM-DD.&lt;/li&gt;
+  &lt;li&gt;SEARCH_TERM (String): término de búsqueda mostrados.&lt;/li&gt;
+  &lt;li&gt;TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;viewitemlist&quot;&gt;VIEW_ITEM_LIST&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario ha visto una lista de elementos.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ITEM_CATEGORY (String): categoría del producto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;viewsearchresults&quot;&gt;VIEW_SEARCH_RESULTS&lt;/h3&gt;
+
+&lt;p&gt;Evento que indica que el usuario ha obtenido los resultados de su búsqueda.&lt;/p&gt;
+
+&lt;p&gt;Parámetros necesarios:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SEARCH_TERM (String): término de búsqueda.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="firebase" /><category term="android" /><category term="analytics" /><summary type="html">Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/" rel="alternate" type="text/html" title="Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta" /><published>2017-01-02T12:25:55-06:00</published><updated>2017-01-02T12:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-autenticacion&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 
@@ -1084,7 +1628,7 @@
       &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2&quot;&gt;Usuarios anónimos&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;Analytics&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics&quot;&gt;Analytics&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Notificaciones&lt;/li&gt;
   &lt;li&gt;Configuración Remota&lt;/li&gt;
   &lt;li&gt;Base de datos&lt;/li&gt;
@@ -2587,501 +3131,4 @@
 
 &lt;p&gt;Como hemos visto, la herencia nos permite reutilizar y centralizar código, haciendo nuestro código más reusable y limpio. Pero trae también algunos problemas.&lt;/p&gt;
 
-&lt;p&gt;En Java, solamente se permite la &lt;em&gt;herencia simple&lt;/em&gt; - heredar de una sola clase. En sistemas más grandes esto representa un problema. De igual manera, la clase hija depende estrechamente de la implementación que tenga la clase padre y si en algún momento esta implementación llega a cambiar, la clase hija podría tener un comportamiento distinto al deseado. Hay maneras de evitar estos problemas, y lo veremos en los siguientes módulos.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="herencia" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Clases y Objetos</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Clases y Objetos" /><published>2016-11-07T15:39:55-06:00</published><updated>2016-11-07T15:39:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/">&lt;p&gt;Este Post es la primera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Definición de POO&lt;/li&gt;
-  &lt;li&gt;Clases y Objetos&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;El código correspondiente a esta primera parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/poo&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org/&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
-
-&lt;p&gt;La programación cada día está tomando más importancia en el mundo, ya que se utiliza para prácticamente cualquier cosa que se puedan imaginar. Desde aplicaciones móviles como Facebook, Twitter y Tinder, pasando por plataformas educativas como Coursera o Urmynd, hasta para controlar y llevar naves espaciales como la New Horizons hasta los límites del Sistema Solar.&lt;/p&gt;
-
-&lt;p&gt;A lo largo de los años, se han desarrollado diferentes técnicas de programación, cada una con sus respectivas ventajas y desventajas. Una de las téncicas de programación más utilizadas y que los mayores lenguajes de programación utilizan es la &lt;strong&gt;Programación Orientada a Objetos&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;La Programación Orientada a Objetos (POO) es un paradigma (técnica o estilo) de programación el cual se basa en el concepto de objetos. Un &lt;em&gt;objeto&lt;/em&gt; puede representar cualquier elemento del sistema o programa. Cada objeto contiene datos o información (en forma de atributos o variables) y código (en forma de métodos o funciones). Los diferentes objetos que conforman el programa se pueden comunicar entre sí mediante un intercambio de mensajes, el cual se lleva a cabo utilizando métodos que el objeto posee y expone a otros objetos.&lt;/p&gt;
-
-&lt;p&gt;Utilizar la POO en el diseño y desarrollo de sistemas de programación tiene diversas ventajas. Se puede tener un sistema bien diseñado, en el cual cada objeto tenga una función específica, haciendo que el desarrollo, detección de errores y expansión del sistema resulten más sencillos. Así mismo, la POO es la base para utilizar &lt;em&gt;Patrones de Diseño&lt;/em&gt;, con el cual el código se hace más eficiente, mantenible y fácil para agregar nuevas funcionalidades en el futuro. También al utilizar la POO se puede llevar a cabo la reutilización de código, centralizando el código y evitando repetir código que se utiliza en varios objetos.&lt;/p&gt;
-
-&lt;p&gt;Existen varios lenguajes de programación que están diseñados para utilizar la Programación Orientada a Objetos. Algunos de estos lenguajes son los siguientes: Java, C#, Ruby, Python, PHP, Perl. Si bien algunos lenguajes han soportado POO desde el principio, otros como PHP han ido agregando soporte para POO a lo largo de los años.&lt;/p&gt;
-
-&lt;p&gt;La POO consiste de los siguientes conceptos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Abstracción&lt;/li&gt;
-  &lt;li&gt;Herencia&lt;/li&gt;
-  &lt;li&gt;Polimorfismo&lt;/li&gt;
-  &lt;li&gt;Encapsulamiento&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;También cuenta con los siguientes principios:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DRY - No te repitas&lt;/li&gt;
-  &lt;li&gt;Separación de intereses&lt;/li&gt;
-  &lt;li&gt;Principio abierto-cerrado&lt;/li&gt;
-  &lt;li&gt;Composición sobre herencia&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;De estos conceptos y principios hablaremos en este post.&lt;/p&gt;
-
-&lt;h2 id=&quot;i-clases-y-objetos&quot;&gt;I. Clases y Objetos&lt;/h2&gt;
-
-&lt;p&gt;Imaginemos que queremos desarrollar un sistema de streaming de música parecido (pero mucho mejor!) que Spotify. Este sistema va a contar con canciones, artistas, álbumes, listas de reproducción y muchas cosas más. Usando la POO podemos traducir estos elementos del sistema a objetos: vamos a crear objetos de tipo canción, artista, álbum y lista de reproducción. (Se pueden crear objetos más abstractos, también como Mensaje, TareaAsíncrona, Banner).&lt;/p&gt;
-
-&lt;p&gt;En este momento sabemos cuáles van a ser nuestros objetos, pero hace falta una manera de crearlos. Las Clases son la manera de crear estos objetos. Cada Clase es la plantilla con las instrucciones para cada objeto y contiene el comportamiento, los datos y las operaciones que el objeto puede realizar.&lt;/p&gt;
-
-&lt;p&gt;En su forma más simple una clase se define de la siguiente manera&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Con esta definición de clase podemos construir objetos de tipo “Usuario”.&lt;/p&gt;
-
-&lt;p&gt;Para crear un objeto del tipo Usuario se utiliza la palabra reservada &lt;em&gt;new&lt;/em&gt;, y se asigna a una variable del tipo Usuario:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;miObjeto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Al hacer esto, se dice que se crea una &lt;em&gt;instancia&lt;/em&gt; de la clase Usuario. Esto quiere decir que el objeto “miObjeto” se comportará como un Usuario y tendrá los datos que caracterizan a un Usuario, pero con los valores propios de “miObjeto”.&lt;/p&gt;
-
-&lt;h3 id=&quot;estructura-de-una-clase&quot;&gt;Estructura de una Clase&lt;/h3&gt;
-
-&lt;p&gt;Una clase vacía no tiene ninguna utilidad, por lo que se necesitan agregar contenedores de datos, que se llaman &lt;em&gt;variables&lt;/em&gt;, con las cuales se pueden realizar operaciones y darle comportamiento al objeto, esto se hace utilizando &lt;em&gt;métodos&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Para demostrar cómo se estructura una clase, vamos a utilizar nuestra clase Usuario.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;variables-de-instancia&quot;&gt;Variables de instancia&lt;/h3&gt;
-
-&lt;p&gt;Dentro de una clase se crean contenedores de datos, llamados variables, que será dónde el objeto pueda almacenar sus datos. Existen diferentes tipos de variables dependiendo en dónde se puedan utilizar, pero su estructura básica es la siguiente&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tipoDeAcceso&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tipoDeDato&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombreDeLaVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Al crear un objeto (cuando se dice que es una instancia de una clase), este objeto contiene una copia de las variables las cuales tendrán datos únicos a esa instancia. Al crear OTRA instancia diferente de la misma clase, ese objeto tendrá OTRA copia de esas variables. Estas variables son llamadas &lt;em&gt;variables de instancia&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Generalmente se declaran estas variables de instancia al inicio de la clase. Para nuestra clase Usuario sería de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;estatura&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;variables-de-clase&quot;&gt;Variables de clase&lt;/h3&gt;
-
-&lt;p&gt;Las variables de clase pertenecen a la clase en sí, no a la instancia de cada objeto, por lo que al crear diferentes instancias de la misma clase, TODOS compartirán la misma variable.&lt;/p&gt;
-
-&lt;p&gt;Para crear las variables de clase se utiliza la palabra reservada &lt;em&gt;static&lt;/em&gt;. Suelen colocarse al inicio de la clase, antes de las variables de instancia. Para nuestra clase Usuario, podríamos crear una variable de clase que nos cuente la cantidad de usuarios que se han creado:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numeroDeUsuariosCreados&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;mtodos&quot;&gt;Métodos&lt;/h3&gt;
-
-&lt;p&gt;Los &lt;em&gt;métodos&lt;/em&gt; son el conjunto de instrucciones dentro de una clase que hacen una labor específica sobre los datos que posee el objeto o la clase. La sintaxis para crear métodos es la siguiente:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tipoDeAcceso&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tipoDeDatoDeRetorno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombreDelM&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;é&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;todo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TipoDeDato&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombrePar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;á&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Los métodos pueden regresar algún valor de cierto tipo de dato, o pueden regresar &lt;em&gt;void&lt;/em&gt; que es cuando no regresan ningún tipo de dato. Dependiendo del tipo de acceso definido en el método, éste puede ser visible desde otros objetos, y por lo tanto puede ser llamado por estos objetos, o solamente puede ser visible dentro de la instancia del objeto.&lt;/p&gt;
-
-&lt;p&gt;Con el siguiente código dentro del método main podemos crear un objeto, asignarle un valor a su variable “nombre” y luego imprimir en pantalla el nombre de ese usuario:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;WarriorMinds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Nombre de usuario: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Esto es lo que observamos en la consola, usando NetBeans:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;run:&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Nombre&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;usuario:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WarriorMinds&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;BUILD&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SUCCESSFUL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;time:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Al igual que las variables, existen &lt;em&gt;métodos de instancia&lt;/em&gt; y &lt;em&gt;métodos de clase&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;mtodos-de-instancia&quot;&gt;Métodos de instancia&lt;/h3&gt;
-
-&lt;p&gt;Estos métodos son los métodos que tendrá cada instancia (o copia) del objeto. Podrán modificar valores de variables de instancia como de variables de clase. Así mismo, las variables que se creen dentro del método únicamente serán visibles dentro del método.&lt;/p&gt;
-
-&lt;p&gt;Agreguemos un método de instancia para agregar el nombre del usuario y otro para obtener su valor.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Cada instancia de la clase Usuario puede asignarse un valor diferente a su variable nombre y obtener ese valor. Lo mismo se puede hacer con las demás variables de instancia.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apellido&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Se pueden crear otros métodos que solamente se utilicen en operaciones internas del objeto, siendo éstos también métodos de instancia.&lt;/p&gt;
-
-&lt;h3 id=&quot;mtodos-de-clase&quot;&gt;Métodos de clase&lt;/h3&gt;
-
-&lt;p&gt;Los métodos de clase pertenecen a la clase en sí, no al objeto en particular. Para crear estos métodos se utiliza la palabra reservada &lt;em&gt;static&lt;/em&gt;. Hagamos un método para aumentar  el valor de nuestra variable estática para saber cuantos usuarios se han creado, y otro para obtener este valor.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;usuarioCreado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;numeroDeUsuariosCreados&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cuantosUsuariosCreados&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numeroDeUsuariosCreados&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Es importante recordar que solamente se pueden modificar variables estáticas dentro de métodos estáticos. ¿Cuál es la razón de esto?&lt;/p&gt;
-
-&lt;p&gt;Las variables de instancia se crean cada vez que se crea la nueva instancia de la clase, utilizando la palabra reservada new. Mientras tanto, las variables de clase están creadas aún sin crear una instancia de la clase. Por lo tanto, no se puede modificar una variable de instancia dentro de un método de clase porque puede que no esté creada esa variable de instancia aún y además, solamente las variables de clase son comunes a la clase.&lt;/p&gt;
-
-&lt;p&gt;Es por esto que desde fuera de nuestra clase, los métodos de clase se pueden llamar de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;usuarioCreado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;No es necesario crear una instancia de Usuario para llamar este método de clase.&lt;/p&gt;
-
-&lt;h3 id=&quot;envo-de-mensajes-entre-objetos&quot;&gt;Envío de mensajes entre objetos&lt;/h3&gt;
-
-&lt;p&gt;Los objetos que conforman nuestro sistema tienen que comunicarse de alguna manera para interactuar entre sí. Esto se logra mediante un envío de mensajes entre los objetos. Para realizar este envío de mensajes entre objetos se utilizan los métodos disponibles de cada objeto. Los mensajes pueden ser valores primitivos (como int, String, double, boolean) o pueden ser otros objetos. Estos valores se conocen como &lt;em&gt;parámetros&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Para el envío de mensajes entre objetos, hay que tener en cuenta que existen dos maneras en que los datos son enviados. Hay que conocer ambas maneras para ver qué pasará con el dato que enviemos al método.&lt;/p&gt;
-
-&lt;h4 id=&quot;pasando-parmetros-de-tipos-de-datos-primitivos&quot;&gt;Pasando parámetros de tipos de datos primitivos.&lt;/h4&gt;
-
-&lt;p&gt;Una variable a fin de cuentas es un espacio en memoria reservado en donde se almacenará un valor. Cuando enviamos como parámetros a un método cualquier tipo de dato primitivo (int, double, float, boolean, etc), se dice que el parámetro se &lt;em&gt;pasa por valor&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Esto quiere decir que la variable original se copia y esta nueva copia del valor es la que se pasa al método. Por lo tanto, si el valor de la variable recibida en el método se modifica, la variable original no es modificada.&lt;/p&gt;
-
-&lt;p&gt;Veamos un ejemplo de esto con la clase Usuario y una variable edad con un valor predefinido.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;otroUsuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;otroUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;El valor de la variable definida en nuestro método, y el valor de la variable edad dentro del objeto otroUsuario tienen un valor de 25.&lt;/p&gt;
-
-&lt;p&gt;Al modificar el valor de la variable edad, definida en nuestro método:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Y al momento de obtener el valor de esa variable, y de la variable dentro del objeto Usuario, vemos que solamente cambió el valor de la variable local:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Valor de edad del objeto otroUsuario: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;otroUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Valor de edad de la variable edad: &quot;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Obtenemos esta salida:&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Valor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;del&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objeto&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;otroUsuario:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Valor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;la&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;variable&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;edad:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;pasando-parmetros-de-datos-por-referencia&quot;&gt;Pasando parámetros de datos por referencia&lt;/h4&gt;
-
-&lt;p&gt;Cuando un parámetro en un método es un objeto, se dice que se &lt;em&gt;pasa por referencia&lt;/em&gt;, ya que se pasa la referencia en donde está guardado este objeto en la memoria. Este paso de la referencia se hace por valor, por lo cual si se modifica el objeto dentro del método, el objeto original NO es modificado.&lt;/p&gt;
-
-&lt;p&gt;Veamos este caso con un ejemplo.&lt;/p&gt;
-
-&lt;p&gt;El siguiente método recibe un objeto usuario como parámetro, se le asigna un valor a su nombre. Después, se crea un nuevo objeto Usuario y se asigna al mismo parámetro usuario. Después se modifica la variable de nombre al nuevo usuario creado.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;modificarUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Otro nombre&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Mandamos llamar este método de la siguiente manera.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;modificarUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Mi nombre es Warrior Minds.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Obtenemos la siguiente respuesta en la consola:&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Mi&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;es&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Warrior&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Minds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Esto pasa ya que el parámetro Usuario fue pasado por valor y al momento de crear el nuevo usuario dentro del método “modificarUsuario” el parámetro original no se modificó.&lt;/p&gt;
-
-&lt;h3 id=&quot;constructores&quot;&gt;Constructores&lt;/h3&gt;
-
-&lt;p&gt;Hemos visto cómo crear un objeto, de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Lo que esta instrucción hace, es llamar un método especial llamado &lt;em&gt;constructor&lt;/em&gt;. Los constructores son métodos que se utilizan para la creación de objetos.&lt;/p&gt;
-
-&lt;p&gt;La sintaxis para crear métodos constructores es la siguiente:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NombreDeLaClase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listaDePar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;á&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Cada clase puede tener diferentes constructores, cada uno con una lista de parámetros diferente. Si no definimos un constructor en nuestro código, de todas formas existe uno el cual no tiene ningún parámetro. Es por esto que hemos podido crear objetos Usuario hasta ahora.&lt;/p&gt;
-
-&lt;p&gt;Vamos a crear dos constructores, uno sin parámetros y otro con parámetros, y ambos aumentarán el valor de nuestra variable de clase definida previamente:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;usuarioCreado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;usuarioCreado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apellido&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Ahora crearemos dos usuarios, uno con cada constructor y veremos el resultado de nuestra variable de clase.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;warrior.software.minds@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&quot;Warrior&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Usuario 1: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Usuario 2: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Usuarios creados: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cuantosUsuariosCreados&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En este código se crean dos usuarios, con dos constructores diferentes. A usuario1 no se le asigna ningún valor, por lo que al imprimir su nombre con getNombre() obtenemos el valor null. A usuario2 se le asignan todos sus valores en el constructor, por lo que al imprimir su nombre con getNombre() obtenemos “Warrior”.&lt;/p&gt;
-
-&lt;p&gt;¿Cuántos usuarios se han creado hasta ahora? Si ejecutan el código como está hecho en GitHub, verán que el resultado es 6. ¿Porqué sale este valor?&lt;/p&gt;
-
-&lt;h3 id=&quot;clases-embebidas&quot;&gt;Clases embebidas&lt;/h3&gt;
-
-&lt;p&gt;Como hemos visto hasta ahora, las clases que definamos son la base para nuestros programas. Hemos visto cómo crear clases, cada clase siendo un archivo completo. Pero también se pueden crear clases dentro de otras clases. Estas clases se llaman clases embebidas y pueden ser de dos tipos: clases internas o clases estáticas.&lt;/p&gt;
-
-&lt;p&gt;Una ventaja de las clases embebidas es que se puede agrupar cierta lógica dentro de un objeto separado, pero que solamente se utiliza en una clase. Además, esto ayuda al momento de leer y mantener el código ya que el código de la clase embebida se encuentra cerca del lugar en donde es utilizado.&lt;/p&gt;
-
-&lt;h4 id=&quot;clases-internas&quot;&gt;Clases Internas&lt;/h4&gt;
-
-&lt;p&gt;Una &lt;em&gt;clase interna&lt;/em&gt; es una clase que está definida dentro de otra clase. Esto puede ocurrir cuando tu clase necesita algún objeto que solamente esa clase va a utilizar. La clase interna puede utilizar y modificar variables y métodos de la clase padre, y sólamente la clase padre puede tener acceso a esta clase.&lt;/p&gt;
-
-&lt;p&gt;Veamos un ejemplo de clase interna. Crearemos una clase llamada ClasesInternas, que será un tipo de usuario, con el nombre de ClasesInternas para identificar lo que se muestra.&lt;/p&gt;
-
-&lt;p&gt;Dentro de esta clase, crearemos una clase Direccion, en la cual almacenaremos la dirección del usuario. Esta clase será privada, por lo que solamente se podrá usar en la clase padre ClasesInternas.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClasesInternas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ClasesInternas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Se puede tener acceso a la clase Dirección desde aqui.&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Nombre: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, email: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, edad: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;codigoPostal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; vive en &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En este ejemplo, la clase Direccion es la clase interna. La declaramos como privada para que solamente la clase padre ClasesInternas pueda tener acceso a ella. Dentro de la clase Direccion en el método mostrarInfo() podemos ver que se hace uso de la variable “nombre”, la cual está definida en la clase padre.&lt;/p&gt;
-
-&lt;p&gt;Si quisiéramos utilizar la clase Direccion desde nuestro método main (o desde cualquier otro lugar) nos marcaría error, ya que la clase Direccion solamente es visible para la clase ClasesInternas.&lt;/p&gt;
-
-&lt;h4 id=&quot;clases-estticas&quot;&gt;Clases Estáticas&lt;/h4&gt;
-
-&lt;p&gt;Una &lt;em&gt;clase estática&lt;/em&gt; también se crea dentro de una clase padre, pero, al ser estática, no tiene acceso a las variables y métodos no estáticos de la clase padre. Esta clase se puede utilizar en cualquier lugar, solamente debe de utilizarse la siguiente notación: &lt;em&gt;NombreClasePadre.NombreClaseHija&lt;/em&gt;. Veamos un ejemplo.&lt;/p&gt;
-
-&lt;p&gt;Crearemos una clase similar a la ClasesInternas. Solamente que en esta ocasión, la clase Dirección será una clase estática.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClasesEstaticas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ClasesEstaticas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Nombre: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, email: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, edad: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;codigoPostal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mostrarInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Dirección: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colonia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;codigoPostal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Para crear una clase estática, se necesita la siguiente sintaxis:&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NombreDeLaClase&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En esta ocasión, NO se puede tener acceso a las variables nombre o email o edad dentro de la clase Direccion.&lt;/p&gt;
-
-&lt;p&gt;Para hacer uso de la clase estática Direccion desde nuestro método main, es de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ClasesEstaticas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Direccion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClasesEstaticas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Calle Central&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Colonia Nueva&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;123456&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ClasesEstaticas&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClasesEstaticas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;WarriorMinds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;warrior.software.minds@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Se puede ver una clase estática como una clase independiente, solamente definida dentro de otra clase.&lt;/p&gt;
-
-&lt;h3 id=&quot;this&quot;&gt;this&lt;/h3&gt;
-
-&lt;p&gt;Se puede utilizar la palabra reservada &lt;em&gt;this&lt;/em&gt; dentro de cualquier método o constructor dentro de la clase para tener acceso a la instancia actual del objeto.&lt;/p&gt;
-
-&lt;p&gt;Por ejemplo, hay veces que un constructor puede hacer uso de algún otro constructor para inicializar algunas variables. En este caso se puede utilizar this(….) con la lista de parámetros del constructor deseado.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sin nombre&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;De igual manera, hay veces que el parámetro de algún método tiene el mismo nombre que alguna variable de instancia de nuestro objeto. Es lógico y correcto que ambas tengan el mismo nombre, ya que representan lo mismo. Pero necesitamos alguna manera de identificar la variable de instancia. En este escenario también se hace uso de la palabra this.&lt;/p&gt;
-
-&lt;p&gt;Si tenemos una variable de instancia llamada nombre: private String nombre;&lt;/p&gt;
-
-&lt;p&gt;Y el siguiente método&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UsandoThis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;La variable nombre, hace referencia al parámetro que recibe el método, mientras que “this.nombre” hace referencia a la variable de instancia nombre.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;Las clases y los objetos son la base de la Programación Orientada a Objetos. Una vez conociendo cómo crear clases y objetos, tipos de variables, como utilizar los métodos y sus parámetros, el concepto de clases/variables estáticas, clases internas y de cuándo utilizar “this”, podemos pasar a conceptos, e ideas que se utilizan en la POO.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="clases" /><category term="objetos" /><category term="java" /><summary type="html">Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
+&lt;p&gt;En Java, solamente se permite la &lt;em&gt;herencia simple&lt;/em&gt; - heredar de una sola clase. En sistemas más grandes esto representa un problema. De igual manera, la clase hija depende estrechamente de la implementación que tenga la clase padre y si en algún momento esta implementación llega a cambiar, la clase hija podría tener un comportamiento distinto al deseado. Hay maneras de evitar estos problemas, y lo veremos en los siguientes módulos.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="herencia" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
