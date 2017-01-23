@@ -1,4 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-16T12:39:24-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Notificaciones con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications/" rel="alternate" type="text/html" title="Notificaciones con Firebase" /><published>2017-01-16T11:25:55-06:00</published><updated>2017-01-16T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-23T14:45:13-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Configuración Remota con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/" rel="alternate" type="text/html" title="Configuración Remota con Firebase" /><published>2017-01-23T11:25:55-06:00</published><updated>2017-01-23T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-config-remota&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Hay veces que necesitamos modificar algunos valores de nuestra aplicación sin tener que publicar una nueva versión solamente para eso. O también en algunas ocasiones necesitamos mostrar cierto contenido para algún grupo de usuarios que cumplan con ciertas reglas (por ejemplo, que el dispositivo esté en algún idioma en específico o que se encuentre en algún país, o también que el sistema operativo sea de alguna versión/tipo). Para estos casos Firebase nos proporciona la opción de &lt;em&gt;Configuración Remota&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Configuracion Remota se conforma por un par de elementos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Una lista de &lt;em&gt;parámetros&lt;/em&gt;, de la forma Llave - Valor.&lt;/li&gt;
+  &lt;li&gt;Una lista de &lt;em&gt;condiciones&lt;/em&gt;, las cuales se pueden aplicar a los parametros.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;En nuestra aplicación podemos hacer uso de estos parámetros. Por defecto, en la aplicación necesitamos definir estos parámetros con un valor inicial. Si obtenemos los valores que definimos en la Configuración Remota de Firebase, la aplicación va a utilizar estos valores en lugar de los predefinidos en la app.&lt;/p&gt;
+
+&lt;h2 id=&quot;definiendo-parmetros&quot;&gt;Definiendo Parámetros&lt;/h2&gt;
+
+&lt;p&gt;Vamos a iniciar definiendo algunos parámetros para nuestra aplicación de prueba. Estos parámetros se podrán configurar para mostrar o no un texto, cambiar el color de un texto y definir un texto que se quiera mostrar. En la &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;consola de Firebase&lt;/a&gt; entramos a nuestra aplicación y seleccionamos la opción de Configuración Remota en el menú. Nos abre una pantalla donde podemos añadir nuestro primer parámetro.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/00.primer-param.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/00.primer-param.png&quot; alt=&quot;Creando el primer parámetro de configuración remota.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al presionar el botón &lt;em&gt;Añade Tu Primer Parámetro&lt;/em&gt;, nos aparece un diálogo donde podemos agregar nuestro parámetro. Como llave (o clave, como aparece en Firebase) pondremos la cadena titulo_bienvenida, y como valor podemos poner cualquier texto, en este caso, como se muestra en la imagen, el texto será “Este valor se cambió en la consola”.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/01.nuevo-param.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/01.nuevo-param.png&quot; alt=&quot;Agregando el primer parámetro.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Podemos agregar otro parámetro, en este caso lo llamaremos color_subtítulo. A este parámetro lo dejaremos &lt;strong&gt;SIN&lt;/strong&gt; valor. Al hacer esto, la aplicación &lt;em&gt;utilizará el valor para este parámetro definido dentro de la app&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/02.param-sin-valor.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/02.param-sin-valor.png&quot; alt=&quot;Agregando un parámetro sin valor.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;agregando-condiciones&quot;&gt;Agregando Condiciones&lt;/h2&gt;
+
+&lt;p&gt;Al momento de definir un parámtro, también se nos da la opción de definir una &lt;em&gt;condición&lt;/em&gt; para este parámetro. Una condición nos permite agregar ciertas reglas que se deben de cumplir, para que el valor del parámetro se utilice. Para agregar una nueva condición, en el diálogo donde se define el parámetro, necesitamos presionar el texto &lt;em&gt;Añadir valor de condición&lt;/em&gt;. Al hacer esto, aparecerá otro diálogo donde podemos definir la condición o agregar alguna condición existente.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/03.param-condicion-nueva.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/03.param-condicion-nueva.png&quot; alt=&quot;Agregando una condición al parámetro.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Si queremos definir una condición nueva, se abrirá un nuevo diálogo donde podremos definir la condición. Podemos asignarle un nombre, un color para identificarla, y podemos agregar varias reglas que se deben de cumplir para que el valor del parámetro se utilice.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/04.condiciones.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/04.condiciones.png&quot; alt=&quot;Condición nueva.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Vamos a crear una condición. Esta condición se aplicará cuando el Sistema Operativo del dispositivo sea Android, el país sea México y el idioma del dispositivo sea Inglés.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/05.creando-condicion.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/05.creando-condicion.png&quot; alt=&quot;Creando una condición.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al crear la condición la podemos agregar a nuestro parámetro. Si se cumple esta condición, podemos asignarle un valor. En nuestro caso, a nuestra condición anterior que llamamos Inglés-Android-Mexico, si se cumple, tendremos el valor &lt;em&gt;El dispositivo está en inglés, es Android y está en México&lt;/em&gt;. En caso de que la condición no se cumpla, vamos a mostrar el valor &lt;em&gt;El texto a mostrar por default&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/06.usando-condicion.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/06.usando-condicion.png&quot; alt=&quot;Valores del parámetro con la condición.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Podemos agregar varias condiciones. Habrá veces en que varias condiciones se puedan cumplir. Sin embargo, el valor que se utilizará será el primer valor donde la condición se cumpla, de arriba hacia abajo.&lt;/p&gt;
+
+&lt;p&gt;Al terminar de añaidr parámetros con sus valores y condiciones, estos cambios no serán publicados inmediatamente. Aparecerá la pantalla con la lista de tus parámetros y valores/condiciones y necesitamos presionar el botón de &lt;em&gt;Aplicar Cambios&lt;/em&gt; en la parte superior de la pantalla para que los parámetros estén disponibles para nuestra aplicación.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/07.publicar-cambios.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/07.publicar-cambios.png&quot; alt=&quot;Publicar los cambios de configuración remota.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;En la sección de Configuración Remota en la consola, también podemos tener acceso a la lista de condiciones que tenemos definidas, las cuales podemos editar, así cómo la opción para crear una condición nueva. Para acceder a esta lista, debemos presionar la pestaña de &lt;em&gt;Condiciones&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/08.condiciones-editar.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/08.condiciones-editar.png&quot; alt=&quot;Lista de condiciones.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;agregando-configuracin-remota&quot;&gt;Agregando Configuración Remota&lt;/h2&gt;
+
+&lt;p&gt;Para comenzar a utilizar la Configuración Remota de Firebase, necesitamos seguir los pasos de este &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-intro&quot; target=&quot;_blank&quot;&gt;Post&lt;/a&gt;. Posteriormente, necesitamos agregar la dependencia en el &lt;a href=&quot;https://github.com/warriorminds/firebase-config-remota/blob/master/app/build.gradle&quot; target=&quot;_blank&quot;&gt;gradle de la aplicación&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;config:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;utilizando-configuracin-remota&quot;&gt;Utilizando Configuración Remota&lt;/h2&gt;
+
+&lt;p&gt;Firebase nos proporciona un objeto &lt;em&gt;FirebaseRemoteConfig&lt;/em&gt; para poder utilizar la Configuración Remota. Necesitamos crear una variable de este tipo para posteriormente asignarle la instancia correspondiente y poder comenzar a utilizarlo.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseRemoteConfig&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseRemoteConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para que la Configuración Remota funcione, necesitamos crear un &lt;em&gt;archivo xml&lt;/em&gt; con los valores predeterminados de nuestros parámetros. Estos valores se utilizarán cuando no haya algún parámetro en la consola de Firebase con el mismo nombre, o cuándo el parámetro no tenga un valor definido en la consola.&lt;/p&gt;
+
+&lt;p&gt;Crearemos el archivo valores_config_remota.xml donde debemos de crear una estructura como se muestra a continuación.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;defaultsMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;defaultsMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Llenando el archivo con los parámetros que definimos en la consola previamente, pero con el valor por defecto, nuestro archivo quedaría de la siguiente manera&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;defaultsMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;titulo_bienvenida&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Aplicaci&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ó&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuraci&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ó&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mostrar_subtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color_subtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;000000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;texto_mostrar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Este&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;es&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;texto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mostrar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;por&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defecto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;en&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;la&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aplicaci&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ó&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;defaultsMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para que nuestra aplicación cargue los valores por defecto que definimos en nuestro archivo xml, necesitamos utilizar el método &lt;em&gt;setDefaults()&lt;/em&gt; indicándole el archivo donde vendrán nuestros valores.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;xml&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valores_config_remota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Una vez que se cargaron los valores por defecto, podemos obtenerlos del objeto FirebaseRemoteConfig y comenzar a utilizarlos.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mostrarValores&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;titulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TITULO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBoolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MOSTRAR_SUBTITULO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;subtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VISIBLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;subtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GONE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;subtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTextColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;COLOR_SUBTITULO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;colorSubtitulo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;El color del subtitulo es &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;COLOR_SUBTITULO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;texto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TEXTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para obtener los valores de Configuración Remota que están en Firebase, vamos a crear un botón para que cuando lo presionemos, obtenga estos valores.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;botonConfigRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OnClickListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;obtenerConfiguracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Firebase permite hacer solamente &lt;strong&gt;5&lt;/strong&gt; peticiones por hora. Si están en modo de desarrollador van a necesitar más de 5 para hacer sus pruebas. Firebase nos permite configurar el objeto FirebaseRemoteConfig en modo &lt;em&gt;Debug&lt;/em&gt; para poder obtener más peticiones.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;FirebaseRemoteConfigSettings&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcionesConfiguracionRemota&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FirebaseRemoteConfigSettings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDeveloperModeEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BuildConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEBUG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setConfigSettings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opcionesConfiguracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Con esto estamos listos para obtener nuestra configuración. Podemos agregarle un tiempo de expiración de los datos (que en el caso de ser desarrolladores y estar en modo Debug, podrá ser de 0 para cada vez que pidamos la configuración, nos traiga los últimos valores, con la finalidad de probar el código).&lt;/p&gt;
+
+&lt;p&gt;Utilizamos el método &lt;em&gt;fetch()&lt;/em&gt; del objeto FirebaseRemoteConfig para obtener los datos. Una vez obtenidos, necesitamos &lt;em&gt;activarlos&lt;/em&gt; para que puedan ser utilizados. Una vez obtenidos y activados los valores, podemos actualizar los TextViews con los nuevos valores:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obtenerConfiguracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tiempoExpiracionDatos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// en segundos.&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getConfigSettings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isDeveloperModeEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;tiempoExpiracionDatos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiempoExpiracionDatos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addOnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OnCompleteListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tarea&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tarea&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isSuccessful&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;configuracionRemota&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;activateFetched&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mostrarValores&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Podemos ver los valores defecto, &lt;em&gt;ANTES&lt;/em&gt; de sincronizar con Firebase.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/09.valores-default.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/09.valores-default.png&quot; alt=&quot;Valores por defecto.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Al presionar el botón, obtenemos la configuración remota.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/10.valores-config-remota.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/config-remota/10.valores-config-remota.png&quot; alt=&quot;Valores de configuración remota.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;La Configuración Remota de Firebase nos permite almacenar parámetros con la forma llave-valor, los cuales nos permiten cambiar algunos aspectos de nuestra aplicación sin tener que sacar una nueva versión. Para que esto funcione, necesitamos agregar los parámetros en la consola, agregar condiciones si es necesario para posteriormente obtener los parámetros dentro de la aplicación. En la aplicación, necesitamos un archivo con los valores por defecto de los parámetros. Para sincronizar con Firebase, necesitamos obtener los parámetros y posteriormente activarlos.&lt;/p&gt;
+
+&lt;p&gt;Las condiciones funcionarán de la siguiente manera: se pueden agregar varias condiciones, pero la primera condición que sea verdadera, será la que se utilice.&lt;/p&gt;
+
+&lt;p&gt;En caso de no tener parámetros con esa llave, o el parámetro en Firebase no tiene un valor, se utilizará el valor del archivo xml dentro de la aplicación. De igual manera se utilizarán los valores de ese archivo cuando no se haga la activación de los parámetros, una vez obtenidos.&lt;/p&gt;
+
+&lt;p&gt;Si hay parámetros con valor y se activaron, y cumplen con las condiciones (en caso de que existan), se utilizarán los valores de la consola de Firebase.&lt;/p&gt;</content><category term="firebase" /><category term="android" /><category term="configuracion remota" /><summary type="html">La configurción remota de Firebase permite cambiar algunos aspectos de tu aplicación sin tener que publicar una nueva versión de tu app.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Notificaciones con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications/" rel="alternate" type="text/html" title="Notificaciones con Firebase" /><published>2017-01-16T11:25:55-06:00</published><updated>2017-01-16T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-notificaciones&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 
@@ -1977,7 +2195,7 @@
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics&quot;&gt;Analytics&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications&quot;&gt;Notificaciones&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Configuración Remota&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota&quot;&gt;Configuración Remota&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Base de datos&lt;/li&gt;
   &lt;li&gt;Almacenamiento&lt;/li&gt;
 &lt;/ol&gt;
@@ -2687,373 +2905,4 @@
       &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Abstracción</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Abstracción" /><published>2016-11-14T10:30:55-06:00</published><updated>2016-11-14T10:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/">&lt;p&gt;Este Post es la tercera parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Abstracción&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento&quot;&gt;Encapsulamiento&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;El código correspondiente a esta tercera parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Abstraccion&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
-
-&lt;p&gt;Cuando hacemos un programa traducimos los requerimientos o ideas en código. Usando la POO traducimos o modelamos estas ideas en objetos. Para hacer esto, necesitamos identificar las características de los objetos y sus comportamientos que queremos programar y que serían importantes en la ejecución de nuestro programa. El proceso mediante el cual se identifican los componentes necesarios para tus objetos, y los que no son necesarios, se conoce como &lt;em&gt;abstracción&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;La abstracción es un proceso de suma importancia en el diseño de nuestros sistemas ya que debemos de identificar adecuadamente las características del objeto que necesitamos implementar. La selección de estas características depende del &lt;em&gt;contexto&lt;/em&gt; en el cual se utilizará tu objeto.&lt;/p&gt;
-
-&lt;p&gt;Como ejemplo, vamos a diseñar un pequeño sistema para llevar registro de alumnos que entran en una escuela y una manera de calcular su calificación. Podemos modelar un alumno en una clase Alumno. De igual manera, nuestros objetos Alumno tendrán algunas de las siguientes características:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Nombre&lt;/li&gt;
-  &lt;li&gt;Grado escolar&lt;/li&gt;
-  &lt;li&gt;Lista de materias cursadas&lt;/li&gt;
-  &lt;li&gt;Promedio&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;De igual manera, en este contexto, no nos interesan algunas características que podrían tener los alumnos, como lo son estatura, color de ojos, peso, etc.&lt;/p&gt;
-
-&lt;p&gt;Si bien en la sección de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt; realizamos este proceso de abstracción, Java y la POO nos ofrecen otras herramientas para realizar este proceso y hacer nuestro diseño de software de una manera más adecuada.&lt;/p&gt;
-
-&lt;p&gt;Nuestro ejemplo contará con dos tipos de alumnos, alumnos de primaria y alumnos de universidad. Ambos tipos de alumnos contarán con una lista de materias, su nombre, el grado escolar que cursan y el promedio que obtuvieron.&lt;/p&gt;
-
-&lt;p&gt;La diferencia va a ser que el promedio se calculará de una manera diferente para los dos: el promedio del alumno de primaria será de esta manera&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Promedio de las materias - 80%&lt;/li&gt;
-  &lt;li&gt;Conducta - 10%&lt;/li&gt;
-  &lt;li&gt;Esfuerzo - 10%&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Mientras que el promedio del alumno de universidad será solamente el promedio de las materias.&lt;/p&gt;
-
-&lt;p&gt;También contará con una clase Materia, que tendrá solamente el nombre y el promedio del alumno.&lt;/p&gt;
-
-&lt;p&gt;Para esto utilizaremos &lt;em&gt;Clases y Métodos abstractos&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;clases-y-mtodos-abstractos&quot;&gt;Clases y Métodos Abstractos&lt;/h2&gt;
-
-&lt;p&gt;En nuestro ejemplo que realizaremos, vemos que existen dos tipos de alumnos. Por lo cual, podemos crear dos objetos diferentes de tipo AlumnoPrimaria y AlumnoUniversidad. Pero también podemos ver que nuestro proceso de abstracción nos llevó a observar que prácticamente todas las características de ambos objetos son iguales y que también tienen las mismas operaciones. Lo único que cambia entre ambos es la manera de realizar la operación de calcular el promedio.&lt;/p&gt;
-
-&lt;p&gt;Java nos da la opción de crear &lt;em&gt;clases y métodos abstractos&lt;/em&gt;. Una clase abstracta se define de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Una clase abstracta deberá ser extendida por otra clase no abstracta. Si se trata de crear un objeto con la clase abstracta, marcará error ya que no es posible hacer esto debido a la falta de implementación de los métodos abstractos. Nuestra clase abstracta Alumno contendrá todas las propiedades de nuestro alumno y sus métodos para acceder a ellas, así como un constructor que nos permita crear a nuestro alumno:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;promedio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;grado&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;materias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPromedio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;promedio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Con esto, podemos crear otras dos clases específicas, que heredarán de nuestra clase abstracta:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AlumnoPrimaria&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AlumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Al heredar de una clase abstracta, Java nos pide que creemos un constructor que mande llamar al constructor de la clase padre. Así mismo, si intentamos crear un objeto directamente con la clase Alumno, nos mandará un error:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(...);&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;---&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;est&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;á&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;permitido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;De igual manera podemos crear nuestra clase AlumnoUniversidad:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AlumnoUniversidad&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-     &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AlumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Con esto, podemos agregar materias a cada objeto que creemos de las dos clases, así como obtener su nombre y el grado en el que está (todo este código está implementado en la clase abstracta Alumno).&lt;/p&gt;
-
-&lt;p&gt;Ahora necesitamos implementar nuestro método para calcular el promedio de cada alumno. Para esto, crearemos en nuestra clase Alumno un método abstracto:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Un &lt;em&gt;método abstracto&lt;/em&gt; solamente es la definición del método sin implementación. Cuando se agrega un método abstracto a nuestra clase, la clase forzosamente debe de ser una clase abstracta.&lt;/p&gt;
-
-&lt;p&gt;Al agregar este método en nuestra clase Alumno, podemos ver que nuestras clases específicas AlumnoPrimaria y AlumnoUniversidad, nos piden implementar nuestro nuevo método.&lt;/p&gt;
-
-&lt;p&gt;Implementemos este método para la clase AlumnoPrimaria:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conducta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;esfuerzo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materiasAcademicas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;conducta&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;conducta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCalificacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;esfuerzo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;esfuerzo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCalificacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCalificacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;materiasAcademicas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;promedio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materiasAcademicas&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conducta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;esfuerzo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Podemos ver que es necesario agregar la anotación &lt;em&gt;@Override&lt;/em&gt; a nuestro método y que puede tener una implementación propia para cada clase.&lt;/p&gt;
-
-&lt;p&gt;Ahora implementemos este método para nuestra clase AlumnoUniversidad&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCalificacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;promedio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Para hacer uso de nuestras clases, crearemos un alumno de cada tipo y le agregaremos sus materias con su calificación correspondiente:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AlumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Juan&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Primero&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Matemáticas&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Español&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Conducta&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Esfuerzo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AlumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pablo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Sexto Semestre&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Matemáticas Aplicadas&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Diseño de Software&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sistemas Operativos&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;agregarMateria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Física Avanzada&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Podemos hacer uso ahora del método calcularCalificacionDelGrado() de cada objeto:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Pero para ver el alcance y el uso de nuestras clases abstractas, crearemos una lista de Alumno y agregaremos nuestros dos alumnos a la lista:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alumnoPrimaria&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alumnoUniversidad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Si bien tenemos nuestras clases AlumnoPrimaria y AlumnoSecundaria, ambas clases también son de la clase Alumno, por eso podemos realizar esto.&lt;/p&gt;
-
-&lt;p&gt;Y por último, calcularemos el promedio para cada alumno y lo imprimiremos en la pantalla:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPromedio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Cada alumno sabe de qué tipo específico de alumno se trata, por eso cuando se ejecuta la línea de código&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calcularCalificacionDelGrado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;dependiendo del tipo de alumno que se trate, se ejecuta su método específico.&lt;/p&gt;
-
-&lt;p&gt;Para Juan, el alumno de primaria esperaríamos esta calificación:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Materias académicas: 9 * 0.8 = 7.2&lt;/li&gt;
-  &lt;li&gt;Esfuerzo: 10 * 0.1 = 1.0&lt;/li&gt;
-  &lt;li&gt;Conducta: 9 * 0.1 = 0.9&lt;/li&gt;
-  &lt;li&gt;Total = 9.1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Para Pablo, el alumno de universidad:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Materias: (7 + 8 + 8 + 9) / 4 = 8.0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Podemos ver en la consola el siguiente resultado:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;Juan:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;9.1&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;Pablo:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Las ventajas de utilizar clases abstractas es que podemos tener implementación dentro de la clase abstracta, en nuestro caso los métodos para obtener y modificar las variables del objeto. También podemos utilizar las clases abstractas cuando tenemos varias clases que comparten cierta información y que difieren solamente en la implementación de algún método o comportamiento.&lt;/p&gt;
-
-&lt;h2 id=&quot;interfaces&quot;&gt;Interfaces&lt;/h2&gt;
-
-&lt;p&gt;Las clases abstractas son muy útiles, como ya lo vimos, pero tienen una limitación: en Java solamente se permite &lt;em&gt;herencia simple&lt;/em&gt; - heredar de una sola clase. Al heredar de la clase abstracta, ocupamos este único lugar que tenemos disponible. Si en cambio queremos que cualquier clase, aún cuando no estén relacionadas, pueda implementar algunos métodos, especificar el comportamiento de una clase y además permitir que se hereden de varios tipos, se puede utilizar una &lt;em&gt;interfaz&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Una &lt;em&gt;interfaz&lt;/em&gt; se puede ver como un contrato que debe de cumplir la clase. Todas las clases que implementen una interfaz tendrán disponibles los métodos que se declaran en la interfaz.&lt;/p&gt;
-
-&lt;p&gt;Para definir una interfaz se utiliza la palabra &lt;em&gt;interface&lt;/em&gt; y el nombre de la interfaz. Dentro de ella, se declaran los métodos, sin implementación, que deberán implementar las clases que implementen la interfaz.&lt;/p&gt;
-
-&lt;p&gt;A nuestro ejemplo de Alumnos y Materias, agregaremos una interfaz, IAlumno, la cual tendrá dos métodos: obtenerInformacion(); e imprimirMaterias();&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IAlumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obtenerInformacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Ahora haremos que ambos objetos AlumnoPrimaria y AlumnoUniversidad implementen esta interfaz:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AlumnoPrimaria&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IAlumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;......&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obtenerInformacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AlumnoUniversidad&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Alumno&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IAlumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;......&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obtenerInformacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;En ambas clases debemos de implementar los métodos de la interfaz IAlumno. Para este ejemplo, ambas implementaciones harán lo mismo.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;obtenerInformacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Nombre: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, Grado: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grado&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imprimirMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Materia&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Nombre: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; - &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCalificacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Para hacer uso de esta interfaz, haremos que nuestros objetos alumnos que están en la lista muestren la información y las materias.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;IAlumno&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IAlumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alumnos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;obtenerInformacion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;alumno&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;imprimirMaterias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Como podemos ver, la lista de alumnos es de tipo Alumno, pero sabemos que cada alumno también es de tipo IAlumno, por lo tanto el cast (IAlumno) se puede hacer. También podemos ver que el objeto IAlumno alumno, tendrá disponibles los métodos obtenerInformacion() e imprimirMaterias().&lt;/p&gt;
-
-&lt;p&gt;El resultado que vemos en la consola es el siguiente:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;===============&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RESULTADOS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;INTERFAZ&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IALUMNO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===============&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;Nombre:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Juan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Grado:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Primero&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Matem&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;á&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ticas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Espa&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ñ&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Conducta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;9.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Esfuerzo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;Nombre:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Pablo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;Grado:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sexto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Semestre&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Matem&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;á&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ticas&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Aplicadas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;7.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Dise&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ñ&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Software&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Sistemas&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Operativos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;í&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sica&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Avanzada&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;9.0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Una de las ventajas de las interfaces es que las clases pueden implementar el número que quieran de interfaces:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AlumnoUniversidad&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaz1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaz2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaz3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;La abstracción es un proceso de suma importancia a la hora de diseñar sistemas de software. Un buen proceso de abstracción lleva a un buen diseño del sistema. Para poder lograr esto de una mejor manera, contamos con las clases abstractas y las interfaces. Las clases abstractas definen métodos abstractos, los cuales deben de ser implementados por las clases que hereden la clase abstracta. De igual manera, contamos con Interfaces, que son contratos que las clases deben de cumplir, al implementar siempre los métodos definidos en la interfaz.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="abstraccion" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
+&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
