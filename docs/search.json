@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "Base de Datos en Tiempo Real con Firebase",
+      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas/",
+      "excerpt"		: "Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos."
+    }
+  
+
+  
+    ,{
       "title"			: "Configuración Remota con Firebase",
       "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/",
       "excerpt"		: "La configurción remota de Firebase permite cambiar algunos aspectos de tu aplicación sin tener que publicar una nueva versión de tu app."

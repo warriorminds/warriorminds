@@ -1,4 +1,301 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-23T14:45:13-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Configuración Remota con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/" rel="alternate" type="text/html" title="Configuración Remota con Firebase" /><published>2017-01-23T11:25:55-06:00</published><updated>2017-01-23T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io/warriorminds/feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io/warriorminds/" rel="alternate" type="text/html" /><updated>2017-01-31T14:33:23-06:00</updated><id>https://warriorminds.github.io/warriorminds/</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Base de Datos en Tiempo Real con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas/" rel="alternate" type="text/html" title="Base de Datos en Tiempo Real con Firebase" /><published>2017-01-31T11:25:55-06:00</published><updated>2017-01-31T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
+
+&lt;p&gt;Firebase nos proporciona una base de datos en tiempo real, permite trabajar de forma sin conexión y se puede utilizar con Android, iOS y web. Es una base de datos NoSQL y por lo mismo, almacena los datos en un archivo con formato JSON.&lt;/p&gt;
+
+&lt;p&gt;Utilizar la base de datos de Firebase nos da la ventaja de que está en la nube, así evitamos todo lo relacionado con el soporte y mantenimiento y además se puede ir expandiendo conforme aumente el uso.&lt;/p&gt;
+
+&lt;p&gt;Para tener acceso a la base de datos, debemos entrar en la &lt;a href=&quot;https://console.firebase.google.com/&quot;&gt;consola de Firebase&lt;/a&gt;, en el menú &lt;em&gt;Base de Datos&lt;/em&gt;. En esa pantalla tenemos acceso a nuestra base de datos, a la configuración de reglas, estadísticas de uso y copias de seguridad.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/03.inicio-db.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/03.inicio-db.png&quot; alt=&quot;Base de datos en la consola.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;En este Post nos enfocaremos en entender y aprender cómo crear las &lt;em&gt;reglas&lt;/em&gt;, que son la base para la seguridad de nuestra base de datos. En el siguiente Post, crearemos una base de datos e implementaremos el código necesario para utilizar la base desde una aplicación Android.&lt;/p&gt;
+
+&lt;h2 id=&quot;reglas&quot;&gt;Reglas&lt;/h2&gt;
+
+&lt;p&gt;Las &lt;em&gt;reglas&lt;/em&gt; permiten definir quién tiene acceso de &lt;em&gt;lectura&lt;/em&gt;, quien puede tener acceso de &lt;em&gt;escritura&lt;/em&gt;, permite definir el &lt;em&gt;formato de los datos&lt;/em&gt; (si un elemento puede tener hijos y definir el tipo de dato del elemento) y además permiten definir un elemento de los datos como &lt;em&gt;índice&lt;/em&gt; para poder realizar búsquedas. Para configurar Reglas seleccionamos la pestaña &lt;em&gt;Reglas&lt;/em&gt; en la consola de Firebase.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/04.reglas.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/04.reglas.png&quot; alt=&quot;Reglas en la consola.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;La estructura de las reglas debe de seguir la estructura de la base de datos, para que se puedan cumplir de manera adecuada. De igual manera, las reglas fallarán si no se tiene definida una regla en el padre.&lt;/p&gt;
+
+&lt;h3 id=&quot;reglas-de-escritura-y-lectura&quot;&gt;Reglas de Escritura y Lectura&lt;/h3&gt;
+
+&lt;p&gt;Existen dos tipos de reglas para regular el acceso a lectura y escritura de datos en nuestra base. Estas dos reglas son&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;.read&lt;/em&gt;: define las reglas que permiten la lectura de datos.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;.write&lt;/em&gt;: define las reglas que permiten la escritura de datos.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por default, está permitido hacer escritura y lectura de datos a los usuarios que están autenticados. Tenemos disponible la variable &lt;em&gt;auth&lt;/em&gt; que es diferente de &lt;em&gt;null&lt;/em&gt; cuando el usuario está autenticado. Al entrar a la sección de &lt;em&gt;Base de Datos -&amp;gt; Reglas&lt;/em&gt; por primera vez, tenemos las siguientes reglas:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Las reglas tienen un formato tipo &lt;em&gt;JSON&lt;/em&gt; empezando siempre con el nodo &lt;em&gt;rules&lt;/em&gt; y donde cada elemento hijo de &lt;em&gt;rules&lt;/em&gt; es una ruta diferente. Por ejemplo, nuestra base de datos tendrá una URL de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;https://firebase-basededatos.firebaseio.com&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Si queremos agregar un elemento &lt;em&gt;/mensajes&lt;/em&gt; a nuestra base de datos y ponerle reglas, lo haríamos de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;mensajes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Esta regla define que para la ruta &lt;em&gt;https://firebase-basededatos.firebaseio.com/mensajes&lt;/em&gt; todos los usuarios autenticados pueden leer y escribir datos.&lt;/p&gt;
+
+&lt;p&gt;Las reglas que definimos se aplican a &lt;strong&gt;todos los hijos&lt;/strong&gt;; esto quiere decir que los hijos van a seguir las reglas que tenga el primer ancestro, sobreescribiendo las reglas definidas en los hijos.&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo, en la siguiente regla, está definida una regla en el padre que permite escribir a cualquier usuario, sin necesitar autenticación. También tenemos definida en el hijo &lt;em&gt;/mensajes&lt;/em&gt; otra regla que solamente permite a los usuarios autenticados escribir datos.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth == null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;mensajes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Como en Firebase se aplica la regla del primer ancestro, entonces cualquier usuario podría escribir datos en &lt;em&gt;/mensajes.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Firebase también nos proporciona algunas &lt;em&gt;variables&lt;/em&gt; que podemos utilizar, por ejemplo podemos hacer referencia a otras rutas de nuestra base de datos, tener acceso a identificadores de autenticación de usuarios, entre otras.&lt;/p&gt;
+
+&lt;p&gt;Un escenario común que podríamos encontrar, es solamente permitir que el usuario modifique su propia información. Para esto, podemos crear la variable &lt;em&gt;$uid&lt;/em&gt;. Cada usuario podría tener asignada una URL, utilizando su identificador de usuario (obtenido al iniciar sesión con Firebase). Por ejemplo,&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;https://firebase-basededatos.firebaseio.com/usuarios/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ab&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;45-123&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-1234&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-abcde-a&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Donde &lt;em&gt;123ab45-123a-1234-abcde-a1abc123a1a1&lt;/em&gt; es el identificador del usuario. Si solamente queremos que ese usuario pueda leer datos de esa URL, definiríamos la siguiente regla:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;usuarios&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;$uid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;$uid === auth.uid&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Esta regla se leería de la siguiente manera: para la ruta &lt;em&gt;/usuarios/$uid&lt;/em&gt; solamente podrán leer los datos de cada &lt;em&gt;$uid&lt;/em&gt; los usuarios que se hayan autenticado y que tengan la misma &lt;em&gt;uid&lt;/em&gt; después de autenticarse.&lt;/p&gt;
+
+&lt;p&gt;Más adelante veremos más variables que tenemos disponibles para definir las reglas.&lt;/p&gt;
+
+&lt;h2 id=&quot;reglas-de-validacin&quot;&gt;Reglas de Validación&lt;/h2&gt;
+
+&lt;p&gt;Podemos utilizar las reglas para &lt;em&gt;validar&lt;/em&gt; los datos que se van a escribir a nuestra base. Es necesario tener estas reglas ya que la base de datos de Firebase &lt;em&gt;no tiene esquema&lt;/em&gt; (al ser NoSQL). Con estas reglas podemos validar que los datos ingresados sean correctos y no pueda haber problemas posteriormente. Las reglas de validación se ejecutan &lt;em&gt;una vez que se autorizó la escritura de los datos&lt;/em&gt; (se cumplieron las reglas de .write).&lt;/p&gt;
+
+&lt;p&gt;Para crear una regla de validación, debemos utilizar la palabra &lt;em&gt;.validate&lt;/em&gt;. Como introducción, crearemos una regla que indique que unos valores serán números, cadenas, y limitaremos el tamaño de unas cadenas.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cadenas&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.validate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;newData.isString()&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;numeros&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.validate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;newData.isNumber()&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;cadenaTamaño&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.validate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;newData.isString() &amp;amp;&amp;amp; newData.val().length &amp;gt; 5&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Utilizando el simulador, podemos hacer pruebas y ver cuándo nuestras reglas se cumplen y cuando no.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/00.regla1.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/00.regla1.png&quot; alt=&quot;Reglas en el simulador.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/01.regla2.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/01.regla2.png&quot; alt=&quot;Reglas en el simulador.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+    &lt;a href=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/02.regla3.png&quot;&gt;&lt;img src=&quot;https://warriorminds.github.io/warriorminds/images/fb/db/02.regla3.png&quot; alt=&quot;Reglas en el simulador.&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Más adelante veremos reglas más avanzadas.&lt;/p&gt;
+
+&lt;h2 id=&quot;reglas-para-indexacin&quot;&gt;Reglas para indexación&lt;/h2&gt;
+
+&lt;p&gt;La base de datos en Firebase nos permite hacer búsquedas de los datos. Es importante crear &lt;em&gt;índices&lt;/em&gt; para que estas búsquedas sean más eficientes, ya que la base puede contener una gran cantidad de datos.&lt;/p&gt;
+
+&lt;p&gt;Se utilizan las reglas para crear índices, con la palabra &lt;em&gt;indexOn&lt;/em&gt;, proporcionando el nombre de los campos que queremos utilizar como índices:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;usuarios&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.indexOn&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;apodo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;nombre&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Con esta regla indexamos la ruta &lt;em&gt;usuarios&lt;/em&gt; con sus nodos hijos apodo y nombre. Esta manera de indexar es indexar utilizando los nodos hijos.&lt;/p&gt;
+
+&lt;p&gt;Tambiéne podemos indexar utilizando los valores, en lugar de los hijos. Para esto utilizamos el valor &lt;em&gt;.value&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;indexOn&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.value&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;variables-disponibles-para-crear-reglas&quot;&gt;Variables Disponibles para crear Reglas&lt;/h2&gt;
+
+&lt;p&gt;Existen algunas variables predefinidas que podemos utilizar para crear nuestras reglas. Pueden ver la lista completa &lt;a href=&quot;https://firebase.google.com/docs/reference/security/database/#variables&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;auth&quot;&gt;auth&lt;/h3&gt;
+
+&lt;p&gt;Como ya hemos visto, esta variable nos indica si el usuario ha sido autenticado y contiene la siguiente información:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;provider&lt;/em&gt;: Nos indica qué método utilizó el usuario para iniciar sesión.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;uid&lt;/em&gt;: El identificador único del usuario.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;token&lt;/em&gt;: el token de autenticación del usuario.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por ejemplo, si queremos que solamente puedan leer los datos usuarios que iniciaron sesión con Google, podemos definir una regla como la siguiente:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth.provider == 'google'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;authtoken&quot;&gt;auth.token&lt;/h3&gt;
+
+&lt;p&gt;Esta variable contiene la información del inicio de sesión del usuario. Puede o no tener las siguientes variables:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;email&lt;/em&gt;: el correo electrónico utilizado.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;email_verified&lt;/em&gt;: si el correo electrónico está verificado.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;name&lt;/em&gt;: el nombre del usuario&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;firebase.sing_in_provider&lt;/em&gt;: el proveedor del inicio de sesión.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;variable&quot;&gt;$variable&lt;/h3&gt;
+
+&lt;p&gt;Como vimos anteriormente, se pueden definir variables en nuestra estructura de reglas con el símbolo $. Por ejemplo, habíamos definido la variable $uid para representar la ruta  https://firebase-basededatos.firebaseio.com/usuarios/$uid donde $uid podría tener un valor similar a 123ab45-123a-1234-abcde-a1abc123a1a1.&lt;/p&gt;
+
+&lt;p&gt;Una vez definidas estas variables, podemos utilizarlas dentro de las reglas.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;$uid&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;$uid === auth.uid&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Esta regla se podría traducir de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;123ab45-123a-1234-abcde-a1abc123a1a1&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot; 123ab45-123a-1234-abcde-a1abc123a1a1 === auth.uid&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Teniendo un valor diferente dependiendo del usuario que inicie sesión. De igual manera, podemos crear las variables que sean necesarias.&lt;/p&gt;
+
+&lt;h3 id=&quot;now&quot;&gt;now&lt;/h3&gt;
+
+&lt;p&gt;Esta variable contiene la cantidad de milisegundos transcurridos desde la fecha Epoch Unix (medianoche del 1 de enero de 1970 UTC) hasta el memento de la utilización. Podemos utilizar esta variable para crear reglas referentes al tiempo y fecha.&lt;/p&gt;
+
+&lt;h3 id=&quot;root&quot;&gt;root&lt;/h3&gt;
+
+&lt;p&gt;La variable root contiene una &lt;em&gt;copia de los datos de la base como se encuentra antes de realizar la operación&lt;/em&gt;. Se utiliza para leer datos que existen previamente en la base y crear reglas basadas en esos datos.&lt;/p&gt;
+
+&lt;h3 id=&quot;data&quot;&gt;data&lt;/h3&gt;
+
+&lt;p&gt;Esta variable es similar a root, con la diferencia que solamente trae la &lt;em&gt;copia de los datos en la ubicación que se está modificando&lt;/em&gt;. Por ejemplo,&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;libros&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;$usuario&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;data.child('nombre').val() == 'John'&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;En este ejemplo, &lt;em&gt;data&lt;/em&gt; contiene los datos que existen en $usuario. Por eso podemos tener acceso a su hijo (child) nombre y obtener su valor.&lt;/p&gt;
+
+&lt;h3 id=&quot;newdata&quot;&gt;newData&lt;/h3&gt;
+
+&lt;p&gt;De igual manera, newData es similar a las dos variables anteriores. En este caso, newData trae la &lt;em&gt;información de los datos que se van a agregar&lt;/em&gt;. Esta variable solamente está disponible para las reglas .validate y .write.&lt;/p&gt;
+
+&lt;h2 id=&quot;mtodos-importantes&quot;&gt;Métodos importantes&lt;/h2&gt;
+
+&lt;p&gt;Con las variables root, data y newData tenemos algunos métodos que nos permiten obtener información de la base de datos para crear nuestras reglas. Pueden consultar la lista completa &lt;a href=&quot;https://firebase.google.com/docs/reference/security/database/#ruledatasnapshot_methods&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;val&quot;&gt;val()&lt;/h3&gt;
+
+&lt;p&gt;Este método nos permite obtener el valor de un hijo. Los valores que se pueden obtener son String, Number, Boolean y Null.&lt;/p&gt;
+
+&lt;h3 id=&quot;child&quot;&gt;child()&lt;/h3&gt;
+
+&lt;p&gt;Este método nos permite tener acceso a un hijo determinado. Por ejemplo, data.child(‘nombre’) utilizado previamente nos da acceso al hijo “nombre” del elemento “$usuario”.&lt;/p&gt;
+
+&lt;h3 id=&quot;parent&quot;&gt;parent()&lt;/h3&gt;
+
+&lt;p&gt;Con este método podemos movernos a algún nodo hermano.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;data.parent().child('hijo')&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;haschild-haschildren&quot;&gt;hasChild(), hasChildren()&lt;/h3&gt;
+
+&lt;p&gt;Estos dos métodos nos sirven para saber si root, data o newData tienen un hijo en específico o si tienen varios hijos. Nos puede servir para validar que newData tenga una estructura predefinida.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;newData.hasChildren(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'hijo&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'hijo&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;exists&quot;&gt;exists()&lt;/h3&gt;
+
+&lt;p&gt;Nos indica si root, data, newData contienen algún dato o no.&lt;/p&gt;
+
+&lt;h3 id=&quot;isnumber-isstring-isboolean&quot;&gt;isNumber(), isString(), isBoolean()&lt;/h3&gt;
+&lt;p&gt;Nos indica si un valor es número, cadena o booleano.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Firebase nos proporciona la base de datos en tiempo real. Necesitamos definir reglas que nos indiquen quiénes tienen permisos para obtener los datos y quiénes tienen permisos para escribir en la base. También podemos tener índices para facilitar la búsqueda, que de igual manera se definen mediante las reglas. Por último, contamos con reglas para validar que los datos que se escriban en la base cumplan con ciertos valores.&lt;/p&gt;
+
+&lt;p&gt;En el próximo Post, crearemos una base de datos, implementaremos sus reglas, y utilizaremos una app de Android para escribir y leer en la base.&lt;/p&gt;</content><category term="firebase" /><category term="android" /><category term="base de datos" /><summary type="html">Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Configuración Remota con Firebase</title><link href="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/" rel="alternate" type="text/html" title="Configuración Remota con Firebase" /><published>2017-01-23T11:25:55-06:00</published><updated>2017-01-23T11:25:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/">&lt;p&gt;Toda la información oficial de Firebase la pueden encontrar &lt;a href=&quot;https://console.firebase.google.com/&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;El código completo para este Post lo pueden encontrar en &lt;a href=&quot;https://github.com/warriorminds/firebase-config-remota&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 
@@ -2196,7 +2493,12 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics&quot;&gt;Analytics&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications&quot;&gt;Notificaciones&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota&quot;&gt;Configuración Remota&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Base de datos&lt;/li&gt;
+  &lt;li&gt;Base de datos
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas&quot;&gt;Primera Parte: Reglas&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Segunda Parte: Implementación&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
   &lt;li&gt;Almacenamiento&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -2659,250 +2961,4 @@
 
 &lt;p&gt;También podemos observar que todos los objetos creados en Java son del tipo Object, por default.&lt;/p&gt;
 
-&lt;p&gt;En nuestra sección de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;, pudimos ver el polimorfismo en acción y algunas de las ventajas que nos puede traer.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="polimorfismo" /><category term="java" /><summary type="html">En este Post hablaremos acerca del polimorfismo.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Programación Orientada a Objetos: Encapsulamiento</title><link href="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/" rel="alternate" type="text/html" title="Programación Orientada a Objetos: Encapsulamiento" /><published>2016-11-20T16:30:55-06:00</published><updated>2016-11-20T16:30:55-06:00</updated><id>https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento</id><content type="html" xml:base="https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/">&lt;p&gt;Este Post es la cuarta parte de la serie &lt;em&gt;“Programación Orientada a Objetos”&lt;/em&gt;. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Definición de POO&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/&quot;&gt;Clases y Objetos&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-herencia&quot;&gt;Herencia&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Encapsulamiento&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo&quot;&gt;Polimorfismo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-composicion&quot;&gt;Composición&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-principios&quot;&gt;Principios utilizados en la POO&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Todo el código de la serie está disponible en &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;El código correspondiente a esta cuarta parte lo pueden encontrar &lt;a href=&quot;https://github.com/warriorminds/prog-orientada-objetos/tree/master/Encapsulamiento&quot; target=&quot;_blank&quot;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Todos los ejemplos están hechos en &lt;a href=&quot;https://netbeans.org&quot; target=&quot;_blank&quot;&gt;Netbeans&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
-
-&lt;p&gt;Otro de los conceptos principales de la POO es el &lt;em&gt;encpsulamiento&lt;/em&gt;. Ya hemos venido aplicando el encapsulamiento desde que comenzamos a hablar acerca de los objetos. &lt;em&gt;Encapsular&lt;/em&gt; significa envolver todos los datos y comportamientos en un solo lugar. Esto es lo que buscamos al crear objetos: &lt;em&gt;tener los datos y comportamientos comunes en un solo objeto&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Así mismo, el encapsulamiento busca &lt;em&gt;limitar la interacción&lt;/em&gt; que puedan tener objetos externos sobre nuestro objeto, esto con el objetivo de que los datos de nuestro objeto se encuentren seguros y no puedan ser cambiados en cualquier momento y por cualquier otro objeto. Esto se logra escondiendo las variables y los métodos de nuestro objeto para limitar su interacción externa.&lt;/p&gt;
-
-&lt;p&gt;El encapsulamiento ya lo habíamos aplicado antes. Viendo nuestro ejemplo de Usuario (en el proyecto POO), vemos que declaramos nuestras variables privadas&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;y posteriormente creamos métodos públicos, llamados getters y setters, para poder modificar estas variables.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apellido&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getApellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEdad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Con esto logramos encapsular las variables de la clase Usuario y obligamos a otros objetos externos a utilizar los métodos para modificar los valores de las variables de Usuario.&lt;/p&gt;
-
-&lt;p&gt;Lo que se quiere lograr con el encapsulamiento, es hacer de cada objeto una &lt;em&gt;caja negra&lt;/em&gt;, que solamente puedan tener opción de ingresar valores para sus variables y obtener los resultados de vuelta. Así, aun cuando el objeto tenga más variables que solamente sean de uso interno, los objetos externos no tendrán conocimiento de su existencia y no las podrán modificar, asegurando el buen funcionamiento del comportamiento del objeto en cuestión.&lt;/p&gt;
-
-&lt;h2 id=&quot;niveles-de-acceso&quot;&gt;Niveles de Acceso&lt;/h2&gt;
-
-&lt;p&gt;Para poder implementar el encapsulamiento de una manera adecuada, Java nos provee varios niveles de acceso para nuestras variables y métodos. Dependiendo del nivel de acceso que tengan, estas variables y métodos podrán ser accesados y modificados por ciertos elementos.&lt;/p&gt;
-
-&lt;h3 id=&quot;private&quot;&gt;private&lt;/h3&gt;
-
-&lt;p&gt;Este es el nivel de acceso más limitado de todos. Las variables y métodos que sean declarados privados, solamente podrán ser accesados &lt;em&gt;dentro de la clase&lt;/em&gt;. Teniendo como ejemplo nuestra clase Usuario y nuestras siguientes variables&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apellido&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Si creamos un objeto usuario e intentamos acceder a estas variables, obtendremos un error diciendo que nombre tiene acceso privado.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Warrior Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;De igual manera, un método privado solamente puede ser accesado dentro de la clase en la que está declarado.&lt;/p&gt;
-
-&lt;h3 id=&quot;public&quot;&gt;public&lt;/h3&gt;
-
-&lt;p&gt;El nivel de acceso public da acceso a todo mundo a la variable o al método. Cualquiera que cree un objeto, puede tener acceso a estos métodos y variables. Es por eso que a nuestros métodos getters y setters son públicos.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nombre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Desde cualquier lado, podemos mandarlos llamar:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Warrior Minds&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNombre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;protected&quot;&gt;protected&lt;/h3&gt;
-
-&lt;p&gt;El nivel de acceso protected se puede ver como un punto intermedio entre público y privado. Las variables o métodos protected podrán ser accesados dentro de la clase, dentro del mismo paquete y en clases hijas (sin importar en el paquete que se encuentren).&lt;/p&gt;
-
-&lt;p&gt;Si declaramos una variable protected&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Y tratamos de usarla en nuestra clase Encapsulamiento, no la podemos utilizar.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Calle central&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Esto pasa porque la clase Encapsulamiento está en el paquete com.warriorminds, y la clase Usuario está en el paquete com.warriorminds.encapsulamiento.&lt;/p&gt;
-
-&lt;p&gt;En cambio, si creamos otra clase dentro del paquete com.warriorminds.encapsulamiento, ahí sí podemos tener acceso a esta variable, como por ejemplo en la clase Prueba.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Prueba&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Calle central 123&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Si creamos una clase en un paquete diferente y que herede de la clase Usuario, también podremos tener acceso a la variable dirección.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OtroHijoDeUsuario&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OtroHijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;direccion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Mi nueva dirección&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;declarando-variables-y-mtodos-sin-modificador-de-acceso&quot;&gt;Declarando variables y métodos sin modificador de acceso&lt;/h2&gt;
-
-&lt;p&gt;Tenemos la opción de NO indicar el tipo de acceso a una variable o método. Al hacer esto, nuestras variables y métodos podrán ser accesados desde dentro de su clase, y dentro del mismo paquete, pero NO podrán ser accesadas en clases hijas (a menos que estén en el mismo paquete).&lt;/p&gt;
-
-&lt;p&gt;Al declarar esta variable apodos en nuestra clase Usuario (dentro del paquete com.warriorminds.encapsulamiento)&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;apodos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;La clase Prueba puede tener acceso a ella ya que están en el mismo paquete:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Prueba&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;El Warrior&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Igualmente, la clase HijoDeUsuario puede tener acceso a ella, ya que están en el mismo paquete también:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;El Warrior&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Pero la clase Encapsulamiento NO puede tener acceso, porque están en diferente paquete.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;usuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apodos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Otro más&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;De igual manera, nuestra clase OtroHijoDeUsuario, que hereda de Usuario, pero está en otro paquete, tampoco tiene acceso:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OtroHijoDeUsuario&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Usuario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OtroHijoDeUsuario&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//apodos.add(&quot;Esto no es posible!&quot;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;Es importante declarar el nivel de acceso adecuado a nuestras variables y métodos, para tener un diseño correcto de nuestro programa. En la siguiente tabla podemos ver un resumen de los modificadores de acceso que existen en Java, los cuales ayudan a implementar el encapsulamiento.&lt;/p&gt;
-
-&lt;table class=&quot;table&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Modificador&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Clase&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Paquete&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Clase Hija&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Mundo&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;public&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;protected&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;sin modificador&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;private&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Sí&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="encapsulamiento" /><category term="java" /><summary type="html">En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
+&lt;p&gt;En nuestra sección de &lt;a href=&quot;https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/&quot;&gt;Abstracción&lt;/a&gt;, pudimos ver el polimorfismo en acción y algunas de las ventajas que nos puede traer.&lt;/p&gt;</content><category term="oop" /><category term="programación orientada a objetos" /><category term="polimorfismo" /><category term="java" /><summary type="html">En este Post hablaremos acerca del polimorfismo.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/warriorminds{&quot;feature&quot;=&gt;nil}" /></entry></feed>
