@@ -2,38 +2,6 @@
 
   
     {
-      "title"			: "Base de Datos en Tiempo Real con Firebase",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-db-reglas/",
-      "excerpt"		: "Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos."
-    }
-  
-
-  
-    ,{
-      "title"			: "Configuración Remota con Firebase",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-config-remota/",
-      "excerpt"		: "La configurción remota de Firebase permite cambiar algunos aspectos de tu aplicación sin tener que publicar una nueva versión de tu app."
-    }
-  
-
-  
-    ,{
-      "title"			: "Notificaciones con Firebase",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-notifications/",
-      "excerpt"		: "Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase."
-    }
-  
-
-  
-    ,{
-      "title"			: "Analytics con Firebase",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-analytics/",
-      "excerpt"		: "Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase."
-    }
-  
-
-  
-    ,{
       "title"			: "Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta",
       "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/",
       "excerpt"		: "Autenticación con Firebase utilizando cuenta de Twitter, autenticación anónima y varios proveedores."
