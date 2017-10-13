@@ -2,8 +2,40 @@
 
   
     {
+      "title"			: "Base de Datos en Tiempo Real con Firebase",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-db-reglas/",
+      "excerpt"		: "Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos."
+    }
+  
+
+  
+    ,{
+      "title"			: "Configuración Remota con Firebase",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-config-remota/",
+      "excerpt"		: "La configurción remota de Firebase permite cambiar algunos aspectos de tu aplicación sin tener que publicar una nueva versión de tu app."
+    }
+  
+
+  
+    ,{
+      "title"			: "Notificaciones con Firebase",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-notifications/",
+      "excerpt"		: "Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase."
+    }
+  
+
+  
+    ,{
+      "title"			: "Analytics con Firebase",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-analytics/",
+      "excerpt"		: "Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase."
+    }
+  
+
+  
+    ,{
       "title"			: "Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part2/",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-auth-part2/",
       "excerpt"		: "Autenticación con Firebase utilizando cuenta de Twitter, autenticación anónima y varios proveedores."
     }
   
@@ -11,7 +43,7 @@
   
     ,{
       "title"			: "Autenticación con Firebase - Primera Parte: correo, Google y Facebook",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-auth-part1/",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-auth-part1/",
       "excerpt"		: "Autenticación con Firebase utilizando correo electrónico, cuenta de Google y cuenta de Facebook."
     }
   
@@ -19,7 +51,7 @@
   
     ,{
       "title"			: "Introducción a Firebase",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/firebase-intro/",
+      "link"			: "https://warriorminds.github.io//blogesp/firebase-intro/",
       "excerpt"		: "Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps."
     }
   
@@ -27,7 +59,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Principios",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-principios/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-principios/",
       "excerpt"		: "En este Post hablaremos acerca de algunos principios utilizados en la POO."
     }
   
@@ -35,7 +67,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Composición",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-composicion/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-composicion/",
       "excerpt"		: "En este Post hablaremos acerca del principio de composición."
     }
   
@@ -43,7 +75,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Polimorfismo",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-polimorfismo/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-polimorfismo/",
       "excerpt"		: "En este Post hablaremos acerca del polimorfismo."
     }
   
@@ -51,7 +83,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Encapsulamiento",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-encapsulamiento/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-encapsulamiento/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Encapsulamiento."
     }
   
@@ -59,7 +91,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Abstracción",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-abstraccion/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-abstraccion/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Abstracción."
     }
   
@@ -67,7 +99,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Herencia",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-herencia/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-herencia/",
       "excerpt"		: "En este Post hablaremos acerca de uno de los pilares de la POO - Herencia."
     }
   
@@ -75,7 +107,7 @@
   
     ,{
       "title"			: "Programación Orientada a Objetos: Clases y Objetos",
-      "link"			: "https://warriorminds.github.io/warriorminds/blogesp/poo-clases-objetos/",
+      "link"			: "https://warriorminds.github.io//blogesp/poo-clases-objetos/",
       "excerpt"		: "Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:"
     }
   
@@ -89,15 +121,15 @@
   
 
   
-
-  
-
-  
     ,{
       "title"			: "Acerca de Warrior Minds",
-      "link"			: "https://warriorminds.github.io/warriorminds/about/",
+      "link"			: "https://warriorminds.github.io//about/",
       "excerpt"		: "Entrena tu mente en las artes del Software."
     }
+  
+
+  
+
   
 
   
