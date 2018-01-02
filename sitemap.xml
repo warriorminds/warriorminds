@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/</loc>
+<lastmod>2018-01-02T11:15:55-06:00</lastmod>
+</url>
+<url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-emuladores-dispositivos/</loc>
+<lastmod>2018-01-02T11:05:55-06:00</lastmod>
+</url>
+<url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-hola-mundo/</loc>
+<lastmod>2018-01-02T10:55:55-06:00</lastmod>
+</url>
+<url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-android-studio/</loc>
+<lastmod>2018-01-02T10:45:55-06:00</lastmod>
+</url>
+<url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-que-es-android/</loc>
+<lastmod>2018-01-02T10:35:55-06:00</lastmod>
+</url>
+<url>
+<loc>https://warriorminds.github.io//blogesp/fundamentos-android-introduccion/</loc>
+<lastmod>2018-01-02T10:25:55-06:00</lastmod>
+</url>
+<url>
 <loc>https://warriorminds.github.io//blogesp/firebase-db-reglas/</loc>
 <lastmod>2017-01-31T11:25:55-06:00</lastmod>
 </url>

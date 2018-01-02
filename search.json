@@ -2,6 +2,54 @@
 
   
     {
+      "title"			: "Fundamentos de Android con Kotlin: Resumen",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/",
+      "excerpt"		: "Resumen del primer módulo de Fundamentos de Android con Kotlin."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Emuladores y Dispositivos",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-emuladores-dispositivos/",
+      "excerpt"		: "Presentación de las diferentes maneras existentes para ejecutar y probar nuestras aplicaciones. Emuladores en Android Studio, Genymotion y dispositivos físicos."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Hola Mundo",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-hola-mundo/",
+      "excerpt"		: "Creación de la primera aplicación en Android Studio, Hola Mundo. Se presenta también una descripción de la estructura del proyecto."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Android Studio",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-android-studio/",
+      "excerpt"		: "Android Studio es el IDE para desarrollar las aplicaciones para Android. Se presenta una introducción a Android Studio y al SDK Manager."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: ¿Qué es Android?",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-que-es-android/",
+      "excerpt"		: "Se presenta una introducción al sistema operativo Android, para qué sirve, algunas estadísticas de uso y las versiones que existen del mismo."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Introducción",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-introduccion/",
+      "excerpt"		: "Introducción al módulo de Fundamentos de Android con Kotlin. Se presentarán los temas que se cubrirán en este módulo."
+    }
+  
+
+  
+    ,{
       "title"			: "Base de Datos en Tiempo Real con Firebase",
       "link"			: "https://warriorminds.github.io//blogesp/firebase-db-reglas/",
       "excerpt"		: "Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos."
