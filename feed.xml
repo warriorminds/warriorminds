@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io//" rel="alternate" type="text/html" /><updated>2018-01-02T13:00:49-06:00</updated><id>https://warriorminds.github.io//</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Fundamentos de Android con Kotlin: Resumen</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Resumen" /><published>2018-01-02T11:15:55-06:00</published><updated>2018-01-02T11:15:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/">&lt;h2 id=&quot;resumen&quot;&gt;Resumen&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://warriorminds.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://warriorminds.github.io//" rel="alternate" type="text/html" /><updated>2018-01-04T11:29:09-06:00</updated><id>https://warriorminds.github.io//</id><title type="html">Warrior Minds</title><subtitle>Entrena tu mente en las artes del Software.</subtitle><entry><title type="html">Fundamentos de Android con Kotlin: Resumen</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Resumen" /><published>2018-01-02T11:15:55-06:00</published><updated>2018-01-02T11:15:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/">&lt;h2 id=&quot;resumen&quot;&gt;Resumen&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/XVyoYgaNosc&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/XVyoYgaNosc&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h2 id=&quot;contenido-del-mdulo-introduccin&quot;&gt;Contenido del Módulo Introducción&lt;/h2&gt;
 &lt;ol&gt;
@@ -12,7 +12,7 @@
   &lt;li&gt;Resumen&lt;/li&gt;
 &lt;/ol&gt;</content><category term="android" /><category term="fundamentos de android con kotlin" /><summary type="html">Resumen del primer módulo de Fundamentos de Android con Kotlin.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Fundamentos de Android con Kotlin: Emuladores y Dispositivos</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-emuladores-dispositivos/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Emuladores y Dispositivos" /><published>2018-01-02T11:05:55-06:00</published><updated>2018-01-02T11:05:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-emuladores-dispositivos</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-emuladores-dispositivos/">&lt;h2 id=&quot;probando-la-app-emuladores-y-dispositivos&quot;&gt;Probando la app: emuladores y dispositivos&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/1jcg-Sjxp0o&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/1jcg-Sjxp0o&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h3 id=&quot;ligas&quot;&gt;Ligas&lt;/h3&gt;
 &lt;ol&gt;
@@ -29,7 +29,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro&quot;&gt;Resumen&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><category term="android" /><category term="fundamentos de android con kotlin" /><category term="genymotion" /><summary type="html">Presentación de las diferentes maneras existentes para ejecutar y probar nuestras aplicaciones. Emuladores en Android Studio, Genymotion y dispositivos físicos.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Fundamentos de Android con Kotlin: Hola Mundo</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-hola-mundo/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Hola Mundo" /><published>2018-01-02T10:55:55-06:00</published><updated>2018-01-02T10:55:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-hola-mundo</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-hola-mundo/">&lt;h2 id=&quot;primer-proyecto-hola-mundo&quot;&gt;Primer Proyecto: Hola Mundo&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/G88upqpyjLw&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/G88upqpyjLw&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h2 id=&quot;contenido-del-mdulo-introduccin&quot;&gt;Contenido del Módulo Introducción&lt;/h2&gt;
 &lt;ol&gt;
@@ -41,7 +41,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro&quot;&gt;Resumen&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><category term="android" /><category term="fundamentos de android con kotlin" /><summary type="html">Creación de la primera aplicación en Android Studio, Hola Mundo. Se presenta también una descripción de la estructura del proyecto.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Fundamentos de Android con Kotlin: Android Studio</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-android-studio/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Android Studio" /><published>2018-01-02T10:45:55-06:00</published><updated>2018-01-02T10:45:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-android-studio</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-android-studio/">&lt;h2 id=&quot;android-studio&quot;&gt;Android Studio&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/7z1bbrPR1OU&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/7z1bbrPR1OU&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h3 id=&quot;ligas&quot;&gt;Ligas&lt;/h3&gt;
 &lt;ol&gt;
@@ -59,7 +59,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro&quot;&gt;Resumen&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><category term="android" /><category term="fundamentos de android con kotlin" /><category term="android studio" /><summary type="html">Android Studio es el IDE para desarrollar las aplicaciones para Android. Se presenta una introducción a Android Studio y al SDK Manager.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Fundamentos de Android con Kotlin: ¿Qué es Android?</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-que-es-android/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: ¿Qué es Android?" /><published>2018-01-02T10:35:55-06:00</published><updated>2018-01-02T10:35:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-que-es-android</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-que-es-android/">&lt;h2 id=&quot;qu-es-android&quot;&gt;¿Qué es Android?&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/qHqY29XUKYc&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qHqY29XUKYc&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h2 id=&quot;contenido-del-mdulo-introduccin&quot;&gt;Contenido del Módulo Introducción&lt;/h2&gt;
 &lt;ol&gt;
@@ -71,7 +71,7 @@
   &lt;li&gt;&lt;a href=&quot;https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro&quot;&gt;Resumen&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><category term="android" /><category term="fundamentos de android con kotlin" /><summary type="html">Se presenta una introducción al sistema operativo Android, para qué sirve, algunas estadísticas de uso y las versiones que existen del mismo.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://warriorminds.github.io/{&quot;feature&quot;=&gt;nil}" /></entry><entry><title type="html">Fundamentos de Android con Kotlin: Introducción</title><link href="https://warriorminds.github.io//blogesp/fundamentos-android-introduccion/" rel="alternate" type="text/html" title="Fundamentos de Android con Kotlin: Introducción" /><published>2018-01-02T10:25:55-06:00</published><updated>2018-01-02T10:25:55-06:00</updated><id>https://warriorminds.github.io//blogesp/fundamentos-android-introduccion</id><content type="html" xml:base="https://warriorminds.github.io//blogesp/fundamentos-android-introduccion/">&lt;h2 id=&quot;introduccin&quot;&gt;Introducción&lt;/h2&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/JB8Qfrt4YBE&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JB8Qfrt4YBE&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
 
 &lt;h2 id=&quot;contenido-del-mdulo-introduccin&quot;&gt;Contenido del Módulo Introducción&lt;/h2&gt;
 &lt;ol&gt;
