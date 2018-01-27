@@ -2,6 +2,142 @@
 
   
     {
+      "title"			: "Fundamentos de Android con Kotlin: Resumen del Módulo Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-resumen-actividades/",
+      "excerpt"		: "En este video se presenta el resumen del segundo módulo Actividades."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-persistencia-datos-actividad-codigo/",
+      "excerpt"		: "En este video se presenta el código para persistir datos dentro de una actividad."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-persistencia-datos-actividad/",
+      "excerpt"		: "En este video se presenta la forma de persistir datos dentro de una actividad."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-ciclo-vida-actividades-codigo/",
+      "excerpt"		: "En este video se presenta el código para el ciclo de vida de las actividades."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Actividades - Ciclo de Vida",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-ciclo-vida-actividades/",
+      "excerpt"		: "En este video se presenta el ciclo de vida de las actividades."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Iniciando Actividades Esperando un Resultado",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-iniciando-resultado-codigo/",
+      "excerpt"		: "En este video se presenta el código para iniciar una actividad y esperar un resultado de vuelta."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Iniciando Actividades Esperando un Resultado",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-iniciando-resultado/",
+      "excerpt"		: "En este video se presenta la manera de iniciar una actividad y esperar un resultado de vuelta."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Enviando y Recibiendo Datos Entre Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-datos-actividades-codigo/",
+      "excerpt"		: "En este video se presenta el código para enviar y recibir datos entre ellas."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Enviando y Recibiendo Datos Entre Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-datos-actividades/",
+      "excerpt"		: "En este video se presenta el mecanismo que tienen las actividades para enviar y recibir datos entre ellas."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Iniciando Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-iniciando-actividades-codigo/",
+      "excerpt"		: "En este video se presenta el código para iniciar actividades dentro de nuestra app y fuera de ella."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Iniciando Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-iniciando-actividades/",
+      "excerpt"		: "En este video se presenta la manera para iniciar actividades dentro de nuestra app y fuera de ella."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Introducción a la Interfaz Gráfica",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-intro-ui-codigo/",
+      "excerpt"		: "En este video se presenta el código para el manejo básico de la interfaz gráfica en Android."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Introducción a la Interfaz Gráfica",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-intro-ui/",
+      "excerpt"		: "En este video se presenta una introducción al manejo de la interfaz gráfica en Android."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Programando - Creación de una Actividad",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-creacion-actividad-codigo/",
+      "excerpt"		: "En este video se presenta en código la manera en que se crea una actividad principal y la manera para crear actividades secundarias."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Creación de una Actividad",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-creacion-actividad/",
+      "excerpt"		: "En este video se presenta la manera en que se crea una actividad principal y la manera para crear actividades secundarias."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: ¿Qué es una Actividad?",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-que-es-actividad/",
+      "excerpt"		: "En este video se presenta lo que es una Actividad, para qué nos sirve, y sus funciones principales."
+    }
+  
+
+  
+    ,{
+      "title"			: "Fundamentos de Android con Kotlin: Actividades",
+      "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-intro-actividades/",
+      "excerpt"		: "Introducción al módulo de Actividades del curso Fundamentos de Android con Kotlin. Se presentarán los temas que se cubrirán en este módulo."
+    }
+  
+
+  
+    ,{
       "title"			: "Fundamentos de Android con Kotlin: Resumen",
       "link"			: "https://warriorminds.github.io//blogesp/fundamentos-android-resumen-intro/",
       "excerpt"		: "Resumen del primer módulo de Fundamentos de Android con Kotlin."
@@ -169,15 +305,15 @@
   
 
   
-
-  
-
-  
     ,{
       "title"			: "Acerca de Warrior Minds",
       "link"			: "https://warriorminds.github.io//about/",
       "excerpt"		: "Entrena tu mente en las artes del Software."
     }
+  
+
+  
+
   
 
   
