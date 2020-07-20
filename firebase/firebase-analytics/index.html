@@ -147,8 +147,6 @@
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
-            </li><li class="masthead__menu-item">
               <a href="/category-archive/">Categorías</a>
             </li><li class="masthead__menu-item">
               <a href="/year-archive/">Archivo</a>
@@ -348,7 +346,7 @@
 
 <p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-analytics" target="_blank">Github</a></p>
 
-<p>Necesitan seguir los pasos en el Post de <a href="http://rodrigoguerrero.com/blogesp/firebase-intro" target="_blank">Introducción a Firebase</a> para poder comenzar a utilizar Analytics.</p>
+<p>Necesitan seguir los pasos en el Post de <a href="http://rodrigoguerrero.com/firebase/firebase-intro" target="_blank">Introducción a Firebase</a> para poder comenzar a utilizar Analytics.</p>
 
 <h2 id="introducción">Introducción</h2>
 
@@ -356,7 +354,7 @@
 
 <h2 id="agregando-analytics">Agregando Analytics</h2>
 
-<p>Después de seguir los pasos en el Post de  <a href="http://rodrigoguerrero.com/blogesp/firebase-intro" target="_blank">Introducción a Firebase</a>, ya tenemos lo necesario para utilizar Analytics, ya que Analytics viene incluido en la dependencia principal de Firebase, la cual pueden encontrar en el archivo <a href="https://github.com/warriorminds/firebase-analytics/blob/master/app/build.gradle" target="_blank">gradle de la app</a>:</p>
+<p>Después de seguir los pasos en el Post de  <a href="http://rodrigoguerrero.com/firebase/firebase-intro" target="_blank">Introducción a Firebase</a>, ya tenemos lo necesario para utilizar Analytics, ya que Analytics viene incluido en la dependencia principal de Firebase, la cual pueden encontrar en el archivo <a href="https://github.com/warriorminds/firebase-analytics/blob/master/app/build.gradle" target="_blank">gradle de la app</a>:</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">firebase</span><span class="o">:</span><span class="n">firebase</span><span class="o">-</span><span class="nl">core:</span><span class="mf">9.8</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
 </code></pre></div></div>
@@ -964,6 +962,15 @@
     </div>
 
     
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Deja un comentario</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
   </article>
 
   
@@ -1176,6 +1183,24 @@
 <script src="/assets/js/lunr/lunr.min.js"></script>
 <script src="/assets/js/lunr/lunr-store.js"></script>
 <script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-86871758-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
 
 
 
