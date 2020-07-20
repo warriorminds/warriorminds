@@ -1,0 +1,955 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Base de Datos en Tiempo Real con Firebase - Rodrigo Guerrero</title>
+<meta name="description" content="Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Base de Datos en Tiempo Real con Firebase">
+<meta property="og:url" content="http://rodrigoguerrero.com/firebase/firebase-db-reglas/">
+
+
+  <meta property="og:description" content="Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos.">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Base de Datos en Tiempo Real con Firebase">
+  <meta name="twitter:description" content="Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos.">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/firebase/firebase-db-reglas/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-01-31T17:25:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/firebase/firebase-db-reglas/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Base de Datos en Tiempo Real con Firebase" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Base de Datos en Tiempo Real con Firebase">
+    <meta itemprop="description" content="Firebase proporciona una base de datos en tiempo real. Este Post habla de las reglas para configurar el acceso a la base de datos.">
+    <meta itemprop="datePublished" content="2017-01-31T17:25:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Base de Datos en Tiempo Real con Firebase
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Toda la información oficial de Firebase la pueden encontrar <a href="https://console.firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<h2 id="introducción">Introducción</h2>
+
+<p>Firebase nos proporciona una base de datos en tiempo real, permite trabajar de forma sin conexión y se puede utilizar con Android, iOS y web. Es una base de datos NoSQL y por lo mismo, almacena los datos en un archivo con formato JSON.</p>
+
+<p>Utilizar la base de datos de Firebase nos da la ventaja de que está en la nube, así evitamos todo lo relacionado con el soporte y mantenimiento y además se puede ir expandiendo conforme aumente el uso.</p>
+
+<p>Para tener acceso a la base de datos, debemos entrar en la <a href="https://console.firebase.google.com/">consola de Firebase</a>, en el menú <em>Base de Datos</em>. En esa pantalla tenemos acceso a nuestra base de datos, a la configuración de reglas, estadísticas de uso y copias de seguridad.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/db/03.inicio-db.png"><img src="http://rodrigoguerrero.com/images/fb/db/03.inicio-db.png" alt="Base de datos en la consola." /></a>
+</figure>
+
+<p>En este Post nos enfocaremos en entender y aprender cómo crear las <em>reglas</em>, que son la base para la seguridad de nuestra base de datos. En el siguiente Post, crearemos una base de datos e implementaremos el código necesario para utilizar la base desde una aplicación Android.</p>
+
+<h2 id="reglas">Reglas</h2>
+
+<p>Las <em>reglas</em> permiten definir quién tiene acceso de <em>lectura</em>, quien puede tener acceso de <em>escritura</em>, permite definir el <em>formato de los datos</em> (si un elemento puede tener hijos y definir el tipo de dato del elemento) y además permiten definir un elemento de los datos como <em>índice</em> para poder realizar búsquedas. Para configurar Reglas seleccionamos la pestaña <em>Reglas</em> en la consola de Firebase.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/db/04.reglas.png"><img src="http://rodrigoguerrero.com/images/fb/db/04.reglas.png" alt="Reglas en la consola." /></a>
+</figure>
+
+<p>La estructura de las reglas debe de seguir la estructura de la base de datos, para que se puedan cumplir de manera adecuada. De igual manera, las reglas fallarán si no se tiene definida una regla en el padre.</p>
+
+<h3 id="reglas-de-escritura-y-lectura">Reglas de Escritura y Lectura</h3>
+
+<p>Existen dos tipos de reglas para regular el acceso a lectura y escritura de datos en nuestra base. Estas dos reglas son</p>
+<ul>
+  <li><em>.read</em>: define las reglas que permiten la lectura de datos.</li>
+  <li><em>.write</em>: define las reglas que permiten la escritura de datos.</li>
+</ul>
+
+<p>Por default, está permitido hacer escritura y lectura de datos a los usuarios que están autenticados. Tenemos disponible la variable <em>auth</em> que es diferente de <em>null</em> cuando el usuario está autenticado. Al entrar a la sección de <em>Base de Datos -&gt; Reglas</em> por primera vez, tenemos las siguientes reglas:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Las reglas tienen un formato tipo <em>JSON</em> empezando siempre con el nodo <em>rules</em> y donde cada elemento hijo de <em>rules</em> es una ruta diferente. Por ejemplo, nuestra base de datos tendrá una URL de la siguiente manera:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">https://firebase-basededatos.firebaseio.com</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Si queremos agregar un elemento <em>/mensajes</em> a nuestra base de datos y ponerle reglas, lo haríamos de la siguiente manera:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"mensajes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Esta regla define que para la ruta <em>https://firebase-basededatos.firebaseio.com/mensajes</em> todos los usuarios autenticados pueden leer y escribir datos.</p>
+
+<p>Las reglas que definimos se aplican a <strong>todos los hijos</strong>; esto quiere decir que los hijos van a seguir las reglas que tenga el primer ancestro, sobreescribiendo las reglas definidas en los hijos.</p>
+
+<p>Por ejemplo, en la siguiente regla, está definida una regla en el padre que permite escribir a cualquier usuario, sin necesitar autenticación. También tenemos definida en el hijo <em>/mensajes</em> otra regla que solamente permite a los usuarios autenticados escribir datos.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth == null"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"mensajes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Como en Firebase se aplica la regla del primer ancestro, entonces cualquier usuario podría escribir datos en <em>/mensajes.</em></p>
+
+<p>Firebase también nos proporciona algunas <em>variables</em> que podemos utilizar, por ejemplo podemos hacer referencia a otras rutas de nuestra base de datos, tener acceso a identificadores de autenticación de usuarios, entre otras.</p>
+
+<p>Un escenario común que podríamos encontrar, es solamente permitir que el usuario modifique su propia información. Para esto, podemos crear la variable <em>$uid</em>. Cada usuario podría tener asignada una URL, utilizando su identificador de usuario (obtenido al iniciar sesión con Firebase). Por ejemplo,</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">https://firebase-basededatos.firebaseio.com/usuarios/</span><span class="mi">123</span><span class="err">ab</span><span class="mi">45-123</span><span class="err">a</span><span class="mi">-1234</span><span class="err">-abcde-a</span><span class="mi">1</span><span class="err">abc</span><span class="mi">123</span><span class="err">a</span><span class="mi">1</span><span class="err">a</span><span class="mi">1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Donde <em>123ab45-123a-1234-abcde-a1abc123a1a1</em> es el identificador del usuario. Si solamente queremos que ese usuario pueda leer datos de esa URL, definiríamos la siguiente regla:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"usuarios"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"$uid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$uid === auth.uid"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Esta regla se leería de la siguiente manera: para la ruta <em>/usuarios/$uid</em> solamente podrán leer los datos de cada <em>$uid</em> los usuarios que se hayan autenticado y que tengan la misma <em>uid</em> después de autenticarse.</p>
+
+<p>Más adelante veremos más variables que tenemos disponibles para definir las reglas.</p>
+
+<h2 id="reglas-de-validación">Reglas de Validación</h2>
+
+<p>Podemos utilizar las reglas para <em>validar</em> los datos que se van a escribir a nuestra base. Es necesario tener estas reglas ya que la base de datos de Firebase <em>no tiene esquema</em> (al ser NoSQL). Con estas reglas podemos validar que los datos ingresados sean correctos y no pueda haber problemas posteriormente. Las reglas de validación se ejecutan <em>una vez que se autorizó la escritura de los datos</em> (se cumplieron las reglas de .write).</p>
+
+<p>Para crear una regla de validación, debemos utilizar la palabra <em>.validate</em>. Como introducción, crearemos una regla que indique que unos valores serán números, cadenas, y limitaremos el tamaño de unas cadenas.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cadenas"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">".validate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newData.isString()"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"numeros"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">".validate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newData.isNumber()"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"cadenaTamaño"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">".validate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"newData.isString() &amp;&amp; newData.val().length &gt; 5"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Utilizando el simulador, podemos hacer pruebas y ver cuándo nuestras reglas se cumplen y cuando no.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/db/00.regla1.png"><img src="http://rodrigoguerrero.com/images/fb/db/00.regla1.png" alt="Reglas en el simulador." /></a>
+</figure>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/db/01.regla2.png"><img src="http://rodrigoguerrero.com/images/fb/db/01.regla2.png" alt="Reglas en el simulador." /></a>
+</figure>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/db/02.regla3.png"><img src="http://rodrigoguerrero.com/images/fb/db/02.regla3.png" alt="Reglas en el simulador." /></a>
+</figure>
+
+<p>Más adelante veremos reglas más avanzadas.</p>
+
+<h2 id="reglas-para-indexación">Reglas para indexación</h2>
+
+<p>La base de datos en Firebase nos permite hacer búsquedas de los datos. Es importante crear <em>índices</em> para que estas búsquedas sean más eficientes, ya que la base puede contener una gran cantidad de datos.</p>
+
+<p>Se utilizan las reglas para crear índices, con la palabra <em>indexOn</em>, proporcionando el nombre de los campos que queremos utilizar como índices:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"usuarios"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">".indexOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"apodo"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nombre"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Con esta regla indexamos la ruta <em>usuarios</em> con sus nodos hijos apodo y nombre. Esta manera de indexar es indexar utilizando los nodos hijos.</p>
+
+<p>Tambiéne podemos indexar utilizando los valores, en lugar de los hijos. Para esto utilizamos el valor <em>.value</em></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"indexOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">".value"</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="variables-disponibles-para-crear-reglas">Variables Disponibles para crear Reglas</h2>
+
+<p>Existen algunas variables predefinidas que podemos utilizar para crear nuestras reglas. Pueden ver la lista completa <a href="https://firebase.google.com/docs/reference/security/database/#variables" target="_blank">aquí</a>.</p>
+
+<h3 id="auth">auth</h3>
+
+<p>Como ya hemos visto, esta variable nos indica si el usuario ha sido autenticado y contiene la siguiente información:</p>
+
+<ul>
+  <li><em>provider</em>: Nos indica qué método utilizó el usuario para iniciar sesión.</li>
+  <li><em>uid</em>: El identificador único del usuario.</li>
+  <li><em>token</em>: el token de autenticación del usuario.</li>
+</ul>
+
+<p>Por ejemplo, si queremos que solamente puedan leer los datos usuarios que iniciaron sesión con Google, podemos definir una regla como la siguiente:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth.provider == 'google'"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="authtoken">auth.token</h3>
+
+<p>Esta variable contiene la información del inicio de sesión del usuario. Puede o no tener las siguientes variables:</p>
+
+<ul>
+  <li><em>email</em>: el correo electrónico utilizado.</li>
+  <li><em>email_verified</em>: si el correo electrónico está verificado.</li>
+  <li><em>name</em>: el nombre del usuario</li>
+  <li><em>firebase.sing_in_provider</em>: el proveedor del inicio de sesión.</li>
+</ul>
+
+<h3 id="variable">$variable</h3>
+
+<p>Como vimos anteriormente, se pueden definir variables en nuestra estructura de reglas con el símbolo $. Por ejemplo, habíamos definido la variable $uid para representar la ruta  https://firebase-basededatos.firebaseio.com/usuarios/$uid donde $uid podría tener un valor similar a 123ab45-123a-1234-abcde-a1abc123a1a1.</p>
+
+<p>Una vez definidas estas variables, podemos utilizarlas dentro de las reglas.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"$uid"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$uid === auth.uid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Esta regla se podría traducir de la siguiente manera:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"123ab45-123a-1234-abcde-a1abc123a1a1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">" 123ab45-123a-1234-abcde-a1abc123a1a1 === auth.uid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Teniendo un valor diferente dependiendo del usuario que inicie sesión. De igual manera, podemos crear las variables que sean necesarias.</p>
+
+<h3 id="now">now</h3>
+
+<p>Esta variable contiene la cantidad de milisegundos transcurridos desde la fecha Epoch Unix (medianoche del 1 de enero de 1970 UTC) hasta el memento de la utilización. Podemos utilizar esta variable para crear reglas referentes al tiempo y fecha.</p>
+
+<h3 id="root">root</h3>
+
+<p>La variable root contiene una <em>copia de los datos de la base como se encuentra antes de realizar la operación</em>. Se utiliza para leer datos que existen previamente en la base y crear reglas basadas en esos datos.</p>
+
+<h3 id="data">data</h3>
+
+<p>Esta variable es similar a root, con la diferencia que solamente trae la <em>copia de los datos en la ubicación que se está modificando</em>. Por ejemplo,</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"libros"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"$usuario"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.child('nombre').val() == 'John'"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>En este ejemplo, <em>data</em> contiene los datos que existen en $usuario. Por eso podemos tener acceso a su hijo (child) nombre y obtener su valor.</p>
+
+<h3 id="newdata">newData</h3>
+
+<p>De igual manera, newData es similar a las dos variables anteriores. En este caso, newData trae la <em>información de los datos que se van a agregar</em>. Esta variable solamente está disponible para las reglas .validate y .write.</p>
+
+<h2 id="métodos-importantes">Métodos importantes</h2>
+
+<p>Con las variables root, data y newData tenemos algunos métodos que nos permiten obtener información de la base de datos para crear nuestras reglas. Pueden consultar la lista completa <a href="https://firebase.google.com/docs/reference/security/database/#ruledatasnapshot_methods" target="_blank">aquí</a>.</p>
+
+<h3 id="val">val()</h3>
+
+<p>Este método nos permite obtener el valor de un hijo. Los valores que se pueden obtener son String, Number, Boolean y Null.</p>
+
+<h3 id="child">child()</h3>
+
+<p>Este método nos permite tener acceso a un hijo determinado. Por ejemplo, data.child(‘nombre’) utilizado previamente nos da acceso al hijo “nombre” del elemento “$usuario”.</p>
+
+<h3 id="parent">parent()</h3>
+
+<p>Con este método podemos movernos a algún nodo hermano.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">data.parent().child('hijo')</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="haschild-haschildren">hasChild(), hasChildren()</h3>
+
+<p>Estos dos métodos nos sirven para saber si root, data o newData tienen un hijo en específico o si tienen varios hijos. Nos puede servir para validar que newData tenga una estructura predefinida.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">newData.hasChildren(</span><span class="p">[</span><span class="err">'hijo</span><span class="mi">1</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'hijo</span><span class="mi">2</span><span class="err">'</span><span class="p">]</span><span class="err">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="exists">exists()</h3>
+
+<p>Nos indica si root, data, newData contienen algún dato o no.</p>
+
+<h3 id="isnumber-isstring-isboolean">isNumber(), isString(), isBoolean()</h3>
+<p>Nos indica si un valor es número, cadena o booleano.</p>
+
+<h2 id="conclusión">Conclusión</h2>
+
+<p>Firebase nos proporciona la base de datos en tiempo real. Necesitamos definir reglas que nos indiquen quiénes tienen permisos para obtener los datos y quiénes tienen permisos para escribir en la base. También podemos tener índices para facilitar la búsqueda, que de igual manera se definen mediante las reglas. Por último, contamos con reglas para validar que los datos que se escriban en la base cumplan con ciertos valores.</p>
+
+<p>En el próximo Post, crearemos una base de datos, implementaremos sus reglas, y utilizaremos una app de Android para escribir y leer en la base.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#android" class="page__taxonomy-item" rel="tag">android</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2017-01-31T17:25:55+00:00">January 31, 2017</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Base+de+Datos+en+Tiempo+Real+con+Firebase%20http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-db-reglas%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-db-reglas%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-db-reglas%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/firebase/firebase-config-remota/" class="pagination--pager" title="Configuración Remota con Firebase
+">Anterior</a>
+    
+    
+      <a href="/android/fundamentos-android-introduccion/" class="pagination--pager" title="Fundamentos de Android con Kotlin: Introducción
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/firebase/firebase-db-reglas/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/firebase/firebase-db-reglas"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,801 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introducción a Firebase - Rodrigo Guerrero</title>
+<meta name="description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Introducción a Firebase">
+<meta property="og:url" content="http://rodrigoguerrero.com/firebase/firebase-intro/">
+
+
+  <meta property="og:description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Introducción a Firebase">
+  <meta name="twitter:description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/firebase/firebase-intro/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-12-19T20:25:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/firebase/firebase-intro/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Introducción a Firebase" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introducción a Firebase">
+    <meta itemprop="description" content="Introducción a Firebase - la opción de Google para facilitar el desarrollo de apps.">
+    <meta itemprop="datePublished" content="2016-12-19T20:25:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Introducción a Firebase
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Al crear aplicaciones móviles, casi el 100% de las veces necesitamos un <em>servidor “back-end”</em> el cual proporciona los datos necesarios a la app y de igual manera permite almacenar algunos datos generados por nuestros usuarios. También muchas veces necesitamos <em>identificar</em> al usuario, ya sea por medio de su email, cuenta de Facebook, Twitter o alguna otra. Una funcionalidad cada vez más común en las aplicaciones son las <em>notificaciones</em>, que también tendríamos que desarrollar en nuestro servidor para que funcionen. Para saber cómo utilizan tus usuarios tu aplicación necesitas información conocida como <em>Analytics</em> (estadísticas). Y también a veces necesitas cambiar la <em>configuración</em> de tu app sin sacar una nueva versión. Todas estas características, entre otras, son las que ofrece Firebase, de Google.</p>
+
+<p>Firebase pretende facilitar el desarrollo de aplicaciones móviles y web al proporcionar estas herramientas. Es una solución muy completa que nos puede evitar tener que desarrollar un servicio web completo. Nos puede ayudar a tener un alcance más grande de usuarios. Además, tiene dos grandes ventajas: para comenzar, Firebase es gratis y además se puede ir contratando un plan que cumpla con las necesidades, conforme tu app vaya creciendo.</p>
+
+<p>En esta serie de Posts explicaremos qué es Firebase y cómo implementar algunas de sus funcionalidades en aplicaciones Android.</p>
+
+<p>Los temas de Firebase que se verán serán:</p>
+
+<ol>
+  <li>Añadiendo Firebase a tu app Android</li>
+  <li>Autenticación
+    <ol>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-auth-part1">Correo electrónico y contraseña</a></li>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-auth-part1">Google</a></li>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-auth-part1">Facebook</a></li>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-auth-part2">Twitter</a></li>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-auth-part2">Usuarios anónimos</a></li>
+    </ol>
+  </li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/firebase-analytics">Analytics</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/firebase-notifications">Notificaciones</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/firebase-config-remota">Configuración Remota</a></li>
+  <li>Base de datos
+    <ol>
+      <li><a href="http://rodrigoguerrero.com/blogesp/firebase-db-reglas">Primera Parte: Reglas</a></li>
+      <li>Segunda Parte: Implementación</li>
+    </ol>
+  </li>
+  <li>Almacenamiento</li>
+</ol>
+
+<p>Toda la información oficial de Firebase la pueden encontrar <a href="https://firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-app.git" target="_blank">Github</a>. Esta aplicación no tiene funcionalidad alguna, solamente se muestra cómo agregar Firebase. Este código será la base para los siguientes Posts.</p>
+
+<h2 id="instalando-firebase">Instalando Firebase</h2>
+
+<p>Para comenzar a utilizar Firebase necesitamos crear un proyecto en su <a href="https://console.firebase.google.com/" target="_blank">consola</a>. Al entrar por primera vez, podrán visualizar una pantalla similar a la siguiente:</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/1.intro-consola.png"><img src="http://rodrigoguerrero.com/images/fb/init/1.intro-consola.png" alt="Consola de Firebase" /></a>
+</figure>
+
+<p>Para crear un nuevo proyecto solamente hay que hacer clic en el botón “Crear Nuevo Proyecto”. Aparecerá un diálogo para introducir el nombre de tu aplicación y para seleccionar tu país o región. Nombraremos nuestro proyecto Firebase. Al ingresar el nombre del proyecto y seleccionar el país o región, hay que dar clic en el botón para crear tu proyecto.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/2.crear-proyecto.png"><img src="http://rodrigoguerrero.com/images/fb/init/2.crear-proyecto.png" alt="Crear proyecto en Firebase" /></a>
+</figure>
+
+<p>Una vez creado el nuevo proyecto se abre la página principal de la consola.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/3.consola-principal.png"><img src="http://rodrigoguerrero.com/images/fb/init/3.consola-principal.png" alt="Consola principal de Firebase" /></a>
+</figure>
+
+<p>Como vamos a crear una aplicación para Android, presionaremos el botón “Añade Firebase a tu aplicación de Android” que se encuentra en el centro de la pantalla. Como podemos ver, también se puede agregar Firebase a una aplicación de iOS y a una aplicación web.</p>
+
+<p>Se nos presenta la siguiente pantalla para poder agregar Firebase a nuestra app Android.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/4.agregar-android.png"><img src="http://rodrigoguerrero.com/images/fb/init/4.agregar-android.png" alt="Agregar una aplicacion Android" /></a>
+</figure>
+
+<p>Antes de poder añadir Firebase a nuestra app, necesitamos tener creado nuestro proyecto en Android Studio, ya que como vimos en la imagen, Firebase nos pide el paquete de nuestra aplicación. En nuestro caso, creé la aplicación con el paquete com.warriorminds.firebase. De igual manera, podemos agregar un apodo a nuestra app si así lo deseamos.</p>
+
+<p>Por último, necesitamos proporcionar nuestro <em>certificado SHA-1</em>. Este certificado se debe de obtener tanto para la firma de debug como para la firma de producción de nuestra app.</p>
+
+<h2 id="obtener-el-certificado-sha-1-en-windows">Obtener el certificado SHA-1 en Windows</h2>
+
+<p>Para obtener el certificado SHA-1 en <em>Windows</em>, debemos de abrir la consola e ir al directorio donde tenemos instalado el JDK de Java. En mi caso es en <em>c:/Program Files/Java/jdk1.8.0_92/bin</em>. Una vez ahí, ejecutaremos el siguiente comando:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">keytool</span> <span class="o">-</span><span class="n">exportcert</span> <span class="o">-</span><span class="n">list</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">alias</span> <span class="n">androiddebugkey</span> <span class="o">-</span><span class="n">keystore</span> <span class="o">%</span><span class="no">USERPROFILE</span><span class="o">%</span><span class="err">\</span><span class="o">.</span><span class="na">android</span><span class="err">\</span><span class="n">debug</span><span class="o">.</span><span class="na">keystore</span>
+</code></pre></div></div>
+
+<p>Al ejecutar el comando se nos solicitará una contraseña. La contraseña por defecto para la firma de debug de Android es <em>android</em>. Una vez que ingresamos la contraseña obtenemos tres valores: MD5, SHA1 y SHA256.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/5.keytool.png"><img src="http://rodrigoguerrero.com/images/fb/init/5.keytool.png" alt="Keytool" /></a>
+</figure>
+
+<p>Debemos de copiar el valor de SHA1 a nuestra consola de Firebase. Cuando hayamos terminado de copiar el valor, podremos añaidr nuestra aplicación a Firebase.</p>
+
+<h2 id="continuando-con-la-instalación-de-firebase">Continuando con la instalación de Firebase</h2>
+
+<p>Al añadir nuestra aplicación, necesitaremos descargar un archivo llamado <em>google-services.json</em>. Este archivo contiene la configuración de nuestra app en Firebase. Debemos de guardarlo en el directorio <em>app</em> de nuestra aplicación. Recuerden que deben descargar su propio archivo google-services.json y colocarlo en la carpeta app. Este archivo no está en el repositorio de Github y si no lo agregan, no funcionará su aplicación.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/6.google-services-json.png"><img src="http://rodrigoguerrero.com/images/fb/init/6.google-services-json.png" alt="Google Services JSON" /></a>
+</figure>
+
+<p>Una vez descargado el archivo google-services.json, hemos terminado de añadir nuestra aplicación a Firebase. Nuestra app nos aparecerá en la consola principal.</p>
+
+<figure>
+	<a href="http://rodrigoguerrero.com/images/fb/init/7.app-creada.png"><img src="http://rodrigoguerrero.com/images/fb/init/7.app-creada.png" alt="Aplicación creada en Firebase" /></a>
+</figure>
+
+<h2 id="dependencias">Dependencias</h2>
+
+<p>Firebase nos proporciona dependencias separadas para cada uno de sus módulos. Cuenta con una dependencia principal o core que debemos de añadir siempre. También necesitamos agregar <em>Google Play Services</em> a nuestra aplicación. Si por alguna razón al agregar estas dependencias gradle no las encuentra, necesitan actualizar su SDK de Android a la última versión.</p>
+
+<p>En el archivo de proyecto <a href="https://github.com/warriorminds/firebase-app/blob/master/build.gradle" target="_blank">build.gradle</a> debemos de agregar el siguiente classpath</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gms</span><span class="o">:</span><span class="n">google</span><span class="o">-</span><span class="nl">services:</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre></div></div>
+
+<p>Por último, en el archivo <a href="https://github.com/warriorminds/firebase-app/blob/master/app/build.gradle" target="_blank">build.gradle</a> de la aplicación debemos agregar las dependencias que utilizaremos de Firebase. Para comenzar y como base, necesitamos agregar <em>firebase-core</em>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">firebase</span><span class="o">:</span><span class="n">firebase</span><span class="o">-</span><span class="nl">core:</span><span class="mf">9.8</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre></div></div>
+
+<p>Al final del mismo archivo necesitamos agregar la siguiente línea para aplicar el plugin de google-services</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">apply</span> <span class="nl">plugin:</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">gms</span><span class="o">.</span><span class="na">google</span><span class="o">-</span><span class="n">services</span><span class="err">'</span>
+</code></pre></div></div>
+
+<h2 id="conclusión">Conclusión</h2>
+
+<p>Hemos terminado de configurar y agregar nuestra app a Firebase. Los pasos que seguimos fueron:</p>
+
+<ol>
+  <li>Crear nuestro proyecto en la consola</li>
+  <li>Agregar nuestra aplicación Android, obteniendo el certificado SHA1 con keytool.</li>
+  <li>Descargar el archivo google-services.json y agregarlo a la carpeta app de nuestro proyecto.</li>
+  <li>Agregar la dependencia de google-services en build.gradle del proyecto.</li>
+  <li>Agregar la dependencia de firebase-core en build.gradle de la app.</li>
+  <li>Aplicar el plugin de google-services en el archivo build.gradle de la app.</li>
+</ol>
+
+<p>En el siguiente Post, aprenderemos a autenticar usuarios mediante correo electrónico, Google, Facebook, Twitter y autenticar usuarios anónimos, todo esto utilizando Firebase.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#android" class="page__taxonomy-item" rel="tag">android</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2016-12-19T20:25:55+00:00">December 19, 2016</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Introducci%C3%B3n+a+Firebase%20http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-intro%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-intro%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-intro%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/poo/poo-principios/" class="pagination--pager" title="Programación Orientada a Objetos: Principios
+">Anterior</a>
+    
+    
+      <a href="/firebase/firebase-auth-part1/" class="pagination--pager" title="Autenticación con Firebase - Primera Parte: correo, Google y Facebook
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/firebase/firebase-intro/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/firebase/firebase-intro"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

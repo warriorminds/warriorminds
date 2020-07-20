@@ -1,0 +1,1133 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Programación Orientada a Objetos: Clases y Objetos - Rodrigo Guerrero</title>
+<meta name="description" content="Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Programación Orientada a Objetos: Clases y Objetos">
+<meta property="og:url" content="http://rodrigoguerrero.com/poo/poo-clases-objetos/">
+
+
+  <meta property="og:description" content="Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Programación Orientada a Objetos: Clases y Objetos">
+  <meta name="twitter:description" content="Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/poo/poo-clases-objetos/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-11-07T21:39:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/poo/poo-clases-objetos/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Programación Orientada a Objetos: Clases y Objetos" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Programación Orientada a Objetos: Clases y Objetos">
+    <meta itemprop="description" content="Este Post es la primera parte de la serie “Programación Orientada a Objetos”. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:">
+    <meta itemprop="datePublished" content="2016-11-07T21:39:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Programación Orientada a Objetos: Clases y Objetos
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  16 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Este Post es la primera parte de la serie <em>“Programación Orientada a Objetos”</em>. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</p>
+
+<ol>
+  <li>Definición de POO</li>
+  <li>Clases y Objetos</li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-herencia/">Herencia</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-abstraccion/">Abstracción</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-encapsulamiento">Encapsulamiento</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-polimorfismo">Polimorfismo</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-composicion">Composición</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-principios">Principios utilizados en la POO</a></li>
+</ol>
+
+<p>Todo el código de la serie está disponible en <a href="https://github.com/warriorminds/prog-orientada-objetos" target="_blank">GitHub</a>.</p>
+
+<p>El código correspondiente a esta primera parte lo pueden encontrar <a href="https://github.com/warriorminds/prog-orientada-objetos/tree/master/poo" target="_blank">aquí</a>.</p>
+
+<p>Todos los ejemplos están hechos en <a href="https://netbeans.org/" target="_blank">Netbeans</a>.</p>
+
+<h2 id="introducción">Introducción</h2>
+
+<p>La programación cada día está tomando más importancia en el mundo, ya que se utiliza para prácticamente cualquier cosa que se puedan imaginar. Desde aplicaciones móviles como Facebook, Twitter y Tinder, pasando por plataformas educativas como Coursera o Urmynd, hasta para controlar y llevar naves espaciales como la New Horizons hasta los límites del Sistema Solar.</p>
+
+<p>A lo largo de los años, se han desarrollado diferentes técnicas de programación, cada una con sus respectivas ventajas y desventajas. Una de las téncicas de programación más utilizadas y que los mayores lenguajes de programación utilizan es la <strong>Programación Orientada a Objetos</strong>.</p>
+
+<p>La Programación Orientada a Objetos (POO) es un paradigma (técnica o estilo) de programación el cual se basa en el concepto de objetos. Un <em>objeto</em> puede representar cualquier elemento del sistema o programa. Cada objeto contiene datos o información (en forma de atributos o variables) y código (en forma de métodos o funciones). Los diferentes objetos que conforman el programa se pueden comunicar entre sí mediante un intercambio de mensajes, el cual se lleva a cabo utilizando métodos que el objeto posee y expone a otros objetos.</p>
+
+<p>Utilizar la POO en el diseño y desarrollo de sistemas de programación tiene diversas ventajas. Se puede tener un sistema bien diseñado, en el cual cada objeto tenga una función específica, haciendo que el desarrollo, detección de errores y expansión del sistema resulten más sencillos. Así mismo, la POO es la base para utilizar <em>Patrones de Diseño</em>, con el cual el código se hace más eficiente, mantenible y fácil para agregar nuevas funcionalidades en el futuro. También al utilizar la POO se puede llevar a cabo la reutilización de código, centralizando el código y evitando repetir código que se utiliza en varios objetos.</p>
+
+<p>Existen varios lenguajes de programación que están diseñados para utilizar la Programación Orientada a Objetos. Algunos de estos lenguajes son los siguientes: Java, C#, Ruby, Python, PHP, Perl. Si bien algunos lenguajes han soportado POO desde el principio, otros como PHP han ido agregando soporte para POO a lo largo de los años.</p>
+
+<p>La POO consiste de los siguientes conceptos:</p>
+
+<ul>
+  <li>Abstracción</li>
+  <li>Herencia</li>
+  <li>Polimorfismo</li>
+  <li>Encapsulamiento</li>
+</ul>
+
+<p>También cuenta con los siguientes principios:</p>
+
+<ul>
+  <li>DRY - No te repitas</li>
+  <li>Separación de intereses</li>
+  <li>Principio abierto-cerrado</li>
+  <li>Composición sobre herencia</li>
+</ul>
+
+<p>De estos conceptos y principios hablaremos en este post.</p>
+
+<h2 id="i-clases-y-objetos">I. Clases y Objetos</h2>
+
+<p>Imaginemos que queremos desarrollar un sistema de streaming de música parecido (pero mucho mejor!) que Spotify. Este sistema va a contar con canciones, artistas, álbumes, listas de reproducción y muchas cosas más. Usando la POO podemos traducir estos elementos del sistema a objetos: vamos a crear objetos de tipo canción, artista, álbum y lista de reproducción. (Se pueden crear objetos más abstractos, también como Mensaje, TareaAsíncrona, Banner).</p>
+
+<p>En este momento sabemos cuáles van a ser nuestros objetos, pero hace falta una manera de crearlos. Las Clases son la manera de crear estos objetos. Cada Clase es la plantilla con las instrucciones para cada objeto y contiene el comportamiento, los datos y las operaciones que el objeto puede realizar.</p>
+
+<p>En su forma más simple una clase se define de la siguiente manera</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Usuario</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Con esta definición de clase podemos construir objetos de tipo “Usuario”.</p>
+
+<p>Para crear un objeto del tipo Usuario se utiliza la palabra reservada <em>new</em>, y se asigna a una variable del tipo Usuario:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Usuario</span> <span class="n">miObjeto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Al hacer esto, se dice que se crea una <em>instancia</em> de la clase Usuario. Esto quiere decir que el objeto “miObjeto” se comportará como un Usuario y tendrá los datos que caracterizan a un Usuario, pero con los valores propios de “miObjeto”.</p>
+
+<h3 id="estructura-de-una-clase">Estructura de una Clase</h3>
+
+<p>Una clase vacía no tiene ninguna utilidad, por lo que se necesitan agregar contenedores de datos, que se llaman <em>variables</em>, con las cuales se pueden realizar operaciones y darle comportamiento al objeto, esto se hace utilizando <em>métodos</em>.</p>
+
+<p>Para demostrar cómo se estructura una clase, vamos a utilizar nuestra clase Usuario.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Usuario</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="variables-de-instancia">Variables de instancia</h3>
+
+<p>Dentro de una clase se crean contenedores de datos, llamados variables, que será dónde el objeto pueda almacenar sus datos. Existen diferentes tipos de variables dependiendo en dónde se puedan utilizar, pero su estructura básica es la siguiente</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tipoDeAcceso</span> <span class="n">tipoDeDato</span> <span class="n">nombreDeLaVariable</span><span class="o">;</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>Al crear un objeto (cuando se dice que es una instancia de una clase), este objeto contiene una copia de las variables las cuales tendrán datos únicos a esa instancia. Al crear OTRA instancia diferente de la misma clase, ese objeto tendrá OTRA copia de esas variables. Estas variables son llamadas <em>variables de instancia</em>.</p>
+
+<p>Generalmente se declaran estas variables de instancia al inicio de la clase. Para nuestra clase Usuario sería de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">apellido</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">;</span>
+<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kt">int</span> <span class="n">estatura</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="variables-de-clase">Variables de clase</h3>
+
+<p>Las variables de clase pertenecen a la clase en sí, no a la instancia de cada objeto, por lo que al crear diferentes instancias de la misma clase, TODOS compartirán la misma variable.</p>
+
+<p>Para crear las variables de clase se utiliza la palabra reservada <em>static</em>. Suelen colocarse al inicio de la clase, antes de las variables de instancia. Para nuestra clase Usuario, podríamos crear una variable de clase que nos cuente la cantidad de usuarios que se han creado:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">numeroDeUsuariosCreados</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="métodos">Métodos</h3>
+
+<p>Los <em>métodos</em> son el conjunto de instrucciones dentro de una clase que hacen una labor específica sobre los datos que posee el objeto o la clase. La sintaxis para crear métodos es la siguiente:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tipoDeAcceso</span> <span class="n">tipoDeDatoDeRetorno</span> <span class="n">nombreDelMétodo</span><span class="o">(</span><span class="nc">TipoDeDato</span> <span class="n">nombreParámetro</span><span class="o">...)</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNombre</span><span class="o">(</span><span class="nc">String</span> <span class="n">nombre</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="o">}</span>
+
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNombre</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Los métodos pueden regresar algún valor de cierto tipo de dato, o pueden regresar <em>void</em> que es cuando no regresan ningún tipo de dato. Dependiendo del tipo de acceso definido en el método, éste puede ser visible desde otros objetos, y por lo tanto puede ser llamado por estos objetos, o solamente puede ser visible dentro de la instancia del objeto.</p>
+
+<p>Con el siguiente código dentro del método main podemos crear un objeto, asignarle un valor a su variable “nombre” y luego imprimir en pantalla el nombre de ese usuario:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Usuario</span> <span class="n">usuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+  <span class="n">usuario</span><span class="o">.</span><span class="na">setNombre</span><span class="o">(</span><span class="s">"WarriorMinds"</span><span class="o">);</span>
+
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Nombre de usuario: "</span> <span class="o">+</span> <span class="n">usuario</span><span class="o">.</span><span class="na">getNombre</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Esto es lo que observamos en la consola, usando NetBeans:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">run:</span>
+<span class="nc">Nombre</span> <span class="n">de</span> <span class="nl">usuario:</span> <span class="nc">WarriorMinds</span>
+<span class="no">BUILD</span> <span class="nf">SUCCESSFUL</span> <span class="o">(</span><span class="n">total</span> <span class="nl">time:</span> <span class="mi">2</span> <span class="n">seconds</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Al igual que las variables, existen <em>métodos de instancia</em> y <em>métodos de clase</em>.</p>
+
+<h3 id="métodos-de-instancia">Métodos de instancia</h3>
+
+<p>Estos métodos son los métodos que tendrá cada instancia (o copia) del objeto. Podrán modificar valores de variables de instancia como de variables de clase. Así mismo, las variables que se creen dentro del método únicamente serán visibles dentro del método.</p>
+
+<p>Agreguemos un método de instancia para agregar el nombre del usuario y otro para obtener su valor.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNombre</span><span class="o">(</span><span class="nc">String</span> <span class="n">nombre</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNombre</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Cada instancia de la clase Usuario puede asignarse un valor diferente a su variable nombre y obtener ese valor. Lo mismo se puede hacer con las demás variables de instancia.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setApellido</span><span class="o">(</span><span class="nc">String</span> <span class="n">apellido</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">apellido</span> <span class="o">=</span> <span class="n">apellido</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getApellido</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">apellido</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEdad</span><span class="o">(</span><span class="kt">int</span> <span class="n">edad</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">edad</span> <span class="o">=</span> <span class="n">edad</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getEdad</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">edad</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Se pueden crear otros métodos que solamente se utilicen en operaciones internas del objeto, siendo éstos también métodos de instancia.</p>
+
+<h3 id="métodos-de-clase">Métodos de clase</h3>
+
+<p>Los métodos de clase pertenecen a la clase en sí, no al objeto en particular. Para crear estos métodos se utiliza la palabra reservada <em>static</em>. Hagamos un método para aumentar  el valor de nuestra variable estática para saber cuantos usuarios se han creado, y otro para obtener este valor.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">usuarioCreado</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">numeroDeUsuariosCreados</span><span class="o">++;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">cuantosUsuariosCreados</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="n">numeroDeUsuariosCreados</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Es importante recordar que solamente se pueden modificar variables estáticas dentro de métodos estáticos. ¿Cuál es la razón de esto?</p>
+
+<p>Las variables de instancia se crean cada vez que se crea la nueva instancia de la clase, utilizando la palabra reservada new. Mientras tanto, las variables de clase están creadas aún sin crear una instancia de la clase. Por lo tanto, no se puede modificar una variable de instancia dentro de un método de clase porque puede que no esté creada esa variable de instancia aún y además, solamente las variables de clase son comunes a la clase.</p>
+
+<p>Es por esto que desde fuera de nuestra clase, los métodos de clase se pueden llamar de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Usuario</span><span class="o">.</span><span class="na">usuarioCreado</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>No es necesario crear una instancia de Usuario para llamar este método de clase.</p>
+
+<h3 id="envío-de-mensajes-entre-objetos">Envío de mensajes entre objetos</h3>
+
+<p>Los objetos que conforman nuestro sistema tienen que comunicarse de alguna manera para interactuar entre sí. Esto se logra mediante un envío de mensajes entre los objetos. Para realizar este envío de mensajes entre objetos se utilizan los métodos disponibles de cada objeto. Los mensajes pueden ser valores primitivos (como int, String, double, boolean) o pueden ser otros objetos. Estos valores se conocen como <em>parámetros</em>.</p>
+
+<p>Para el envío de mensajes entre objetos, hay que tener en cuenta que existen dos maneras en que los datos son enviados. Hay que conocer ambas maneras para ver qué pasará con el dato que enviemos al método.</p>
+
+<h4 id="pasando-parámetros-de-tipos-de-datos-primitivos">Pasando parámetros de tipos de datos primitivos.</h4>
+
+<p>Una variable a fin de cuentas es un espacio en memoria reservado en donde se almacenará un valor. Cuando enviamos como parámetros a un método cualquier tipo de dato primitivo (int, double, float, boolean, etc), se dice que el parámetro se <em>pasa por valor</em>.</p>
+
+<p>Esto quiere decir que la variable original se copia y esta nueva copia del valor es la que se pasa al método. Por lo tanto, si el valor de la variable recibida en el método se modifica, la variable original no es modificada.</p>
+
+<p>Veamos un ejemplo de esto con la clase Usuario y una variable edad con un valor predefinido.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">edad</span> <span class="o">=</span> <span class="mi">25</span><span class="o">;</span>
+<span class="nc">Usuario</span> <span class="n">otroUsuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+<span class="n">otroUsuario</span><span class="o">.</span><span class="na">setEdad</span><span class="o">(</span><span class="n">edad</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>El valor de la variable definida en nuestro método, y el valor de la variable edad dentro del objeto otroUsuario tienen un valor de 25.</p>
+
+<p>Al modificar el valor de la variable edad, definida en nuestro método:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">edad</span> <span class="o">=</span> <span class="mi">50</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>Y al momento de obtener el valor de esa variable, y de la variable dentro del objeto Usuario, vemos que solamente cambió el valor de la variable local:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Valor de edad del objeto otroUsuario: "</span> <span class="o">+</span> <span class="n">otroUsuario</span><span class="o">.</span><span class="na">getEdad</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Valor de edad de la variable edad: "</span>  <span class="o">+</span> <span class="n">edad</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Obtenemos esta salida:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Valor</span> <span class="n">de</span> <span class="n">edad</span> <span class="n">del</span> <span class="n">objeto</span> <span class="nl">otroUsuario:</span> <span class="mi">25</span>
+<span class="nc">Valor</span> <span class="n">de</span> <span class="n">edad</span> <span class="n">de</span> <span class="n">la</span> <span class="n">variable</span> <span class="nl">edad:</span> <span class="mi">50</span>
+</code></pre></div></div>
+
+<h4 id="pasando-parámetros-de-datos-por-referencia">Pasando parámetros de datos por referencia</h4>
+
+<p>Cuando un parámetro en un método es un objeto, se dice que se <em>pasa por referencia</em>, ya que se pasa la referencia en donde está guardado este objeto en la memoria. Este paso de la referencia se hace por valor, por lo cual si se modifica el objeto dentro del método, el objeto original NO es modificado.</p>
+
+<p>Veamos este caso con un ejemplo.</p>
+
+<p>El siguiente método recibe un objeto usuario como parámetro, se le asigna un valor a su nombre. Después, se crea un nuevo objeto Usuario y se asigna al mismo parámetro usuario. Después se modifica la variable de nombre al nuevo usuario creado.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">modificarUsuario</span><span class="o">(</span><span class="nc">Usuario</span> <span class="n">usuario</span><span class="o">,</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">usuario</span><span class="o">.</span><span class="na">setNombre</span><span class="o">(</span><span class="n">nombre</span><span class="o">);</span>
+  <span class="n">usuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+  <span class="n">usuario</span><span class="o">.</span><span class="na">setNombre</span><span class="o">(</span><span class="s">"Otro nombre"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Mandamos llamar este método de la siguiente manera.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Usuario</span> <span class="n">usuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+<span class="n">modificarUsuario</span><span class="o">(</span><span class="n">usuario</span><span class="o">,</span> <span class="s">"Mi nombre es Warrior Minds."</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">usuario</span><span class="o">.</span><span class="na">getNombre</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>Obtenemos la siguiente respuesta en la consola:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Mi</span> <span class="n">nombre</span> <span class="n">es</span> <span class="nc">Warrior</span> <span class="nc">Minds</span><span class="o">.</span>
+</code></pre></div></div>
+
+<p>Esto pasa ya que el parámetro Usuario fue pasado por valor y al momento de crear el nuevo usuario dentro del método “modificarUsuario” el parámetro original no se modificó.</p>
+
+<h3 id="constructores">Constructores</h3>
+
+<p>Hemos visto cómo crear un objeto, de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Usuario</span> <span class="n">usuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Lo que esta instrucción hace, es llamar un método especial llamado <em>constructor</em>. Los constructores son métodos que se utilizan para la creación de objetos.</p>
+
+<p>La sintaxis para crear métodos constructores es la siguiente:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">NombreDeLaClase</span><span class="o">(</span><span class="n">listaDeParámetros</span><span class="o">)</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Cada clase puede tener diferentes constructores, cada uno con una lista de parámetros diferente. Si no definimos un constructor en nuestro código, de todas formas existe uno el cual no tiene ningún parámetro. Es por esto que hemos podido crear objetos Usuario hasta ahora.</p>
+
+<p>Vamos a crear dos constructores, uno sin parámetros y otro con parámetros, y ambos aumentarán el valor de nuestra variable de clase definida previamente:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Usuario</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">Usuario</span><span class="o">.</span><span class="na">usuarioCreado</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">Usuario</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="nc">String</span> <span class="n">apellido</span><span class="o">,</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Usuario</span><span class="o">.</span><span class="na">usuarioCreado</span><span class="o">();</span>
+
+  <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">apellido</span> <span class="o">=</span> <span class="n">apellido</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">edad</span> <span class="o">=</span> <span class="n">edad</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ahora crearemos dos usuarios, uno con cada constructor y veremos el resultado de nuestra variable de clase.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Usuario</span> <span class="n">usuario1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">();</span>
+<span class="nc">Usuario</span> <span class="n">usuario2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Usuario</span><span class="o">(</span><span class="s">"warrior.software.minds@gmail.com"</span><span class="o">,</span>  <span class="s">"Warrior"</span><span class="o">,</span> <span class="s">"Minds"</span><span class="o">,</span> <span class="mi">25</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Usuario 1: "</span> <span class="o">+</span> <span class="n">usuario1</span><span class="o">.</span><span class="na">getNombre</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Usuario 2: "</span> <span class="o">+</span> <span class="n">usuario2</span><span class="o">.</span><span class="na">getNombre</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Usuarios creados: "</span> <span class="o">+</span> <span class="nc">Usuario</span><span class="o">.</span><span class="na">cuantosUsuariosCreados</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>En este código se crean dos usuarios, con dos constructores diferentes. A usuario1 no se le asigna ningún valor, por lo que al imprimir su nombre con getNombre() obtenemos el valor null. A usuario2 se le asignan todos sus valores en el constructor, por lo que al imprimir su nombre con getNombre() obtenemos “Warrior”.</p>
+
+<p>¿Cuántos usuarios se han creado hasta ahora? Si ejecutan el código como está hecho en GitHub, verán que el resultado es 6. ¿Porqué sale este valor?</p>
+
+<h3 id="clases-embebidas">Clases embebidas</h3>
+
+<p>Como hemos visto hasta ahora, las clases que definamos son la base para nuestros programas. Hemos visto cómo crear clases, cada clase siendo un archivo completo. Pero también se pueden crear clases dentro de otras clases. Estas clases se llaman clases embebidas y pueden ser de dos tipos: clases internas o clases estáticas.</p>
+
+<p>Una ventaja de las clases embebidas es que se puede agrupar cierta lógica dentro de un objeto separado, pero que solamente se utiliza en una clase. Además, esto ayuda al momento de leer y mantener el código ya que el código de la clase embebida se encuentra cerca del lugar en donde es utilizado.</p>
+
+<h4 id="clases-internas">Clases Internas</h4>
+
+<p>Una <em>clase interna</em> es una clase que está definida dentro de otra clase. Esto puede ocurrir cuando tu clase necesita algún objeto que solamente esa clase va a utilizar. La clase interna puede utilizar y modificar variables y métodos de la clase padre, y sólamente la clase padre puede tener acceso a esta clase.</p>
+
+<p>Veamos un ejemplo de clase interna. Crearemos una clase llamada ClasesInternas, que será un tipo de usuario, con el nombre de ClasesInternas para identificar lo que se muestra.</p>
+
+<p>Dentro de esta clase, crearemos una clase Direccion, en la cual almacenaremos la dirección del usuario. Esta clase será privada, por lo que solamente se podrá usar en la clase padre ClasesInternas.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClasesInternas</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">Direccion</span> <span class="n">direccion</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">ClasesInternas</span><span class="o">(</span><span class="nc">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">,</span> <span class="nc">String</span> <span class="n">calle</span><span class="o">,</span> <span class="nc">String</span> <span class="n">colonia</span><span class="o">,</span> <span class="nc">String</span> <span class="n">codigoPostal</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">edad</span> <span class="o">=</span> <span class="n">edad</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">direccion</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Direccion</span><span class="o">(</span><span class="n">calle</span><span class="o">,</span> <span class="n">colonia</span><span class="o">,</span> <span class="n">codigoPostal</span><span class="o">);</span> <span class="c1">// Se puede tener acceso a la clase Dirección desde aqui.</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">mostrarInfo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Nombre: "</span> <span class="o">+</span> <span class="n">nombre</span> <span class="o">+</span> <span class="s">", email: "</span> <span class="o">+</span> <span class="n">email</span> <span class="o">+</span> <span class="s">", edad: "</span> <span class="o">+</span> <span class="n">edad</span> <span class="o">+</span> <span class="s">"\n"</span> <span class="o">+</span> <span class="n">direccion</span><span class="o">.</span><span class="na">mostrarInfo</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">private</span> <span class="kd">class</span> <span class="nc">Direccion</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">calle</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">colonia</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">codigoPostal</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Direccion</span><span class="o">(</span><span class="nc">String</span> <span class="n">calle</span><span class="o">,</span> <span class="nc">String</span> <span class="n">colonia</span><span class="o">,</span> <span class="nc">String</span> <span class="n">codigoPostal</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">calle</span> <span class="o">=</span> <span class="n">calle</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">colonia</span> <span class="o">=</span> <span class="n">colonia</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">codigoPostal</span> <span class="o">=</span> <span class="n">codigoPostal</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">mostrarInfo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">nombre</span> <span class="o">+</span> <span class="s">" vive en "</span> <span class="o">+</span> <span class="n">calle</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">colonia</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">codigoPostal</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>En este ejemplo, la clase Direccion es la clase interna. La declaramos como privada para que solamente la clase padre ClasesInternas pueda tener acceso a ella. Dentro de la clase Direccion en el método mostrarInfo() podemos ver que se hace uso de la variable “nombre”, la cual está definida en la clase padre.</p>
+
+<p>Si quisiéramos utilizar la clase Direccion desde nuestro método main (o desde cualquier otro lugar) nos marcaría error, ya que la clase Direccion solamente es visible para la clase ClasesInternas.</p>
+
+<h4 id="clases-estáticas">Clases Estáticas</h4>
+
+<p>Una <em>clase estática</em> también se crea dentro de una clase padre, pero, al ser estática, no tiene acceso a las variables y métodos no estáticos de la clase padre. Esta clase se puede utilizar en cualquier lugar, solamente debe de utilizarse la siguiente notación: <em>NombreClasePadre.NombreClaseHija</em>. Veamos un ejemplo.</p>
+
+<p>Crearemos una clase similar a la ClasesInternas. Solamente que en esta ocasión, la clase Dirección será una clase estática.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClasesEstaticas</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">Direccion</span> <span class="n">direccion</span><span class="o">;</span>
+
+
+  <span class="kd">public</span> <span class="nf">ClasesEstaticas</span><span class="o">(</span><span class="nc">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="kt">int</span> <span class="n">edad</span><span class="o">,</span> <span class="nc">Direccion</span> <span class="n">direccion</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">edad</span> <span class="o">=</span> <span class="n">edad</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">direccion</span> <span class="o">=</span> <span class="n">direccion</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">mostrarInfo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Nombre: "</span> <span class="o">+</span> <span class="n">nombre</span> <span class="o">+</span> <span class="s">", email: "</span> <span class="o">+</span> <span class="n">email</span> <span class="o">+</span> <span class="s">", edad: "</span> <span class="o">+</span> <span class="n">edad</span> <span class="o">+</span> <span class="s">"\n"</span> <span class="o">+</span> <span class="n">direccion</span><span class="o">.</span><span class="na">mostrarInfo</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Direccion</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">calle</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">colonia</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">codigoPostal</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Direccion</span><span class="o">(</span><span class="nc">String</span> <span class="n">calle</span><span class="o">,</span> <span class="nc">String</span> <span class="n">colonia</span><span class="o">,</span> <span class="nc">String</span> <span class="n">codigoPostal</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">calle</span> <span class="o">=</span> <span class="n">calle</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">colonia</span> <span class="o">=</span> <span class="n">colonia</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">codigoPostal</span> <span class="o">=</span> <span class="n">codigoPostal</span><span class="o">;</span>
+    <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">mostrarInfo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"Dirección: "</span> <span class="o">+</span> <span class="n">calle</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">colonia</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">codigoPostal</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Para crear una clase estática, se necesita la siguiente sintaxis:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">NombreDeLaClase</span>
+</code></pre></div></div>
+
+<p>En esta ocasión, NO se puede tener acceso a las variables nombre o email o edad dentro de la clase Direccion.</p>
+
+<p>Para hacer uso de la clase estática Direccion desde nuestro método main, es de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ClasesEstaticas</span><span class="o">.</span><span class="na">Direccion</span> <span class="n">direccion</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClasesEstaticas</span><span class="o">.</span><span class="na">Direccion</span><span class="o">(</span><span class="s">"Calle Central"</span><span class="o">,</span> <span class="s">"Colonia Nueva"</span><span class="o">,</span> <span class="s">"123456"</span><span class="o">);</span>
+<span class="nc">ClasesEstaticas</span> <span class="n">usuario</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClasesEstaticas</span><span class="o">(</span><span class="s">"WarriorMinds"</span><span class="o">,</span> <span class="s">"warrior.software.minds@gmail.com"</span><span class="o">,</span> <span class="mi">25</span><span class="o">,</span> <span class="n">direccion</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Se puede ver una clase estática como una clase independiente, solamente definida dentro de otra clase.</p>
+
+<h3 id="this">this</h3>
+
+<p>Se puede utilizar la palabra reservada <em>this</em> dentro de cualquier método o constructor dentro de la clase para tener acceso a la instancia actual del objeto.</p>
+
+<p>Por ejemplo, hay veces que un constructor puede hacer uso de algún otro constructor para inicializar algunas variables. En este caso se puede utilizar this(….) con la lista de parámetros del constructor deseado.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="o">(</span><span class="s">"sin nombre"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>De igual manera, hay veces que el parámetro de algún método tiene el mismo nombre que alguna variable de instancia de nuestro objeto. Es lógico y correcto que ambas tengan el mismo nombre, ya que representan lo mismo. Pero necesitamos alguna manera de identificar la variable de instancia. En este escenario también se hace uso de la palabra this.</p>
+
+<p>Si tenemos una variable de instancia llamada nombre: private String nombre;</p>
+
+<p>Y el siguiente método</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">UsandoThis</span><span class="o">(</span><span class="nc">String</span> <span class="n">nombre</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>La variable nombre, hace referencia al parámetro que recibe el método, mientras que “this.nombre” hace referencia a la variable de instancia nombre.</p>
+
+<h2 id="conclusión">Conclusión</h2>
+
+<p>Las clases y los objetos son la base de la Programación Orientada a Objetos. Una vez conociendo cómo crear clases y objetos, tipos de variables, como utilizar los métodos y sus parámetros, el concepto de clases/variables estáticas, clases internas y de cuándo utilizar “this”, podemos pasar a conceptos, e ideas que se utilizan en la POO.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#java" class="page__taxonomy-item" rel="tag">java</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#poo" class="page__taxonomy-item" rel="tag">poo</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2016-11-07T21:39:55+00:00">November 7, 2016</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Programaci%C3%B3n+Orientada+a+Objetos%3A+Clases+y+Objetos%20http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-clases-objetos%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-clases-objetos%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-clases-objetos%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Anterior</a>
+    
+    
+      <a href="/poo/poo-herencia/" class="pagination--pager" title="Programación Orientada a Objetos: Herencia
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/poo/poo-clases-objetos/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/poo/poo-clases-objetos"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

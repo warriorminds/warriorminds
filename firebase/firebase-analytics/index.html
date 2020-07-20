@@ -1,0 +1,1206 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Analytics con Firebase - Rodrigo Guerrero</title>
+<meta name="description" content="Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Analytics con Firebase">
+<meta property="og:url" content="http://rodrigoguerrero.com/firebase/firebase-analytics/">
+
+
+  <meta property="og:description" content="Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase.">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Analytics con Firebase">
+  <meta name="twitter:description" content="Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase.">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/firebase/firebase-analytics/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-01-10T18:25:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/firebase/firebase-analytics/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Analytics con Firebase" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Analytics con Firebase">
+    <meta itemprop="description" content="Conoce cómo los usuarios interactúan con tu app con Analytics de Firebase.">
+    <meta itemprop="datePublished" content="2017-01-10T18:25:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Analytics con Firebase
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  12 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Toda la información oficial de Firebase la pueden encontrar <a href="https://console.firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-analytics" target="_blank">Github</a></p>
+
+<p>Necesitan seguir los pasos en el Post de <a href="http://rodrigoguerrero.com/blogesp/firebase-intro" target="_blank">Introducción a Firebase</a> para poder comenzar a utilizar Analytics.</p>
+
+<h2 id="introducción">Introducción</h2>
+
+<p>Analytics nos permite conocer cómo nuestros usuarios interactúan con la app. También nos permite tener reportes de fallas y excepciones así cómo nos provee de filtros para poder visualizar la información generada por nuestros usuarios de diferentes maneras. En este Post aprenderemos cómo utilizar Firebase para agregar Analytics a nuestra aplicación.</p>
+
+<h2 id="agregando-analytics">Agregando Analytics</h2>
+
+<p>Después de seguir los pasos en el Post de  <a href="http://rodrigoguerrero.com/blogesp/firebase-intro" target="_blank">Introducción a Firebase</a>, ya tenemos lo necesario para utilizar Analytics, ya que Analytics viene incluido en la dependencia principal de Firebase, la cual pueden encontrar en el archivo <a href="https://github.com/warriorminds/firebase-analytics/blob/master/app/build.gradle" target="_blank">gradle de la app</a>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">firebase</span><span class="o">:</span><span class="n">firebase</span><span class="o">-</span><span class="nl">core:</span><span class="mf">9.8</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre></div></div>
+
+<p>Para que Analytics funcione, necesitamos agregar los siguientes permisos en el Manifest:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.ACCESS_NETWORK_STATE"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.INTERNET"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">uses</span><span class="o">-</span><span class="n">permission</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.permission.WAKE_LOCK"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>Firebase nos permite tener registro de dos tipos:</p>
+
+<ul>
+  <li>Eventos</li>
+  <li>Propiedades de usuario</li>
+</ul>
+
+<h2 id="eventos">Eventos</h2>
+
+<p>Un <em>evento</em> es alguna acción de importancia que ocurre dentro de nuestra aplicación, la cual quisiéramos medir y analizar. Por ejemplo, quisiéramos saber cuando un usuario compra algún objeto desde nuestra app, cuando inicia sesión, cuando instala o desinstala la app, o alguna opción que seleccionó.</p>
+
+<p>Firebase nos permite enviar hasta <em>500 eventos</em> diferentes desde nuestra aplicación. También nos provee algunos eventos predefinidos que podemos utilizar, aunque también podemos enviar nuestros propios eventos. A cada evento se le pueden agregar hasta <em>25 parámetros</em> por evento.</p>
+
+<h3 id="eventos-enviados-por-defecto">Eventos enviados por defecto</h3>
+
+<p>Al agregar Firebase se tiene el registro de algunos eventos sin necesidad de agregar ningún código.</p>
+
+<ul>
+  <li><strong>first_open</strong>: este evento nos indica la primera vez que un usuario abre nuestra app después de instalarla o reinstalarla.</li>
+  <li><strong>in_app_purchase</strong>: este evento nos indica cuando un usuario termina una compra dentro de la aplicación utilizando Google Play Store. Se envían los siguientes parámetros: ID del producto, nombre del producto, la moneda de la compra y la cantidad de productos comprados.</li>
+  <li><strong>user_engagement</strong>: este evento nos indica cuando el usuario tiene la app abierta y está interactuando con ella.</li>
+  <li><strong>session_start</strong>: se envía cuando un usuario usa la app por más de un tiempo mínimo (que se puede asignar en la app, y que por default es 10 segundos) después de un tiempo de inactividad (que es 30 minutos por defecto y también se puede asignar).</li>
+  <li><strong>app_update</strong>: se envía cuando la app es actualizada. Se envía el ID de la versión anterior de la app.</li>
+  <li><strong>app_remove</strong>: se envía cuando se ha desinstalado la app.</li>
+  <li><strong>os_update</strong>: se envía cuando se ha actualizado el sistema operativo. Se envía el ID de la versión anterior del S.O.</li>
+  <li><strong>app_clear_data</strong>: nos indica cuando el usuario borra toda la información de la app.</li>
+  <li><strong>app_exception</strong>: nos indica cuando ha habido alguna excepción en nuestra app.</li>
+  <li><strong>notification_foreground</strong>: se envía cuando se recibe una notificación por medio de Firebase y la app está siendo utilizada.</li>
+  <li><strong>notification_receive</strong>: nos indica cuando se recibe una notificación por medio de FIrebase y la app está en background.</li>
+  <li><strong>notification_open</strong>: nos indica cuando el usuario abre una notificación enviada por medio de Firebase.</li>
+  <li><strong>notification_dismiss</strong>: nos indica cuando el usuario quita la notificación enviada por Firebase.</li>
+  <li><strong>dynamic_link_first_open</strong>: nos indica cuando un usuario abre la app por primera vez utilizando un link dinámico.</li>
+  <li><strong>dynamic_link_app_open</strong>: se envía cuando el usuario abre la app con un link dinámico.</li>
+  <li><strong>dynamic_link_app_update</strong>: nos indica cuando el usuario actualiza la app utilizando un link dinámico.</li>
+</ul>
+
+<h3 id="enviar-eventos">Enviar Eventos</h3>
+
+<p>Firebase nos proporciona algunas constantes de eventos comunes para la mayoría de las apps, para apps de ventas y comercio, para apps de viaje y para juegos. También nos proporciona algunas constantes para pasar como parámetros de eventos. Pueden ver la lista de eventos y parámetros que nos proporciona Firebase al final del post. De igual manera, podemos crear nuestros propios eventos con nuestros propios parámetros.</p>
+
+<p>En este post agregaremos dos botones y pondremos un evento a cada uno.</p>
+
+<p>En nuestro layout agregamos dos botones:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/boton_compra"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/evento_compra"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/boton_personalizado"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/analytics_personalizado"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>Con el primer botón utilizaremos las constantes que nos proporciona Firebase. Con el segundo botón utilizaremos nuestros propios valores para el evento y sus parámetros.</p>
+
+<p>Para enviar <em>nuestros propios eventos</em>, necesitamos una instancia de FirebaseAnalytics. Agregamos este código en nuestra actividad:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">FirebaseAnalytics</span> <span class="n">analyticsFirebase</span><span class="o">;</span>
+
+<span class="n">analyticsFirebase</span> <span class="o">=</span> <span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Inicializamos las vistas y agregamos un OnClickListener() a cada botón.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializarVistas</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Button</span> <span class="n">botonCompra</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">boton_compra</span><span class="o">);</span>
+    <span class="n">botonCompra</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">analyticsCompra</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="nc">Button</span> <span class="n">botonPersonalizado</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">boton_personalizado</span><span class="o">);</span>
+    <span class="n">botonPersonalizado</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">analyticsPersonalizado</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Los parámetros de nuestro evento se agregan en un <em>Bundle</em> y utilizamos el método de <em>analyticsFirebase.logEvent(evento, parámetros)</em> para enviarlo.</p>
+
+<p>El método analyticsCompra() que utiliza las constantes de Firebase quedaría de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">analyticsCompra</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bundle</span><span class="o">();</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Param</span><span class="o">.</span><span class="na">CURRENCY</span><span class="o">,</span> <span class="s">"MXN"</span><span class="o">);</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="na">putDouble</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Param</span><span class="o">.</span><span class="na">VALUE</span><span class="o">,</span> <span class="mf">50.0</span><span class="o">);</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Param</span><span class="o">.</span><span class="na">TRANSACTION_ID</span><span class="o">,</span> <span class="s">"compra2x1"</span><span class="o">);</span>
+    <span class="n">analyticsFirebase</span><span class="o">.</span><span class="na">logEvent</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ECOMMERCE_PURCHASE</span><span class="o">,</span> <span class="n">bundle</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>El método analyticsPersonalizado() que utiliza nuestros propios eventos y parámetros, quedaría de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">analyticsPersonalizado</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bundle</span><span class="o">();</span>
+    <span class="nc">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="na">putDouble</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Param</span><span class="o">.</span><span class="na">VALUE</span><span class="o">,</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">));</span>
+    <span class="n">bundle</span><span class="o">.</span><span class="na">putString</span><span class="o">(</span><span class="nc">FirebaseAnalytics</span><span class="o">.</span><span class="na">Param</span><span class="o">.</span><span class="na">ITEM_CATEGORY</span><span class="o">,</span> <span class="s">"prueba"</span><span class="o">);</span>
+    <span class="n">analyticsFirebase</span><span class="o">.</span><span class="na">logEvent</span><span class="o">(</span><span class="s">"analytics_prueba"</span><span class="o">,</span> <span class="n">bundle</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Al ejecutar nuestra app y presionar los botones, se generan los eventos. Estos eventos los podemos ver en la <a href="https://console.firebase.google.com/" target="_blank">consola de Firebase</a> en nuestra aplicación. En el menú principal seleccionamos Analytics y entramos a la pestaña de Eventos. Los eventos pueden tardar un tiempo en aparecer en la consola.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/analytics/01.console-events.png"><img src="http://rodrigoguerrero.com/images/fb/analytics/01.console-events.png" alt="Eventos en la consola de Firebase" /></a>
+</figure>
+
+<p>En esta imagen también podemos observar los eventos que Firebase registra automáticamente, como lo son app_remove, first_open y session_start.</p>
+
+<h2 id="propiedades-de-usuario">Propiedades de usuario</h2>
+
+<p>Las propiedades de usuario son atributos que nos permiten filtar la información para identificar los segmentos de personas que utilizan nuestra app.</p>
+
+<p>Al igual que con los Eventos, Firebase registra automáticamente algunas propiedades de usuario. Es importante mencionar que Firebase obtiene algunas de estas propiedades automáticas del ID de publicidad de Android, por lo que si no se ha configurado este ID, no se tendrán algunas de las propiedades.</p>
+
+<p>Estas son las propiedades que se registran automáticamente:</p>
+
+<ul>
+  <li><strong>Age</strong>: identifica a los usuarios en 6 grupos: 18-24, 25-34, 35-44, 45-54, 55-64 y 65+.</li>
+  <li><strong>App Store</strong>: es la tienda de la cual se bajó la app.</li>
+  <li><strong>App Version</strong>: identifica el versionName de la app.</li>
+  <li><strong>Country</strong>: el país donde se encuentra el usuario.</li>
+  <li><strong>Device Brand</strong>: la marca del teléfono en donde se instaló la app.</li>
+  <li><strong>Device Category</strong>: la categoría del dispositivo móvil (tablet, celular).</li>
+  <li><strong>Device Model</strong>: el nombre del modelo del dispositivo.</li>
+  <li><strong>First Open Time</strong>: la hora en microsegundos a la cual se abrió la app por primera vez.</li>
+  <li><strong>Gender</strong>: género del usuario de la app.</li>
+  <li><strong>Interests</strong>: intereses del usuario de la app.</li>
+  <li><strong>Language</strong>: el idioma en el que está el dispositivo.</li>
+  <li><strong>New/Established</strong>: tipo de usuario; new: abrió la app hace menos de 7 días; established: abrió la app por primera vez hace más de 7 días.</li>
+  <li><strong>OS Version</strong>: la versión del sistema operativo.</li>
+</ul>
+
+<p>Podemos observar algunas de estas propiedades en el Panel de Control de Analytics en la consola de Firebase.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/analytics/02.console-user-prop-main.png"><img src="http://rodrigoguerrero.com/images/fb/analytics/02.console-user-prop-main.png" alt="Propiedades de Usuario en la consola de Firebase" /></a>
+</figure>
+
+<p>También podemos crear nuestras propias propiedades de usuario. En el Panel de Control de Analytics seleccionamos la pestaña de Propiedades de Usuario, después presionamos el botón Nueva Propiedad de Usuario.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/analytics/03.nueva_user_property.png"><img src="http://rodrigoguerrero.com/images/fb/analytics/03.nueva_user_property.png" alt="Creación de propiedades de usuario." /></a>
+</figure>
+
+<p>Necesitamos nombrar nuestra propiedad de usuario y ponerle una breve descripción.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/analytics/04.creando_user_prop.png"><img src="http://rodrigoguerrero.com/images/fb/analytics/04.creando_user_prop.png" alt="Creación de propiedades de usuario." /></a>
+</figure>
+
+<p>De regreso en nuestro código, vamos a agregar un nuevo botón para reportar el grupo favorito del usuario, utilizando esta nueva propiedad.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/boton_propiedad_usuario"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/grupo_fav"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>Inicializamos nuestro botón y le agregamos su OnClickListener().</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Button</span> <span class="n">botonPropiedadUsuario</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">boton_propiedad_usuario</span><span class="o">);</span>
+<span class="n">botonPropiedadUsuario</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">propiedadUsuario</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>Para enviar una propiedad de usuario, utilizamos el método <em>analyticsFirebase.setUserProperty(propiedad, valor)</em>.</p>
+
+<p>Vamos a tener un arreglo con tres grupos musicales y mandar uno de manera aleatoria al presionar el botón.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">grupos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"The Beatles"</span><span class="o">,</span> <span class="s">"Pink Floyd"</span><span class="o">,</span> <span class="s">"Led Zeppelin"</span> <span class="o">};</span>
+</code></pre></div></div>
+
+<p>El método propiedadUsuario() quedaría de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">propiedadUsuario</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+    <span class="nc">String</span> <span class="n">grupoFavorito</span> <span class="o">=</span> <span class="n">grupos</span><span class="o">[</span><span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">3</span><span class="o">)];</span>
+    <span class="n">analyticsFirebase</span><span class="o">.</span><span class="na">setUserProperty</span><span class="o">(</span><span class="s">"grupo_favorito"</span><span class="o">,</span> <span class="n">grupoFavorito</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Después de algunas horas, esta propiedad de usuario se puede utilizar en la consola para filtar la información:</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/analytics/05.usando_user_prop.png"><img src="http://rodrigoguerrero.com/images/fb/analytics/05.usando_user_prop.png" alt="Utilizando propiedades de usuario." /></a>
+</figure>
+
+<h2 id="constantes-de-eventos-y-parámetros-proporcionados-por-firebase">Constantes de Eventos y Parámetros Proporcionados por Firebase</h2>
+
+<p>Esta es la lista de las constantes de Eventys y Parámetros que Firebase nos proporciona.</p>
+
+<h3 id="add_payment_info">ADD_PAYMENT_INFO</h3>
+
+<p>Este evento nos indica que el usuario agregó información de pago a la app. No tiene parámetros.</p>
+
+<h3 id="add_to_cart">ADD_TO_CART</h3>
+
+<p>Este evento nos indica que se agregó un elemento al carrito de compras. Le pueden agregar los siguientes parámetros:</p>
+
+<p>Parámetros necesarios</p>
+<ul>
+  <li>ITEM_ID (String): identificador del producto.</li>
+  <li>ITEM_NAME (String): nombre del producto.</li>
+  <li>ITEM_CATEGORY (String): categoría del producto.</li>
+  <li>QUANTITY (long): cantidad de elementos.</li>
+</ul>
+
+<h3 id="parámetros-opcionales">Parámetros opcionales:</h3>
+<ul>
+  <li>PRICE (double): precio del elemento.</li>
+  <li>VALUE (double): valor del elemento.</li>
+  <li>CURRENCY (String): moneda en la que está el precio.</li>
+  <li>ORIGIN (String): procedencia del producto.</li>
+  <li>ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.</li>
+  <li>DESTINATION (String): Destino del producto.</li>
+  <li>START_DATE (String): fecha de inicio del producto (puede ser de alguna oferta, o desde cuando está a la venta) en formato YYYY-MM-DD.</li>
+  <li>END_DATE (String): fecha de fin del producto (cuando termina la oferta, cuando se dejará de vender el producto) en formato YYYY-MM-DD.</li>
+</ul>
+
+<h3 id="add_to_wishlist">ADD_TO_WISHLIST</h3>
+
+<p>Evento que se genera cuando se agregar un producto a una lista de deseos.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ITEM_ID (String): identificador del producto.</li>
+  <li>ITEM_NAME (String): nombre del producto.</li>
+  <li>ITEM_CATEGORY (String): categoría del producto.</li>
+  <li>QUANTITY (long): cantidad de elementos.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>PRICE (double): precio del elemento.</li>
+  <li>VALUE (double): valor del elemento.</li>
+  <li>CURRENCY (String): moneda en la que está el precio.</li>
+  <li>ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.</li>
+</ul>
+
+<h3 id="app_open">APP_OPEN</h3>
+
+<p>Evento que se genera al abrir la app.</p>
+
+<h3 id="begin_checkout">BEGIN_CHECKOUT</h3>
+
+<p>Evento al comenzar con el checkout para realizar una compra.</p>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>VALUE (double): valor del elemento (precio).</li>
+  <li>CURRENCY (String): moneda en la que está el precio.</li>
+  <li>TRANSACTION_ID (String): ID de la transacción a generar.</li>
+  <li>NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.</li>
+  <li>NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.</li>
+  <li>NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.</li>
+  <li>ORIGIN (String): origen del viaje o del producto.</li>
+  <li>DESTINATION (String): destino del viaje o del producto.</li>
+  <li>START_DATE (String): fecha de inicio para el viaje, en formato YYYY-MM-DD.</li>
+  <li>END_DATE (String): fecha de fin del viaje, en formato YYYY-MM-DD.</li>
+  <li>TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).</li>
+</ul>
+
+<h3 id="earn_virtual_currency">EARN_VIRTUAL_CURRENCY</h3>
+
+<p>Evento cuando el usuario obtiene moneda virtual. (como en juegos o promociones en compras).</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>VIRTUAL_CURRENCY_NAME (String): nombre de la moneda virtual en tu app.</li>
+  <li>VALUE (double): cantidad de moneda virtual obtenida.</li>
+</ul>
+
+<h3 id="ecommerce_purchase">ECOMMERCE_PURCHASE</h3>
+
+<p>Evento cuando un usuario ha hecho una compra desde tu app.</p>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>CURRENCY (String): moneda en la que se realizó la compra.</li>
+  <li>VALUE (double): valor de la compra.</li>
+  <li>TRANSACTION_ID (String): ID de la transacción realizada.</li>
+  <li>TAX (double): impuesto del total de la compra.</li>
+  <li>SHIPPING (double): costo del envío.</li>
+  <li>COUPON (String): código de un cupón de oferta utilizado en la compra.</li>
+  <li>LOCATION (String): ID de Google Place, o tu propio ID del lugar de la compra.</li>
+  <li>NUMBER_OF_NIGHTS (long): número de noches reservadas.</li>
+  <li>NUMBER_OF_ROOMS (long): número de cuartos reservados.</li>
+  <li>NUMBER_OF_PASSENGERS (long): número de pasajeros en el viaje.</li>
+  <li>ORIGIN (String): origen del viaje comprado.</li>
+  <li>DESTINATION (String): destino del viaje comprado.</li>
+  <li>START_DATE (String): fecha del viaje.</li>
+  <li>END_DATE (String); fecha del viaje de regreso.</li>
+  <li>TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).</li>
+</ul>
+
+<h3 id="join_group">JOIN_GROUP</h3>
+
+<p>Evento cuando el usuario se une a un grupo.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>GROUP_ID (String): ID del grupo al que se unió el usuario.</li>
+</ul>
+
+<h3 id="level_up">LEVEL_UP</h3>
+
+<p>Evento que indica que el usuario subió de nivel.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>LEVEL (long): nivel al que subió el usuario.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>CHARACTER (String): personaje del usuario.</li>
+</ul>
+
+<h3 id="login">LOGIN</h3>
+
+<p>Evento que indica que el usuario inició sesión.</p>
+
+<h3 id="post_score">POST_SCORE</h3>
+
+<p>Evento que indica cuando el usuario obtuvo un puntaje.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>SCORE (long): puntaje obtenido.</li>
+  <li>LEVEL (long): nivel en el que se obtuvo el puntaje.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>CHARACTER (String): personaje del usuario.</li>
+</ul>
+
+<h3 id="present_offer">PRESENT_OFFER</h3>
+
+<p>Evento que indica que se le presentó una oferta al usuario.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ITEM_ID (String): identificador de la oferta.</li>
+  <li>ITEM_NAME (String): nombre de la oferta.</li>
+  <li>ITEM_CATEGORY (String): categoría de la oferta.</li>
+  <li>QUANTITY (long): cantidad de elementos en la oferta.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>PRICE (double): precio del elemento.</li>
+  <li>VALUE (double): valor del elemento.</li>
+  <li>CURRENCY (String): moneda en la que está el precio.</li>
+  <li>ORIGIN (String): procedencia del producto.</li>
+  <li>ITEM_LOCATION_ID (String): ID de Google Place del origen del producto.</li>
+</ul>
+
+<h3 id="purchase_refund">PURCHASE_REFUND</h3>
+
+<p>Evento que indica que se hizo la devolución de un producto.</p>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>CURRENCY (String): moneda en la que está el precio.</li>
+  <li>VALUE (double): valor del elemento.</li>
+  <li>TRANSACTION_ID (String): ID de la transacción a generar.</li>
+</ul>
+
+<h3 id="search">SEARCH</h3>
+
+<p>Indica que se realizó una búsqueda, así como algunos parámetros de la misma.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>SEARCH_TERM (String): término de búsqueda.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.</li>
+  <li>NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.</li>
+  <li>NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.</li>
+  <li>ORIGIN (String): origen del viaje o del producto.</li>
+  <li>DESTINATION (String): destino del viaje o del producto.</li>
+  <li>START_DATE (String): fecha de inicio para el viaje, en formato YYYY-MM-DD.</li>
+  <li>END_DATE (String): fecha de fin del viaje, en formato YYYY-MM-DD.</li>
+  <li>TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).</li>
+</ul>
+
+<h3 id="select_content">SELECT_CONTENT</h3>
+
+<p>Evento que indica que el usuario ha seleccionado algún elemento en tu app. Puede ser cualquier objeto de tu app.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>CONTENT_TYPE (String): Tipo de elemento seleccionado.</li>
+  <li>ITEM_ID (String): identificador del producto.</li>
+</ul>
+
+<h3 id="share">SHARE</h3>
+
+<p>Evento que indica cuando un usuario comparte algo.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>CONTENT_TYPE (String): Tipo de elemento seleccionado.</li>
+  <li>ITEM_ID (String): identificador del producto.</li>
+</ul>
+
+<h3 id="sign_up">SIGN_UP</h3>
+
+<p>Evento que indica cuando el usuario se registra en tu app.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>SIGN_UP_METHOD (String): método que utilizó el usuario para iniciar sesión.</li>
+</ul>
+
+<h3 id="spend_virtual_currency">SPEND_VIRTUAL_CURRENCY</h3>
+
+<p>Evento que indica que se gastó moneda virtual en la app.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ITEM_NAME (String): nombre del producto.</li>
+  <li>VIRTUAL_CURRENCY_NAME (String): nombre de la moneda virtual en tu app.</li>
+  <li>VALUE (double): cantidad de moneda virtual gastada.</li>
+</ul>
+
+<h3 id="tutorial_begin">TUTORIAL_BEGIN</h3>
+
+<p>Evento que indica que ha iniciado el tutorial en tu app.</p>
+
+<h3 id="tutorial_complete">TUTORIAL_COMPLETE</h3>
+
+<p>Evento que indica que el usuario terminó el tutorial.</p>
+
+<h3 id="unlock_achievement">UNLOCK_ACHIEVEMENT</h3>
+
+<p>Evento que indica que el usuario ha desbloqueado un logro en el juego.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ACHIEVEMENT_ID (String): ID del logro desbloquado.</li>
+</ul>
+
+<h3 id="view_item">VIEW_ITEM</h3>
+
+<p>Evento que indica que se ha mostrado algún elemento al usuario.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ITEM_ID (String): identificador del producto.</li>
+  <li>ITEM_NAME (String): nombre del producto.</li>
+  <li>ITEM_CATEGORY (String): categoría del producto.</li>
+</ul>
+
+<p>Parámetros opcionales:</p>
+<ul>
+  <li>ITEM_LOCATION_ID (String): ID de Google Place del origen del producto mostrado.</li>
+  <li>PRICE (double): precio del elemento mostrado.</li>
+  <li>QUANTITY (long): cantidad de elementos mostrados.</li>
+  <li>CURRENCY (String): moneda en la que está el precio mostrado.</li>
+  <li>VALUE (double): valor del elemento mostrado.</li>
+  <li>FLIGHT_NUMBER (String): número de vuelo mostrado.</li>
+  <li>NUMBER_OF_NIGHTS (long): número de noches para reservaciones de hotel.</li>
+  <li>NUMBER_OF_ROOMS (long): número de cuartos en reservaciones de hotel.</li>
+  <li>NUMBER_OF_PASSENGERS (long): número de pasajeros en viajes.</li>
+  <li>ORIGIN (String): procedencia del producto mostrado.</li>
+  <li>DESTINATION (String): Destino del producto mostrado.</li>
+  <li>START_DATE (String): fecha de inicio del producto mostrado en formato YYYY-MM-DD.</li>
+  <li>END_DATE (String): fecha de fin del producto mostrado en formato YYYY-MM-DD.</li>
+  <li>SEARCH_TERM (String): término de búsqueda mostrados.</li>
+  <li>TRAVEL_CLASS (String): clase del vuelo (económico, business, etc).</li>
+</ul>
+
+<h3 id="view_item_list">VIEW_ITEM_LIST</h3>
+
+<p>Evento que indica que el usuario ha visto una lista de elementos.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>ITEM_CATEGORY (String): categoría del producto.</li>
+</ul>
+
+<h3 id="view_search_results">VIEW_SEARCH_RESULTS</h3>
+
+<p>Evento que indica que el usuario ha obtenido los resultados de su búsqueda.</p>
+
+<p>Parámetros necesarios:</p>
+<ul>
+  <li>SEARCH_TERM (String): término de búsqueda.</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#android" class="page__taxonomy-item" rel="tag">android</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2017-01-10T18:25:55+00:00">January 10, 2017</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Analytics+con+Firebase%20http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-analytics%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-analytics%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-analytics%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/firebase/firebase-auth-part2/" class="pagination--pager" title="Autenticación con Firebase - Segunda Parte: Twitter, Usuarios Anónimos y Diferentes Proveedores en una misma Cuenta
+">Anterior</a>
+    
+    
+      <a href="/firebase/firebase-notifications/" class="pagination--pager" title="Notificaciones con Firebase
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/firebase/firebase-analytics/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/firebase/firebase-analytics"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

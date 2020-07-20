@@ -1,0 +1,1008 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Notificaciones con Firebase - Rodrigo Guerrero</title>
+<meta name="description" content="Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Notificaciones con Firebase">
+<meta property="og:url" content="http://rodrigoguerrero.com/firebase/firebase-notifications/">
+
+
+  <meta property="og:description" content="Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase.">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Notificaciones con Firebase">
+  <meta name="twitter:description" content="Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase.">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/firebase/firebase-notifications/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-01-16T17:25:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/firebase/firebase-notifications/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Notificaciones con Firebase" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Notificaciones con Firebase">
+    <meta itemprop="description" content="Aprende a enviar y recibir notificaciones con tu aplicación Android utilizando Firebase.">
+    <meta itemprop="datePublished" content="2017-01-16T17:25:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Notificaciones con Firebase
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Toda la información oficial de Firebase la pueden encontrar <a href="https://console.firebase.google.com/" target="_blank">aquí</a>.</p>
+
+<p>El código completo para este Post lo pueden encontrar en <a href="https://github.com/warriorminds/firebase-notificaciones" target="_blank">Github</a></p>
+
+<h2 id="introducción">Introducción</h2>
+
+<p>Una característica muy importante en las apps móviles es mantener a los usuarios involucrados con tu aplicación. También hay ciertas aplicaciones que necesitan avisar a los usuarios que suceció algún evento (un mensaje de texto o un correo electrónico fueron recibidos). Otro escenario es cuando ha habido algún cambio en los datos del usuario en el servidor y la aplicación requiere ser sincronizada nuevamente. Para todos estos escenarios se pueden utilizar <em>notificaciones</em>.</p>
+
+<p>Firebase nos permite enviar notificaciones a <em>dispositivos individuales</em> o a un <em>grupo de dispositivos</em> suscritos a algún <em>tema</em> en particular. En este Post aprenderemos cómo configurar nuestra aplicación en Android para recibir notificaciones y cómo podemos enviarlas desde la consola de Firebase o lo que debemos realizar para enviarla desde un servidor.</p>
+
+<h2 id="instalación">Instalación</h2>
+
+<p>Para poder recibir notificaciones utilizando Firebase, necesitamos configurar nuestra app como se muestra en este <a href="http://rodrigoguerrero.com/blogesp/firebase-intro" target="_blank">Post</a>. Además, necesitamos agregar la siguiente dependencia en el archivo <a href="https://github.com/warriorminds/firebase-notificaciones/blob/master/app/build.gradle" target="_blank">build.gradle</a> de la aplicación.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compile</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">firebase</span><span class="o">:</span><span class="n">firebase</span><span class="o">-</span><span class="nl">messaging:</span><span class="mf">10.0</span><span class="o">.</span><span class="mi">1</span><span class="err">'</span>
+</code></pre></div></div>
+
+<h2 id="notificaciones-en-segundo-plano-para-un-usuario-específico">Notificaciones en segundo plano para un usuario específico</h2>
+
+<p>Se pueden mandar notificaciones de dos maneras: segundo plano y primer plano. También se pueden mandar mensajes a usuarios específicos con el token y a grupos de usuarios. Vamos a comenzar enviando una notificación a un dispositivo en específico cuando la aplicación está en <em>segundo plano</em>.</p>
+
+<p>Cada dispositivo tiene un <em>token de registro</em>. Este token de registro es el que identifica a cada usuario de tu aplicación y además es el que se deberá agregar en la consola de Firebase al momento de enviar la notificación. Este token se debería de guardar en una base de datos en la nube, para que desde tu servicio puedas enviar notificaciones a un usuario en específico.</p>
+
+<p>Firebase nos proporciona un servicio, el <em>FirebaseInstanceIdService</em>, del cual debemos heredar para poder obtener el token al iniciar la app. También nos permite obtener el token nuevamente cuando ésta cambia (en caso de que el usuario desinstale e instale la app o de que borre los datos de la misma).</p>
+
+<p>Vamos a crear el servicio ServicioDeToken que herede de FirebaseInstanceIdService. Dentro del servicio, necesitamos sobreescribir el método <em>onTokenRefresh()</em>. Este método se ejecuta cuando el token tiene algún cambio en su estado.</p>
+
+<p>Dentro de este método podemos obtener la instancia de <em>FirebaseInstanceId</em> y de esta instancia podemos obtener el token mediante el método <em>getToken()</em>. Con esta instancia también podemos eliminar el token, o también obtener la fecha de su creación. Una vez obtenido el token, podrán enviar esta información a su servicio web.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTokenRefresh</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">FirebaseInstanceId</span> <span class="n">instanciaIdFirebase</span> <span class="o">=</span> <span class="nc">FirebaseInstanceId</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">tokenDeEsteDispositivo</span> <span class="o">=</span> <span class="n">instanciaIdFirebase</span><span class="o">.</span><span class="na">getToken</span><span class="o">();</span>
+
+    <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="s">"Token de este dispositivo: "</span> <span class="o">+</span> <span class="n">tokenDeEsteDispositivo</span><span class="o">);</span>
+    <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="s">"Creada el "</span> <span class="o">+</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">(</span><span class="n">instanciaIdFirebase</span><span class="o">.</span><span class="na">getCreationTime</span><span class="o">()));</span>
+
+    <span class="c1">// Enviar token a su servicio web.</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Necesitamos registrar nuestro servicio en el <a href="https://github.com/warriorminds/firebase-notificaciones/blob/master/app/src/main/AndroidManifest.xml" target="_blank">manifest</a> de la app. Hay que agregarle un <em>intent-filter</em> con acción <em>INSTANCE_ID_EVENT</em> para que se ejecute nuestro servicio.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">service</span>
+    <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">".ServicioDeToken"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">intent</span><span class="o">-</span><span class="n">filter</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">action</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.google.firebase.INSTANCE_ID_EVENT"</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">intent</span><span class="o">-</span><span class="n">filter</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">service</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Ejecutamos nuestra aplicación y podemos ver en la consola el token y la fecha de creación.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/00.token.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/00.token.png" alt="Token del usuario para enviar notificaciones." /></a>
+</figure>
+
+<p>Esta configuración es suficiente para enviar notificaciones desde la consola de Firebase a un dispositivo en específico, cuando la aplicación está en segundo plano.</p>
+
+<p>Es momento de enviar la notificación. En la <a href="https://console.firebase.google.com/" target="_blank">consola de Firebase</a> hay que ir a la sección de Notificaciones y seleccionar Enviar Tu Primer Mensaje.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/01.first-message.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/01.first-message.png" alt="Crear el primer mensaje para enviar." /></a>
+</figure>
+
+<p>Al seleccionar el botón de Enviar Tu Primer Mensaje, nos abre la consola para redactar el mensaje. Vamos a llenar los campos con el mensaje a enviar, seleccionaremos la opción para enviar ahora y por último vamos a seleccionar la opción de un único dispositivo. Al hacer esto, nos pide el Token de Registro que obtuvimos previamente. Una vez que agreguemos el token, podemos enviar el mensaje. Asegúrense de que la app está corriendo en segundo plano.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/02.create-message.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/02.create-message.png" alt="Llenando los datos para enviar el mensaje." /></a>
+</figure>
+
+<p>Pueden agregar información extra en la sección <em>Opciones avanzadas</em>. En la siguiente sección del Post veremos cómo utilizar esta información extra.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/13.consola-extras.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/13.consola-extras.png" alt="Datos extra en tu mensaje." /></a>
+</figure>
+
+<p>En el dispositivo vemos que recibimos la notificación.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/03.notif-received.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/03.notif-received.png" alt="Notificación recibida en segundo plano." /></a>
+</figure>
+
+<p>Al dar clic sobre la notificación, Firebase está configurado para abrir nuestra aplicación.</p>
+
+<h2 id="notificaciones-en-primer-plano-para-un-usuario-específico">Notificaciones en Primer Plano para un usuario específico</h2>
+
+<p>Para poder manejar las notificaciones en primer plano (cuando el usuario está interactuando con la app) necesitamos agregar un servicio que herede de FirebaseMessagingService.</p>
+
+<p>Debemos registrar el servicio en nuestro <a href="https://github.com/warriorminds/firebase-notificaciones/blob/master/app/src/main/AndroidManifest.xml" target="_blank">Manifest</a>. Necesitamos agregar el <em>intent-filter</em> de <em>MESSAGING_EVENT</em> para que se ejecute cuando recibamos una notificación.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">service</span>
+    <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">".ServicioDeMensajes"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">intent</span><span class="o">-</span><span class="n">filter</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">action</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.google.firebase.MESSAGING_EVENT"</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">intent</span><span class="o">-</span><span class="n">filter</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">service</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>De igual manera podemos agregar un ícono y un color por default para nuestras notificaciones.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">meta</span><span class="o">-</span><span class="n">data</span>
+    <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.google.firebase.messaging.default_notification_icon"</span>
+    <span class="nl">android:</span><span class="n">resource</span><span class="o">=</span><span class="s">"@android:drawable/ic_dialog_info"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="n">meta</span><span class="o">-</span><span class="n">data</span>
+    <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.google.firebase.messaging.default_notification_color"</span>
+    <span class="nl">android:</span><span class="n">resource</span><span class="o">=</span><span class="s">"@color/colorAccent"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>En nuestro servicio ServicioDeMensajes debemos sobreescribir el método <em>onMessageReceived()</em>, que es el método que se ejecuta cuando se recibe una notificación. También en ese método recibimos un objeto RemoteMessage el cual tiene toda la información que se envió con la notificación.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServicioDeMensajes</span> <span class="kd">extends</span> <span class="nc">FirebaseMessagingService</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessageReceived</span><span class="o">(</span><span class="nc">RemoteMessage</span> <span class="n">mensajeRemoto</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">enviarNotificacion</span><span class="o">(</span><span class="n">mensajeRemoto</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>En este método, podemos procesar la información que recibimos. Podemos enviar distintos tipos de mensajes, unos que le pidan a la aplicación hacer algo (sincronizar alguna información) y que no necesite de ninguna notificación gráfica o interacción del usuario.</p>
+
+<p>Un caso de uso muy común es mostrar una notificación en el dispositivo. Aquí es dónde se haría eso y es lo que haremos en este ejemplo.</p>
+
+<p>Podemos obtener los datos extras que enviamos en nuestra notificación con <em>mensajeRemoto.getData()</em>. En este ejemplo agregamos cada valor al intent para mostrarlo posteriormente en la actividad principal. Para obtener la información de la notificación tenemos el método <em>mensajeRemoto.getNotification()</em>. Con este método podemos obtener el título y el cuerpo de la notificación, si fueron enviados.</p>
+
+<p>El método enviarNotifiacion() quedaría de la siguiente manera.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">enviarNotificacion</span><span class="o">(</span><span class="nc">RemoteMessage</span> <span class="n">mensajeRemoto</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="nc">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="nc">MainActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">intent</span><span class="o">.</span><span class="na">addFlags</span><span class="o">(</span><span class="nc">Intent</span><span class="o">.</span><span class="na">FLAG_ACTIVITY_CLEAR_TOP</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">mensajeRemoto</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">llave</span> <span class="o">:</span> <span class="n">mensajeRemoto</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">intent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="n">llave</span><span class="o">,</span> <span class="n">mensajeRemoto</span><span class="o">.</span><span class="na">getData</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">llave</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nc">PendingIntent</span> <span class="n">pendingIntent</span> <span class="o">=</span> <span class="nc">PendingIntent</span><span class="o">.</span><span class="na">getActivity</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">intent</span><span class="o">,</span> <span class="nc">PendingIntent</span><span class="o">.</span><span class="na">FLAG_ONE_SHOT</span><span class="o">);</span>
+
+    <span class="nc">Uri</span> <span class="n">uriDefaultDeSonido</span> <span class="o">=</span> <span class="nc">RingtoneManager</span><span class="o">.</span><span class="na">getDefaultUri</span><span class="o">(</span><span class="nc">RingtoneManager</span><span class="o">.</span><span class="na">TYPE_NOTIFICATION</span><span class="o">);</span>
+    <span class="nc">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builderDeNotificacion</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_dialog_info</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="n">mensajeRemoto</span><span class="o">.</span><span class="na">getNotification</span><span class="o">().</span><span class="na">getTitle</span><span class="o">())</span> <span class="cm">/* getNotification() nos da la información del título y el cuerpo que se recibió. */</span>
+            <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">mensajeRemoto</span><span class="o">.</span><span class="na">getNotification</span><span class="o">().</span><span class="na">getBody</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">setAutoCancel</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setSound</span><span class="o">(</span><span class="n">uriDefaultDeSonido</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentIntent</span><span class="o">(</span><span class="n">pendingIntent</span><span class="o">);</span>
+
+    <span class="nc">NotificationManager</span> <span class="n">manejadorDeNotificaciones</span> <span class="o">=</span> <span class="o">(</span><span class="nc">NotificationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="nc">Context</span><span class="o">.</span><span class="na">NOTIFICATION_SERVICE</span><span class="o">);</span>
+    <span class="n">manejadorDeNotificaciones</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="mi">0</span> <span class="cm">/* ID de la notificación */</span><span class="o">,</span> <span class="n">builderDeNotificacion</span><span class="o">.</span><span class="na">build</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Por último, en la actividad principal, obtenemos los extras y creamos una cadena con cada llave y valor y lo mostramos como Toast.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+    <span class="n">setContentView</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">getIntent</span><span class="o">().</span><span class="na">getExtras</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StringBuilder</span> <span class="n">datosRecibidos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">llave</span> <span class="o">:</span> <span class="n">getIntent</span><span class="o">().</span><span class="na">getExtras</span><span class="o">().</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">datosRecibidos</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">llave</span><span class="o">);</span>
+            <span class="n">datosRecibidos</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">":"</span><span class="o">);</span>
+            <span class="n">datosRecibidos</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">getIntent</span><span class="o">().</span><span class="na">getExtras</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">llave</span><span class="o">));</span>
+            <span class="n">datosRecibidos</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">","</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">datosRecibidos</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="nc">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="enviar-notificaciones-a-un-tema">Enviar Notificaciones a un Tema</h2>
+
+<p>Firebase nos proporciona la opción de suscribir a usuarios a algún <em>tema</em> en particular, y que estos usuarios reciban notificaciones enviadas específicamente del tema seleccionado.</p>
+
+<p>Para este ejemplo, vamos a crear tres botones con los cuales podremos suscribirnos a un tema en específico.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonNoticias"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/suscribirse_a_noticias"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonDeportes"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/suscribirse_a_deportes"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonEntretenimiento"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/suscribirse_a_entretenimiento"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>En nuestra actividad, agregaremos un listener a cada botón para suscribirnos al tema correspondiente. Para inscribirse a un tema obtenemos la instancia de <em>FirebaseMessaging</em> y utilizamos el método de <em>subscribeToTopic()</em>. En el método inicializarVistas() pueden encontrar este código.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">inicializarVistas</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Button</span> <span class="n">botonNoticias</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">botonNoticias</span><span class="o">);</span>
+    <span class="nc">Button</span> <span class="n">botonDeportes</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">botonDeportes</span><span class="o">);</span>
+    <span class="nc">Button</span> <span class="n">botonEntretenimiento</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">botonEntretenimiento</span><span class="o">);</span>
+
+    <span class="n">botonNoticias</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">FirebaseMessaging</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">subscribeToTopic</span><span class="o">(</span><span class="s">"noticias"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="n">botonDeportes</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">FirebaseMessaging</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">subscribeToTopic</span><span class="o">(</span><span class="s">"deportes"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="n">botonEntretenimiento</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">FirebaseMessaging</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">subscribeToTopic</span><span class="o">(</span><span class="s">"entretenimiento"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>De igual manera, agregaremos tres botones más para cancelar la suscripción a cada tema.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonCancelarNoticias"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/cancelar_suscripci_n_a_noticias"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonCancelarDeportes"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/cancelar_suscripci_n_a_deportes"</span> <span class="o">/&gt;</span>
+
+<span class="o">&lt;</span><span class="nc">Button</span>
+    <span class="nl">android:</span><span class="n">id</span><span class="o">=</span><span class="s">"@+id/botonCancelarEntretenimiento"</span>
+    <span class="nl">android:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">"wrap_content"</span>
+    <span class="nl">android:</span><span class="n">text</span><span class="o">=</span><span class="s">"@string/cancelar_suscripci_n_a_entretenimiento"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>El código que debemos de utilizar para cancelar la suscripción es</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FirebaseMessaging</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">unsubscribeFromTopic</span><span class="o">(</span><span class="s">"noticias"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Una vez que presionemos alguno de los botones para suscribirnos, puede tardar hasta <strong>24 horas</strong> en aparecer ese tema en la consola de Firebase.</p>
+
+<p>En la consola, entramos a la opción de Notificaciones y crear un nuevo mensaje. Seleccionamos la opción de Tema y podemos comenzar a mandar notificaciones a los usuarios suscritos a ese tema.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/14.mensaje-tema.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/14.mensaje-tema.png" alt="Enviar mensaje a un tema." /></a>
+</figure>
+
+<p>En nuestro dispositivo recibimos la notificación.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/11.notificacion-tema.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/11.notificacion-tema.png" alt="Mensaje recibido al tema noticias." /></a>
+</figure>
+
+<p>Si decidimos cancelar la suscripción a un tema y tratamos de enviar la notificación nuevamente, no recibiremos nada.</p>
+
+<h2 id="enviar-notificaciones-a-un-dispositivo-desde-un-servidor">Enviar Notificaciones a un dispositivo desde un Servidor</h2>
+
+<p>Además de la consola de Notificaciones de Firebase, podemos tener la necesidad de enviar notificaciones desde nuestro servidor. Como la implementación es muy específica dependiendo del lenguaje de programación que utilice el servicio, vamos a utilizar una aplicación llamda Postman para ver cómo se debe de crear la petición para enviar las notificaciones. Esta aplicación la pueden instalar en Google Chrome en este <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en" target="_blank">link</a>.</p>
+
+<p>Necesitamos crear una petición POST a la siguiente URL: <em>https://fcm.googleapis.com/fcm/send</em></p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/04.postman-posturl.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/04.postman-posturl.png" alt="Liga para enviar POST para notificaciones." /></a>
+</figure>
+
+<p>Posteriormente necesitamos agregar dos encabezados. El encabezado <em>Content-Type</em> tendrá como valor <em>application/json</em>. Para el encabezado <em>Authorization</em> necesitamos ir a la <a href="https://console.firebase.google.com/" target="_blank">consola de Firebase</a> para obtener su valor. En la consola al entrar en su proyecto, seleccionamos el engrane de opciones y vamos a la sección de <em>Configuración del Proyecto</em>.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/05.console-config.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/05.console-config.png" alt="Configuración del proyecto." /></a>
+</figure>
+
+<p>Una vez en Configuración del Proyecto, seleccionamos la pestaña de <em>Mensajería en la Nube</em>. Ahí podemos encontrar la <em>Clave de Servidor</em>.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/06.clave-servidor.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/06.clave-servidor.png" alt="Clave de Servidor." /></a>
+</figure>
+
+<p>Copiamos ese valor y de regerso en Postman, agregamos el encabezado <em>Authorization</em> con el valor de <em>key=&lt;la Clave de Servidor&gt;</em>.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/07.postman-encabezados.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/07.postman-encabezados.png" alt="Encabezados." /></a>
+</figure>
+
+<p>Por último, agregaremos el cuerpo del mensaje en la sección de <em>Body</em>. Necesitamos agregar un JSON con la siguiente información:</p>
+
+<ul>
+  <li><em>to</em>: es el <em>Token Id</em> del dispositivo</li>
+  <li><em>notification</em>: es el objeto que deberá tener los atributos title, que será el título de nuestra notificación, y el atributo body, que será el cuerpo de nuestra notificación.</li>
+  <li><em>data</em>: este objeto opcional tendrá atributos u objetos que podremos obtener dentro de nuestra app.</li>
+</ul>
+
+<p>En Postman seleccionaremos la opción de Body y la opción de raw y pegaremos nuestro JSON:</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/08.postman-cuerpo.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/08.postman-cuerpo.png" alt="JSON a enviar." /></a>
+</figure>
+
+<p>Una vez presionamos el botón Send nuestra notificación será enviada. Obtendremos la siguiente respuesta de Firebase Cloud Messaging:</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/09.postman-respuesta.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/09.postman-respuesta.png" alt="Respuesta recibida al enviar la notificación." /></a>
+</figure>
+
+<p>En nuestro dispositivo recibiremos la notificación.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/10.postman-notificacion.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/10.postman-notificacion.png" alt="Notificación recibida." /></a>
+</figure>
+
+<p>Con esta información pueden desarrollar código en su lenguaje de programación web o framework preferido que genere esta petición POST.</p>
+
+<p>Para enviar notificaciones a un tema, solamente debemos de asignar en el valor del atributo <em>to</em> el tema al que queramos enviarla precedido de la cadena <em>/topics/</em>.</p>
+
+<figure>
+    <a href="http://rodrigoguerrero.com/images/fb/notificaciones/12.postman-tema.png"><img src="http://rodrigoguerrero.com/images/fb/notificaciones/12.postman-tema.png" alt="Enviar notificaciones a temas desde Postman." /></a>
+</figure>
+
+<p>Pueden utilizar esta opción para probar las notificaciones a temas antes de que el tema aparezca en la consola de Firebase.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#android" class="page__taxonomy-item" rel="tag">android</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#firebase" class="page__taxonomy-item" rel="tag">firebase</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2017-01-16T17:25:55+00:00">January 16, 2017</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Notificaciones+con+Firebase%20http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-notifications%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-notifications%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Ffirebase%2Ffirebase-notifications%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/firebase/firebase-analytics/" class="pagination--pager" title="Analytics con Firebase
+">Anterior</a>
+    
+    
+      <a href="/firebase/firebase-config-remota/" class="pagination--pager" title="Configuración Remota con Firebase
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/firebase/firebase-notifications/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/firebase/firebase-notifications"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

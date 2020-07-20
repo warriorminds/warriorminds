@@ -1,0 +1,1080 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.3 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="es" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Programación Orientada a Objetos: Herencia - Rodrigo Guerrero</title>
+<meta name="description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es">
+<meta property="og:site_name" content="Rodrigo Guerrero">
+<meta property="og:title" content="Programación Orientada a Objetos: Herencia">
+<meta property="og:url" content="http://rodrigoguerrero.com/poo/poo-herencia/">
+
+
+  <meta property="og:description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+
+
+
+  <meta property="og:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+
+
+
+  <meta name="twitter:site" content="@warrior_minds">
+  <meta name="twitter:title" content="Programación Orientada a Objetos: Herencia">
+  <meta name="twitter:description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+  <meta name="twitter:url" content="http://rodrigoguerrero.com/poo/poo-herencia/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://rodrigoguerrero.com/assets/images/android-generic.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2016-11-08T21:30:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://rodrigoguerrero.com/poo/poo-herencia/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://rodrigoguerrero.com/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zWZJBibG8K_1P8JoyAvMcsxBjzkx7tOIVm6knil7Ke8" />
+
+
+  <meta name="msvalidate.01" content="BDA9831FA00B2435A6575FB4641D8066">
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Rodrigo Guerrero Feed">
+
+<link rel='icon' href='/assets/images/site-logo.png' type='image/x-icon'/ >
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Saltar enlaces</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Saltar a navegación principal</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Saltar a contenido</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Saltar a pie</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Rodrigo Guerrero
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/">Acerca de</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category-archive/">Categorías</a>
+            </li><li class="masthead__menu-item">
+              <a href="/year-archive/">Archivo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Alternar búsqueda</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Alternar menú</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" background-image: url('');"
+>
+  
+    <img src="/assets/images/android-generic.jpg" alt="Programación Orientada a Objetos: Herencia" class="page__hero-image">
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Seguir</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Dublin, Ireland</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:guerrerorodrigom@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="http://rodrigoguerrero.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i><span class="label">Facebook</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:guerrerorodrigom@gmail.com">
+            <meta itemprop="email" content="guerrerorodrigom@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Correo electrónico</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Programación Orientada a Objetos: Herencia">
+    <meta itemprop="description" content="En este Post hablaremos acerca de uno de los pilares de la POO - Herencia.">
+    <meta itemprop="datePublished" content="2016-11-08T21:30:55+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Programación Orientada a Objetos: Herencia
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minuto(s) de lectura
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Este Post es la segunda parte de la serie <em>“Programación Orientada a Objetos”</em>. Esta serie tiene como objetivo establecer los fundamentos de la POO, utilizando Java como ejemplo. Los temas de esta serie son los siguientes:</p>
+
+<ol>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-clases-objetos/">Definición de POO</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-clases-objetos/">Clases y Objetos</a></li>
+  <li>Herencia</li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-abstraccion/">Abstracción</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-encapsulamiento">Encapsulamiento</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-polimorfismo">Polimorfismo</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-composicion">Composición</a></li>
+  <li><a href="http://rodrigoguerrero.com/blogesp/poo-principios">Principios utilizados en la POO</a></li>
+</ol>
+
+<p>Todo el código de la serie está disponible en <a href="https://github.com/warriorminds/prog-orientada-objetos" target="_blank">GitHub</a>.</p>
+
+<p>El código correspondiente a esta segunda parte lo pueden encontrar <a href="https://github.com/warriorminds/prog-orientada-objetos/tree/master/Herencia" target="_blank">aquí</a>.</p>
+
+<p>Todos los ejemplos están hechos en <a href="https://netbeans.org" target="_blank">Netbeans</a>.</p>
+
+<h2 id="introducción">Introducción</h2>
+
+<p>La POO nos provee algunos conceptos y herramientas para hacer un diseño de nuestro código de una mejor manera, para que tenga un mejor rendimiento y además que sea más sencillo actualizarlo. Si bien los ejemplos que presentaremos en esta y otras secciones serán muy sencillos, cumplen con la intención de mostrar los conceptos necesarios para entender la POO. En aplicaciones más grandes se utilizan los mismos conceptos, con la diferencia de que involucran más código y objetos.</p>
+
+<p>Vamos a crear un programa que pueda mostrar el comportamiento de varios sistemas de transporte: Auto, Avión, Nave Espacial. Crearemos una clase para cada uno de esos sistemas de transporte.</p>
+
+<p>La clase Auto tendrá color, marca, cantidad de combustible y capacidad de pasajeros como datos y tendrá como operaciones arrancar, apagar, avanzar, cargar combustible y cambiar de velocidades. Cada una de las operaciones solamente imprimirá un mensaje de texto en la consola. Nuestra clase Auto quedará de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Auto</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">float</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Auto</span><span class="o">(</span><span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">,</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">marca</span> <span class="o">=</span> <span class="n">marca</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">capacidad</span> <span class="o">=</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Arrancando el auto."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Apagando el auto."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avanzando el auto."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ponerCombustible</span><span class="o">(</span><span class="kt">float</span> <span class="n">cantidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">cantidadCombustible</span> <span class="o">+=</span> <span class="n">cantidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cambiarVelocidades</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cambiando de velocidad."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getCombustible</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMarca</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">color</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCapacidad</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ahora crearemos una clase Avión, con los datos cantidad de combustible, capacidad, marca y modelo. Tendrá como operaciones arrancar, apagar, despegar, aterrizar, avanzar y poner combustible.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Avion</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">float</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">modelo</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Avion</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacidad</span><span class="o">,</span> <span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="nc">String</span> <span class="n">modelo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">capacidad</span> <span class="o">=</span> <span class="n">capacidad</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">marca</span> <span class="o">=</span> <span class="n">marca</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">modelo</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Arrancando el avión."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Apagando el avión."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">despegar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Despegando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avanzando el avión."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">aterrizar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Aterrizando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ponerCombustible</span><span class="o">(</span><span class="kt">float</span> <span class="n">cantidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">cantidadCombustible</span> <span class="o">+=</span> <span class="n">cantidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getCombustible</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMarca</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getModelo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">modelo</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCapacidad</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Por último crearemos una clase NaveEspacial con los datos cantidad de combustible, capacidad, nombre y país. Tendrá como operaciones arrancar, apagar, despegar, aterrizar, avanzar, poner combustible y colocar satélite en órbita.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaveEspacial</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">float</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">pais</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">NaveEspacial</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacidad</span><span class="o">,</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="nc">String</span> <span class="n">pais</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">capacidad</span> <span class="o">=</span> <span class="n">capacidad</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">pais</span> <span class="o">=</span> <span class="n">pais</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Arrancando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Apagando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">despegar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Despegando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avanzando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">aterrizar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Aterrizando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">colocarSatelite</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Colocando satélite en órbita."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ponerCombustible</span><span class="o">(</span><span class="kt">float</span> <span class="n">cantidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">cantidadCombustible</span> <span class="o">+=</span> <span class="n">cantidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getCombustible</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNombre</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPais</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">pais</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCapacidad</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Podemos hacer uso de nuestras clases de la siguiente manera, en nuestro método main:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Auto</span> <span class="n">auto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Auto</span><span class="o">(</span><span class="s">"Audi"</span><span class="o">,</span> <span class="s">"Rojo"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<span class="nc">Avion</span> <span class="n">avion</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Avion</span><span class="o">(</span><span class="mi">700</span><span class="o">,</span> <span class="s">"Boeing"</span><span class="o">,</span> <span class="s">"787"</span><span class="o">);</span>
+<span class="nc">NaveEspacial</span> <span class="n">naveEspacial</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NaveEspacial</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="s">"Orion"</span><span class="o">,</span> <span class="s">"EUA"</span><span class="o">);</span>
+
+<span class="n">auto</span><span class="o">.</span><span class="na">ponerCombustible</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+<span class="n">avion</span><span class="o">.</span><span class="na">ponerCombustible</span><span class="o">(</span><span class="mi">250</span><span class="o">);</span>
+<span class="n">naveEspacial</span><span class="o">.</span><span class="na">ponerCombustible</span><span class="o">(</span><span class="mi">25000</span><span class="o">);</span>
+
+<span class="n">auto</span><span class="o">.</span><span class="na">arrancar</span><span class="o">();</span>
+<span class="n">auto</span><span class="o">.</span><span class="na">avanzar</span><span class="o">();</span>
+<span class="n">auto</span><span class="o">.</span><span class="na">cambiarVelocidades</span><span class="o">();</span>
+<span class="n">auto</span><span class="o">.</span><span class="na">apagar</span><span class="o">();</span>
+
+<span class="n">avion</span><span class="o">.</span><span class="na">arrancar</span><span class="o">();</span>
+<span class="n">avion</span><span class="o">.</span><span class="na">despegar</span><span class="o">();</span>
+<span class="n">avion</span><span class="o">.</span><span class="na">avanzar</span><span class="o">();</span>
+<span class="n">avion</span><span class="o">.</span><span class="na">aterrizar</span><span class="o">();</span>
+
+<span class="n">naveEspacial</span><span class="o">.</span><span class="na">arrancar</span><span class="o">();</span>
+<span class="n">naveEspacial</span><span class="o">.</span><span class="na">despegar</span><span class="o">();</span>
+<span class="n">naveEspacial</span><span class="o">.</span><span class="na">colocarSatelite</span><span class="o">();</span>
+<span class="n">naveEspacial</span><span class="o">.</span><span class="na">aterrizar</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Parece que todo funciona adecuadamente. Pero si miramos detalladamente nuestras tres clases, podemos ver que hay métodos y comportamientos que se repiten en las tres clases. ¿Habrá manera de evitar eso?</p>
+
+<h2 id="definición">Definición</h2>
+
+<p>Los lenguajes de programación que son orientados a objetos, nos ofrecen el concepto de <em>Herencia</em>. La herencia es crear objetos basados en otros objetos. Al hacer esto, los objetos pueden utilizar métodos y variables que se encuentren en el padre. Con esto podemos <em>reutilizar código</em> y centralizarlo para evitar repetición de código y que a la hora de modificarlo sea más sencillo. La clase que hereda de otra clase se llama <em>Clase Hijo o Subclase</em>, mientras que la clase de la que se hereda se conoce como <em>Clase Padre o Super Clase</em>.</p>
+
+<h2 id="herencia-en-acción">Herencia en acción</h2>
+
+<p>Para heredar de una clase en Java, se utiliza la palabra <em>extends</em>. Utilizando esto, podemos mejorar nuestro código de Sistemas de Transporte. Podemos crear una clase padre llamada Vehiculo donde se realicen las operaciones generales de un vehículo.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Vehiculo</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">float</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Vehiculo</span><span class="o">(</span><span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">marca</span> <span class="o">=</span> <span class="n">marca</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">capacidad</span> <span class="o">=</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Arrancando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Apagando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avanzando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ponerCombustible</span><span class="o">(</span><span class="kt">float</span> <span class="n">cantidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">cantidadCombustible</span> <span class="o">+=</span> <span class="n">cantidad</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">float</span> <span class="nf">getCombustible</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">cantidadCombustible</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMarca</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">marca</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCapacidad</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">capacidad</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Ahora podemos hacer que nuestros vehículos hereden de la clase Vehículo, y eliminar los métodos que se han implementado en la clase Vehiculo.</p>
+
+<h2 id="super">super</h2>
+
+<p>Para poder utilizar los constructores de la clase padre, se cuenta con el método <em>super()</em>. El constructor de la clase Auto quedaría de la siguiente manera:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Auto</span><span class="o">(</span><span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">,</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">super</span><span class="o">(</span><span class="n">marca</span><span class="o">,</span> <span class="n">capacidad</span><span class="o">);</span>
+     <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Después de heredar de la clase Vehiculo, modificar el constructor y eliminar los métodos que están implementados en la clase padre, nuestra clase Auto quedaría así:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Auto</span> <span class="kd">extends</span> <span class="nc">Vehiculo</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Auto</span><span class="o">(</span><span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">,</span> <span class="kt">int</span> <span class="n">capacidad</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">marca</span><span class="o">,</span> <span class="n">capacidad</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cambiarVelocidades</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cambiando de velocidad."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">color</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>De manera similar las clases Avion y NaveEspacial:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Avion</span> <span class="kd">extends</span> <span class="nc">Vehiculo</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">modelo</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Avion</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacidad</span><span class="o">,</span> <span class="nc">String</span> <span class="n">marca</span><span class="o">,</span> <span class="nc">String</span> <span class="n">modelo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">marca</span><span class="o">,</span> <span class="n">capacidad</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">modelo</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">despegar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Despegando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">aterrizar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Aterrizando."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getModelo</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">modelo</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaveEspacial</span> <span class="kd">extends</span> <span class="nc">Vehiculo</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nc">String</span> <span class="n">pais</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">NaveEspacial</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacidad</span><span class="o">,</span> <span class="nc">String</span> <span class="n">nombre</span><span class="o">,</span> <span class="nc">String</span> <span class="n">pais</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="s">""</span><span class="o">,</span> <span class="n">capacidad</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">pais</span> <span class="o">=</span> <span class="n">pais</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">despegar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Despegando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">aterrizar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Aterrizando la nave espacial."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">colocarSatelite</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Colocando satélite en órbita."</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getNombre</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">nombre</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPais</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">pais</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Podemos ver como la lógica común de los tres sistemas de transporte están contenidos en la clase Vehículo. Si se necesita modificar algo de esos métodos solamente se tendría que modificar en un solo lugar, y además el mismo código es utilizado por las tres clases. También podemos ver que se pueden agregar métodos específicos para cada clase, extendiendo la funcionalidad de la clase padre.</p>
+
+<h2 id="sobreescribir-métodos-override">Sobreescribir métodos: @Override</h2>
+
+<p>Si ejecutamos nuestro código ahora, se mostrará en consola el mensaje para cada método. Pero ahora no sabemos cuál salida es de cuál vehículo!</p>
+
+<p>Hay varias maneras de modificar esto, pero en esta ocasión utilizaremos la <em>sobreescritura de métodos</em>. Podemos volver a definir un método de la clase padre en la clase hija. A la hora de utilizar ese método de nuestro objeto, se ejecutará el código de la clase hija. Para indicar que un método se está sobreescribiendo, se agrega la anotación <em>@Override</em> antes del método.</p>
+
+<p>En nuestra clase Auto, vamos a sobreescribir los métodos arrancar(), apagar() y avanzar().</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Arrancando el auto."</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Apagando el auto."</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avanzando el auto."</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Para la clase Avión, vamos a utilizar una manera diferente de hacer lo mismo. Vamos a sobreescribir el método, agregarle nueva funcionalidad y después ejecutar el código del método de la clase padre. Para esto podemos utilizar la palabra <em>super</em> nuevamente, seguida del método que necesitemos: super.arrancar();</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">arrancar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"AVION:"</span><span class="o">);</span>
+  <span class="kd">super</span><span class="o">.</span><span class="na">arrancar</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">apagar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"AVION:"</span><span class="o">);</span>
+  <span class="kd">super</span><span class="o">.</span><span class="na">apagar</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">avanzar</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"AVION:"</span><span class="o">);</span>
+  <span class="kd">super</span><span class="o">.</span><span class="na">avanzar</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="herencia-sus-ventajas-y-sus-problemas">Herencia: sus ventajas y sus problemas</h2>
+
+<p>Como hemos visto, la herencia nos permite reutilizar y centralizar código, haciendo nuestro código más reusable y limpio. Pero trae también algunos problemas.</p>
+
+<p>En Java, solamente se permite la <em>herencia simple</em> - heredar de una sola clase. En sistemas más grandes esto representa un problema. De igual manera, la clase hija depende estrechamente de la implementación que tenga la clase padre y si en algún momento esta implementación llega a cambiar, la clase hija podría tener un comportamiento distinto al deseado. Hay maneras de evitar estos problemas, y lo veremos en los siguientes módulos.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Etiquetas: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#java" class="page__taxonomy-item" rel="tag">java</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categorías: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#poo" class="page__taxonomy-item" rel="tag">poo</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Actualizado:</strong> <time datetime="2016-11-08T21:30:55+00:00">November 8, 2016</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Compartir en</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=warrior_minds&text=Programaci%C3%B3n+Orientada+a+Objetos%3A+Herencia%20http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-herencia%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-herencia%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Frodrigoguerrero.com%2Fpoo%2Fpoo-herencia%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Compartir en LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/poo/poo-clases-objetos/" class="pagination--pager" title="Programación Orientada a Objetos: Clases y Objetos
+">Anterior</a>
+    
+    
+      <a href="/poo/poo-abstraccion/" class="pagination--pager" title="Programación Orientada a Objetos: Abstracción
+">Siguiente</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">Puede que también te interese</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-resumen-actividades/" rel="permalink">Fundamentos de Android con Kotlin: Resumen del Módulo Actividades
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el resumen del segundo módulo Actividades.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-persistencia-datos-actividad/" rel="permalink">Fundamentos de Android con Kotlin: Persistencia de Datos en una Actividad
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta la forma de persistir datos dentro de una actividad.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/android-generic.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/android/fundamentos-android-ciclo-vida-actividades-codigo/" rel="permalink">Fundamentos de Android con Kotlin: Programando - Actividades - Ciclo de Vida
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  menos de 1 minuto(s) de lectura
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">En este video se presenta el código para el ciclo de vida de las actividades.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Términos de búsqueda...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Términos de búsqueda..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Seguir:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/warrior_minds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://facebook.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/warriorminds" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Rodrigo Guerrero.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://rodrigoguerrero.com/poo/poo-herencia/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/poo/poo-herencia"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://rodrigoguerrero.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
